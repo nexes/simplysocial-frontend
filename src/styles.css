@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background: #e6ecf0;
+}
+input::-webkit-input-placeholder {
+    text-align: center;
+}
+input::-moz-placeholder {
+    text-align: center;
+}
+input:-ms-input-placeholder {
+    text-align: center;
+}
+input::placeholder {
+    text-align: center;
+}
+.navbar {
+    background: #ffffff;
+}
+.navbar-nav {
+    background: #ffffff;
+    margin: 0px;
+}
+.navbar-nav, p.navbar-text {
+    cursor: pointer;
+}
+.navbar-nav > li:hover > ul {
+    position: absolute;
+    display: inline-block;
+    margin: 0px;
+}
