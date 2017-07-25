@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -6,21 +6,21 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
     templateUrl: 'modal-dialog.component.html',
     styleUrls: ['modal-dialog.component.css']
 })
-export class ModalDialogComponent implements OnInit {
-    @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
+export class ModalDialogComponent {
+    @Output() toggle: EventEmitter<boolean>;
     @Input() title: string;
     @Input() message: string;
 
 
     constructor() {
-        this.title = 'empty';
-        this.message = 'empty';
-    }
-
-    ngOnInit() {
+        this.toggle = new EventEmitter<boolean>();
+        this.title = '';
+        this.message = '';
     }
 
     closeDialog() {
+        this.title = '';
+        this.message = '';
         this.toggle.emit(true);
     }
 }
