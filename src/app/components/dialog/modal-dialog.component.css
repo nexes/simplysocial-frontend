@@ -1,0 +1,15 @@
+div.popup-window {
+    position: absolute;
+    top: 25%;
+    padding-bottom: 20px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0px 0px 18px 2px black;
+}
+button.popup-close-btn {
+    padding: 10px 0px 0px 0px;
+}
+div.popup-window, p {
+    font-size: 14px;
+    font-weight: bold;
+}
