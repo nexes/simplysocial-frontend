@@ -1,0 +1,27 @@
+.card {
+    background: #FFFFFF;  
+    padding: 1px 20px 40px 20px;
+    box-shadow: 1px 2px 5px -1px #4a4a4a;   
+    border-radius: 8px;
+}
+.card .page-header {
+    text-align: center;
+    padding: 0px;
+    margin: 20px 20px 40px 20px;
+}
+input.login-input {
+    height: 40px;
+    font-size: 12pt;
+    text-align: center;
+    border-radius: 20px;
+}
+button.login-button {
+    width: 100%;
+    align-content: center;
+}
+.ng-valid[required], .ng-valid.required {
+    border-left: 5px solid #42A948;
+}
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+}

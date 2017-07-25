@@ -1,1 +1,35 @@
-<h1>hello login {{test}}</h1>
+    <div class="card col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+        <div class="row">
+            
+            <div class="page-header">
+                <h4>Log in to "Name"</h4>
+                <img src="assets/chaticon.png" alt="">
+            </div>
+            
+            <form class="form" #loginForm="ngForm">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                    <div class="form-group">
+                        <label class="sr-only" for="username">username:</label>
+                        <input type="text" class="form-control login-input" id="username" placeholder="username or email" [(ngModel)]="usernameOrEmail" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password">username:</label>
+                        <input type="password" class="form-control login-input" id="password" placeholder="password" [(ngModel)]="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" [(ngModel)]="rememberMe" name="remember"><p class="text-muted">Remember me</p>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-xs-6 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3 col-xs-offset-3">
+                            <button class="btn btn-success login-button" [disabled]="!loginForm.valid" (click)="login()">Log in</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
