@@ -1,0 +1,15 @@
+.navbar {
+    background: #ffffff;
+}
+.navbar-nav {
+    background: #ffffff;
+    margin: 0px;
+}
+.navbar-nav, p.navbar-text {
+    cursor: pointer;
+}
+.navbar-nav > li:hover > ul {
+    position: absolute;
+    display: inline-block;
+    margin: 0px;
+}
