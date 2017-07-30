@@ -4,13 +4,10 @@
             <li class="dropdown">
                 <p class="navbar-text">Account Options <span class="caret"></span></p>
                 <ul class="dropdown-menu" #menu>
-                    <li><a href="#" class="navbar-link" (click)="selected('user')">New User</a></li>
-                    <li><a href="#" class="navbar-link" (click)="selected('password')">Forgot Password</a></li>
+                    <li><a routerLink="newuser" routerLinkActive="active">New User</a></li>
+                    <li><a routerLink="resetpassword" routerLinkActive="active">Forgot Password</a></li>
                 </ul>
             </li>
         </ul>
     </div>
 </nav>
-
-<app-create-user *ngIf="showCreateUser"></app-create-user>
-<!-- <app-resetpassword *ngIf="showPasswordReset"></app-resetpassword> -->
