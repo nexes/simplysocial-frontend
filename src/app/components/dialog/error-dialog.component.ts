@@ -3,14 +3,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-popup',
-    templateUrl: 'modal-dialog.component.html',
-    styleUrls: ['modal-dialog.component.css']
+    templateUrl: 'error-dialog.component.html',
+    styleUrls: ['error-dialog.component.css']
 })
-export class ModalDialogComponent {
+export class ErrorDialogComponent {
     @Output() toggle: EventEmitter<boolean>;
     @Input() title: string;
     @Input() message: string;
-
 
     constructor() {
         this.toggle = new EventEmitter<boolean>();

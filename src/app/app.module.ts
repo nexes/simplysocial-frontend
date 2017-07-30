@@ -5,15 +5,17 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './components/authentication/user-login.component';
+import { UserCreateComponent } from './components/authentication/user-create.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { ModalDialogComponent } from './components/dialog/modal-dialog.component';
+import { ErrorDialogComponent } from './components/dialog/error-dialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserLoginComponent,
-    ModalDialogComponent,
+    UserCreateComponent,
+    ErrorDialogComponent,
     NavigationComponent
   ],
   imports: [
