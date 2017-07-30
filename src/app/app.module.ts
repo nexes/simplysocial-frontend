@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './components/authentication/user-login.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 import { ModalDialogComponent } from './components/dialog/modal-dialog.component';
 
 
@@ -12,12 +13,13 @@ import { ModalDialogComponent } from './components/dialog/modal-dialog.component
   declarations: [
     AppComponent,
     UserLoginComponent,
-    ModalDialogComponent
+    ModalDialogComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'csrftoken',
       headerName: 'X-CSRFToken'

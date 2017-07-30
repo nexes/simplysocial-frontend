@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserAuthService } from '../../services/user-auth.service';
 
 
@@ -16,16 +17,29 @@ export class UserLoginComponent implements OnInit {
     private errorMessage: string;
     private showDialog: boolean;
 
+    private loginForm: FormGroup;
 
-    constructor(private auth: UserAuthService) {
+
+    constructor(private auth: UserAuthService, private fb: FormBuilder) {
         this.rememberMe = false;
         this.showDialog = false;
+
+        this.loginForm = this.fb.group({
+            username: [this.usernameOrEmail, [ Validators.maxLength(40), Validators.required ]],
+            password: [this.password, [ Validators.required ]],
+            remember: false
+        });
     }
 
     ngOnInit() {
     }
 
     login() {
+        this.usernameOrEmail = this.loginForm.get('username').value;
+        this.password = this.loginForm.get('password').value;
+        this.rememberMe = this.loginForm.get('remember').value;
+        this.loginForm.reset();
+
         this.auth.login(this.usernameOrEmail, this.password).subscribe(
             (resp) => {
                 console.log('got data');
