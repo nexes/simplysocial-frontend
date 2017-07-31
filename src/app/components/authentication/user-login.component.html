@@ -34,4 +34,4 @@
     </div>
 </div>
 
-<app-popup *ngIf="showDialog" (toggle)="closeDialog()" [title]="errorTitle" [message]="errorMessage"></app-popup>
+<app-error-dialog *ngIf="showDialog" (toggle)="closeDialog()" [title]="errorTitle" [message]="errorMessage"></app-error-dialog>
