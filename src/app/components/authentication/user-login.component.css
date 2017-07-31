@@ -28,3 +28,15 @@ input.ng-valid.ng-touched {
 .window-dim {
     opacity: 0.15;
 }
+input::-webkit-input-placeholder {
+    text-align: center;
+}
+input::-moz-placeholder {
+    text-align: center;
+}
+input:-ms-input-placeholder {
+    text-align: center;
+}
+input::placeholder {
+    text-align: center;
+}
