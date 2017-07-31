@@ -1,0 +1,33 @@
+.card {
+    background: #FFFFFF;  
+    padding: 1px 20px 40px 20px;
+    box-shadow: 1px 2px 5px -1px #4a4a4a;   
+    border-radius: 8px;
+}
+div.grouping {
+    background: #FFFFFF;
+    padding: 10px 5px 10px 5px;
+    border-radius: 5px;
+    border: 2px solid darkgray;
+}
+.card p.grouping-title {
+    /* padding: 20px 1px 20px 1px; */
+    text-align: center;
+    font-weight: bold;
+    font-size: 27px;
+    line-height: 32px;
+    color: black;
+}
+button[type='submit'] {
+    background-color: #1da1f2;
+    border-radius: 100px;
+    line-height: 28px;
+    font-weight: bold;
+    font-size: 18px;
+}
+input.ng-invalid.ng-touched {
+    border-left: 2px solid red;
+}
+input.ng-valid.ng-touched {
+    border-left: 2px solid forestgreen;
+}

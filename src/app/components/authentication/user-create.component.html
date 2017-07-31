@@ -1,0 +1,20 @@
+<div class="col-lg-6 col-md-8 col-sm-8 col-lg-offset-3 col-md-offset-2 col-sm-offset-2">
+    <form class="form" [formGroup]="newUserForm" (ngSubmit)="createUser()">
+        <div class="form-group card">
+            <div class="page-header">
+                <p class="grouping-title">Join "name" today.</p>
+            </div>
+            <input class="form-control input-lg" type="text" placeholder="Full name" formControlName="fullname">
+            <br/>
+            <input class="form-control input-lg" type="text" placeholder="User name" formControlName="username">
+            <br/>
+            <input class="form-control input-lg" type="email" placeholder="Email" formControlName="email">
+            <br/>
+            <input class="form-control input-lg" type="password" placeholder="Password" formControlName="password">
+        </div>
+        <button class="btn btn-primary col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3" type="submit" [disabled]="newUserForm.invalid">Sign up
+        </button>
+    </form>
+</div>
+
+<app-error-dialog *ngIf="showError" (toggle)="closeErrorDialog()" [title]="errorTitle" [message]="errorMsg"></app-error-dialog>
