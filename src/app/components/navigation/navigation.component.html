@@ -1,11 +1,14 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-right">
+            <div *ngIf="router.url !== '/login'" class="navbar-header">
+                <img  src="assets/chaticon.png" class="brand">
+            </div>
             <li class="dropdown">
                 <p class="navbar-text">Account Options <span class="caret"></span></p>
                 <ul class="dropdown-menu" #menu>
-                    <li><a routerLink="newuser" routerLinkActive="active">New User</a></li>
-                    <li><a routerLink="resetpassword" routerLinkActive="active">Forgot Password</a></li>
+                    <li><a routerLink="newuser" routerLinkActive="active" (click)="selected()">New User</a></li>
+                    <li><a routerLink="resetpassword" routerLinkActive="active" (click)="selected()">Forgot Password</a></li>
                 </ul>
             </li>
         </ul>

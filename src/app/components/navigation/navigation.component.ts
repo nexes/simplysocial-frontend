@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,19 +10,22 @@ import { Component } from '@angular/core';
 export class NavigationComponent {
     private showCreateUser: boolean;
     private showPasswordReset: boolean;
+    private showIcon: boolean;
 
-    constructor() {
+    constructor(private router: Router) {
 
     }
 
     selected(selected: string) {
-        if (selected === 'user') {
+        if (this.router.url === '/newuser') {
             this.showCreateUser = true;
             this.showPasswordReset = false;
+            this.showIcon = true;
 
-        } else if (selected === 'password') {
+        } else if (this.router.url === '/resetpassword') {
             this.showCreateUser = false;
             this.showPasswordReset = true;
+            this.showIcon = true;
         }
     }
 }

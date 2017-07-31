@@ -13,3 +13,8 @@
     display: inline-block;
     margin: 0px;
 }
+.navbar-header > img {
+    position: absolute;
+    width: 52px;
+    right: 48%;
+}
