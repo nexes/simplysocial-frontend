@@ -5,8 +5,10 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UserAuthService } from './services/user-auth.service';
 import { UserLoginComponent } from './components/authentication/user-login.component';
 import { UserCreateComponent } from './components/authentication/user-create.component';
+import { TimelineComponent } from './components/user/user-timeline.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ErrorDialogComponent } from './components/dialog/error-dialog.component';
 import { PageNotFoundComponent } from './components/404/page-notfound.component';
@@ -20,7 +22,8 @@ import { PageNotFoundComponent } from './components/404/page-notfound.component'
     UserCreateComponent,
     ErrorDialogComponent,
     NavigationComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,9 @@ import { PageNotFoundComponent } from './components/404/page-notfound.component'
       headerName: 'X-CSRFToken'
     })
   ],
-  providers: [],
+  providers: [
+    UserAuthService
+  ],
   bootstrap: [
     AppComponent
   ]

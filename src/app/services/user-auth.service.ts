@@ -6,7 +6,8 @@ import { Observable } from 'rxjs/Observable';
 export interface AuthResponse {
     code: number;
     message: string;
-    userid: number;
+    userid?: number;
+    loggedin?: boolean;
 }
 
 export interface User {
@@ -71,7 +72,6 @@ export class UserAuthService {
             username: username,
             password: password
         };
-
         return this.http.post<AuthResponse>(url, data, { headers: this.headers });
     }
 
@@ -82,8 +82,11 @@ export class UserAuthService {
 
     newUser(user: User): Observable<AuthResponse> {
         const url = this.baseURL + 'user/create/';
-        console.log(this.headers);
-
         return this.http.post<AuthResponse>(url, user, { headers: this.headers });
+    }
+
+    isOnline(username: string): Observable<AuthResponse> {
+        const url = `http://localhost:8000/snaplife/api/user/online/${username}/`;
+        return this.http.get<AuthResponse>(url);
     }
 }
