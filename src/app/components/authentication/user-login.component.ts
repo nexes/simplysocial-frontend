@@ -1,8 +1,8 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserAuthService, AuthResponse } from '../../services/user-auth.service';
 import { UserDataService } from '../../services/user-data.service';
+import { UserAuthService, AuthResponse } from '../../services/user-auth.service';
 
 
 @Component({
@@ -41,8 +41,8 @@ export class UserLoginComponent implements OnInit {
         this.usernameOrEmail = this.loginForm.get('username').value;
         this.password = this.loginForm.get('password').value;
         this.rememberMe = this.loginForm.get('remember').value;
-        this.loginForm.reset();
 
+        this.loginForm.reset();
         this.authService.login(this.usernameOrEmail, this.password).subscribe(
             (resp: AuthResponse) => {
                 this.router.navigate([ '/profile/', this.usernameOrEmail ]).then(() => {

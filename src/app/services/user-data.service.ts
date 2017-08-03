@@ -7,6 +7,9 @@ export interface CurrentUser {
     username?: string;
     isActive?: boolean;
     userid?: number;
+    firstname?: string;
+    lastname?: string;
+    email?: string;
 }
 
 @Injectable()
@@ -24,10 +27,7 @@ export class UserDataService implements OnDestroy {
     }
 
     updateUser(updated: CurrentUser) {
-        this.currentUser.username = updated.username || this.currentUser.username;
-        this.currentUser.isActive = updated.isActive || this.currentUser.isActive;
-        this.currentUser.userid = updated.userid || this.currentUser.userid;
-
+        Object.assign(this.currentUser, updated);
         this.dataBus.next(this.currentUser);
     }
 

@@ -10,6 +10,7 @@ button.popup-close-btn {
     padding: 10px 0px 0px 0px;
 }
 div.popup-window, p {
-    font-size: 14px;
+    padding: 5px 30px 5px 10px;
+    font-size: 18px;
     font-weight: bold;
 }
