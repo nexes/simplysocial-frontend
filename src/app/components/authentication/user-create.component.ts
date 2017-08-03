@@ -54,6 +54,7 @@ export class UserCreateComponent implements OnInit {
             email: this.newUserForm.get('email').value
         };
 
+        // TODO: handle routing
         this.auth.newUser(newUser).subscribe(
             (resp: AuthResponse) => {
                 console.log('all done');
