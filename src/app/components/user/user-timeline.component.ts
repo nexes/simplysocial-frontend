@@ -1,41 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserDataService, CurrentUser } from '../../services/user-data.service';
+
 
 @Component({
     selector: 'app-timeline',
     templateUrl: 'user-timeline.component.html',
     styleUrls: ['user-timeline.component.css']
 })
-export class TimelineComponent {
-
-    constructor(private route: ActivatedRoute) {
-        console.log('timeline params');
-
-        this.route.params.subscribe(
-            data => {
-                console.log(data);
-            }
-        );
-
-        console.log('timeline data');
-        this.route.data.subscribe(
-            data => {
-                console.log(data);
-            }
-        );
-
-        console.log('timeline queryparams');
-        this.route.queryParams.subscribe(
-            data => {
-                console.log(data);
-            }
-        );
-
-        console.log('timeline paramMap');
-        this.route.paramMap.subscribe(
-            data => {
-                console.log(data);
-            }
-        );
+export class TimelineComponent implements OnInit {
+    constructor(private route: ActivatedRoute, private userData: UserDataService) {
+        this.userData.listen().subscribe(this.userDataServiceSuccess, this.userDataServiceError);
     }
+
+    ngOnInit() {
+
+    }
+
+    userDataServiceSuccess(resp: CurrentUser) {
+        console.log(resp);
+    }
+
+    userDataServiceError(err: Error) {
+        console.log(err);
+    }
+
 }

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserAuthService, AuthResponse } from '../../services/user-auth.service';
+import { UserDataService } from '../../services/user-data.service';
 
 
 @Component({
     selector: 'app-user-login',
     templateUrl: 'user-login.component.html',
-    styleUrls: [ 'user-login.component.css' ],
-    providers: [ UserAuthService ]
+    styleUrls: [ 'user-login.component.css' ]
 })
 export class UserLoginComponent implements OnInit {
     private loginForm: FormGroup;
@@ -19,13 +20,16 @@ export class UserLoginComponent implements OnInit {
     private showDialog: boolean;
 
 
-    constructor(private auth: UserAuthService, private fb: FormBuilder) {
+    constructor(private authService: UserAuthService,
+                private userDataService: UserDataService,
+                private fb: FormBuilder,
+                private router: Router) {
+
         this.rememberMe = false;
         this.showDialog = false;
-
         this.loginForm = this.fb.group({
-            username: [this.usernameOrEmail, [ Validators.maxLength(40), Validators.required ]],
-            password: [this.password, [ Validators.required ]],
+            username: [ this.usernameOrEmail, [ Validators.maxLength(40), Validators.required ] ],
+            password: [ this.password, [ Validators.required ] ],
             remember: false
         });
     }
@@ -39,19 +43,20 @@ export class UserLoginComponent implements OnInit {
         this.rememberMe = this.loginForm.get('remember').value;
         this.loginForm.reset();
 
-        this.auth.login(this.usernameOrEmail, this.password).subscribe(
+        this.authService.login(this.usernameOrEmail, this.password).subscribe(
             (resp: AuthResponse) => {
-                console.log('got data');
-                console.log(resp);
+                this.router.navigate([ '/profile/', this.usernameOrEmail ]).then(() => {
+                    this.userDataService.updateUser({
+                        username: this.usernameOrEmail,
+                        isActive: true,
+                        userid: resp.userid
+                    });
+                });
             },
             (err) => {
                 this.errorTitle = 'Login failed:';
                 this.errorMessage = err.error[ 'message' ];
                 this.showDialog = true;
-            },
-            () => {
-                // route from here
-                console.log('all done');
             }
         );
     }

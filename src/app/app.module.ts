@@ -6,6 +6,7 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserAuthService } from './services/user-auth.service';
+import { UserDataService } from './services/user-data.service';
 import { UserLoginComponent } from './components/authentication/user-login.component';
 import { UserCreateComponent } from './components/authentication/user-create.component';
 import { TimelineComponent } from './components/user/user-timeline.component';
@@ -36,7 +37,8 @@ import { PageNotFoundComponent } from './components/404/page-notfound.component'
     })
   ],
   providers: [
-    UserAuthService
+    UserAuthService,
+    UserDataService
   ],
   bootstrap: [
     AppComponent
