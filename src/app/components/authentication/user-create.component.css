@@ -11,7 +11,6 @@ div.grouping {
     border: 2px solid darkgray;
 }
 .card p.grouping-title {
-    /* padding: 20px 1px 20px 1px; */
     text-align: center;
     font-weight: bold;
     font-size: 27px;
