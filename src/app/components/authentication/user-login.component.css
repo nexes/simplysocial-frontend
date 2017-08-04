@@ -1,42 +1,25 @@
-.card {
-    background: #FFFFFF;  
-    padding: 1px 20px 40px 20px;
-    box-shadow: 1px 2px 5px -1px #4a4a4a;   
-    border-radius: 8px;
+md-grid-tile-header.cell-header {
+    color: dimgray;
+    background: none;
+    border-bottom: 1px solid black;
 }
-.card .page-header {
+md-grid-tile-header.cell-header > h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+md-grid-tile-footer.cell-footer {
+    color: dimgray;
+    background: none;
+}
+.login-btn-right {
+    position: absolute;
+    right: 0;
     text-align: center;
-    padding: 0px;
-    margin: 20px 20px 40px 20px;
+    border-bottom: 0.5px solid gray;
 }
-input.login-input {
-    height: 40px;
-    font-size: 12pt;
-    text-align: center;
-    border-radius: 20px;
+.login-remember {
+    color: gray;
 }
-button.login-button {
-    width: 100%;
-    align-content: center;
-}
-input.ng-invalid.ng-touched {
-    border-left: 5px solid #a94442;
-}
-input.ng-valid.ng-touched {
-    border-left: 5px solid #42A948;
-}
-.window-dim {
+/* .window-dim {
     opacity: 0.15;
-}
-input::-webkit-input-placeholder {
-    text-align: center;
-}
-input::-moz-placeholder {
-    text-align: center;
-}
-input:-ms-input-placeholder {
-    text-align: center;
-}
-input::placeholder {
-    text-align: center;
-}
+} */

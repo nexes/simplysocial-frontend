@@ -1,33 +1,28 @@
-<div class="card col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2" [ngClass]="{'window-dim': showDialog}">
-  <div class="row">
-    <div class="page-header">
-      <h4>Log in to "Name"</h4>
-      <img src="assets/chaticon.png" alt="">
-    </div>
-    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-        <div class="form-group">
-          <input type="text" class="form-control login-input" formControlName="username" placeholder="username or email">
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control login-input" formControlName="password" placeholder="password">
-        </div>
-        <div class="form-group">
-          <div class="checkbox">
-            <label>
-                <input type="checkbox" formControlName="remember">
-                <p class="text-muted">Remember me</p>
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-6 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3 col-xs-offset-3">
-            <button type="submit" class="btn btn-success login-button" [disabled]="loginForm.invalid">Log in</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+  <md-grid-list cols="4" rowHeight="100px" gutterSize="10px">
+     <md-grid-tile colspan="1" rowspan="1"></md-grid-tile> 
 
-<app-error-dialog *ngIf="showDialog" (toggle)="closeDialog()" [title]="errorTitle" [message]="errorMessage"></app-error-dialog>
+    <md-grid-tile colspan="2" rowspan="3">
+      <md-grid-tile-header class="cell-header">
+        <h3>Log in</h3>
+      </md-grid-tile-header>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+        <md-input-container>
+          <input type="text" placeholder="User name" formControlName="username" mdInput>
+        </md-input-container>
+        <br/>
+        <md-input-container>
+          <input type="password" placeholder="password" formControlName="password" mdInput>
+        </md-input-container>
+
+        <br/>
+        <md-checkbox class="login-remember" color="accent" formControlName="remember">Remember me</md-checkbox>
+
+        <md-grid-tile-footer class="cell-footer">
+          <button md-button class="login-btn-right" [disabled]="!loginForm.valid">Log in</button>
+        </md-grid-tile-footer>
+      </form>
+
+    </md-grid-tile>
+  </md-grid-list>
+<!-- <app-error-dialog *ngIf="showDialog" (toggle)="closeDialog()" [title]="errorTitle" [message]="errorMessage"></app-error-dialog> -->
