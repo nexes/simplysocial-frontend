@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../../services/user-data.service';
-import { UserAuthService, AuthResponse } from '../../services/user-auth.service';
+import { UserAuthenticationService, AuthResponse } from '../../services/user-auth.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 
 
@@ -21,7 +21,7 @@ export class UserLoginComponent implements OnInit {
     private showDialog: boolean;
 
 
-    constructor(private authService: UserAuthService,
+    constructor(private authService: UserAuthenticationService,
                 private userDataService: UserDataService,
                 private fb: FormBuilder,
                 private router: Router,

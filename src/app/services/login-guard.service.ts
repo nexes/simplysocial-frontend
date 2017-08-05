@@ -2,14 +2,14 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { UserAuthService, AuthResponse } from '../services/user-auth.service';
+import { UserAuthenticationService, AuthResponse } from '../services/user-auth.service';
 
 
 @Injectable()
 export class LoginRequiredGuard implements CanActivate {
     private baseURL: string;
 
-    constructor(private userAuth: UserAuthService, private router: Router) {
+    constructor(private userAuth: UserAuthenticationService, private router: Router) {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {

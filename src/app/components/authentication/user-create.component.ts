@@ -1,7 +1,7 @@
 import { OnInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserAuthService, AuthResponse, User } from '../../services/user-auth.service';
+import { UserAuthenticationService, AuthResponse, User } from '../../services/user-auth.service';
 import { UserDataService } from '../../services/user-data.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 
@@ -17,7 +17,7 @@ export class UserCreateComponent implements OnInit {
     constructor(private fb: FormBuilder,
         private dialog: ModalDialogService,
         private userData: UserDataService,
-        private auth: UserAuthService,
+        private auth: UserAuthenticationService,
         private router: Router) {
 
         this.newUserForm = this.fb.group({

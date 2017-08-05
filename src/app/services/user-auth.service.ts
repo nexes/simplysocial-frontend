@@ -19,7 +19,7 @@ export interface User {
 }
 
 @Injectable()
-export class UserAuthService {
+export class UserAuthenticationService {
     private baseURL: string;
     private headers: HttpHeaders;
     private csrftoken: string;

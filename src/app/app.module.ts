@@ -12,7 +12,7 @@ import { UserCreateComponent } from './components/authentication/user-create.com
 import { TimelineComponent } from './components/user/user-timeline.component';
 import { PageNotFoundComponent } from './components/404/page-notfound.component';
 
-import { UserAuthService } from './services/user-auth.service';
+import { UserAuthenticationService } from './services/user-auth.service';
 import { UserDataService } from './services/user-data.service';
 
 
@@ -33,7 +33,7 @@ import { UserDataService } from './services/user-data.service';
     AppMaterialComponentModule
   ],
   providers: [
-    UserAuthService,
+    UserAuthenticationService,
     UserDataService,
     ModalDialogService
   ],
