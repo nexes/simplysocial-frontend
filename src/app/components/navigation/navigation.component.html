@@ -1,16 +1,13 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-right">
-            <div *ngIf="router.url !== '/login'" class="navbar-header">
-                <img  src="assets/chaticon.png" class="brand">
-            </div>
-            <li class="dropdown">
-                <p class="navbar-text">Account Options <span class="caret"></span></p>
-                <ul class="dropdown-menu" #menu>
-                    <li><a routerLink="newuser" routerLinkActive="active" (click)="selected()">New User</a></li>
-                    <li><a routerLink="resetpassword" routerLinkActive="active" (click)="selected()">Forgot Password</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</nav>
+<md-toolbar color="primary">
+    <img class="navbar-image">
+    <span>"Name"</span>
+    <span class="fill-remaining-space"></span>
+
+    <md-menu [overlapTrigger]="false" #navMenu="mdMenu">
+        <a routerLink="/newuser" routerLinkActive="active" md-menu-item><md-icon>person_add</md-icon> New user</a>
+        <a routerLink="/blah" routerLinkActive="active" md-menu-item><md-icon>security</md-icon>Forgot password</a>
+    </md-menu>
+    <button md-icon-button [mdMenuTriggerFor]="navMenu">
+        <md-icon>more_vert</md-icon>
+    </button>
+</md-toolbar>

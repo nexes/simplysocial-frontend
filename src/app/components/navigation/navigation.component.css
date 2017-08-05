@@ -1,20 +1,7 @@
-.navbar {
-    background: #ffffff;
+.fill-remaining-space {
+    flex: 1 1 auto;
 }
-.navbar-nav {
-    background: #ffffff;
-    margin: 0px;
-}
-.navbar-nav, p.navbar-text {
-    cursor: pointer;
-}
-.navbar-nav > li:hover > ul {
-    position: absolute;
-    display: inline-block;
-    margin: 0px;
-}
-.navbar-header > img {
-    position: absolute;
-    width: 52px;
-    right: 48%;
+img.navbar-image {
+    content: url('/assets/chaticon.png');
+    width: 64px;
 }
