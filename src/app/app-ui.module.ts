@@ -9,7 +9,8 @@ import {
     MdInputModule,
     MdCheckboxModule,
     MdSlideToggleModule,
-    MdDialogModule
+    MdDialogModule,
+    MdListModule
 } from '@angular/material';
 
 
@@ -24,7 +25,8 @@ import {
         MdInputModule,
         MdCheckboxModule,
         MdSlideToggleModule,
-        MdDialogModule
+        MdDialogModule,
+        MdListModule
     ],
     exports: [
         BrowserAnimationsModule,
@@ -36,7 +38,8 @@ import {
         MdInputModule,
         MdCheckboxModule,
         MdSlideToggleModule,
-        MdDialogModule
+        MdDialogModule,
+        MdListModule
     ]
 })
 export class AppMaterialComponentModule { }
