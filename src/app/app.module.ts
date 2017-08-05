@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { AppUIModule } from './app-ui.module';
+import { AppMaterialComponentModule } from './app-ui.module';
 
 import { AppComponent } from './app.component';
+import { ErrorDialogTemplateComponent, ModalDialogService } from './components/dialog/modal-dialog.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { UserLoginComponent } from './components/authentication/user-login.component';
+import { UserCreateComponent } from './components/authentication/user-create.component';
+import { TimelineComponent } from './components/user/user-timeline.component';
+import { PageNotFoundComponent } from './components/404/page-notfound.component';
 
 import { UserAuthService } from './services/user-auth.service';
 import { UserDataService } from './services/user-data.service';
@@ -12,24 +18,30 @@ import { UserDataService } from './services/user-data.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavigationComponent,
+    UserLoginComponent,
+    UserCreateComponent,
+    ErrorDialogTemplateComponent,
+    PageNotFoundComponent,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    AppUIModule,
     AppRoutingModule,
-    HttpClientXsrfModule.withOptions({
-      cookieName: 'csrftoken',
-      headerName: 'X-CSRFToken'
-    })
+    ReactiveFormsModule,
+    AppMaterialComponentModule
   ],
   providers: [
     UserAuthService,
-    UserDataService
+    UserDataService,
+    ModalDialogService
   ],
   bootstrap: [
     AppComponent
+  ],
+  entryComponents: [
+    ErrorDialogTemplateComponent
   ]
 })
 export class AppModule { }

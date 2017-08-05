@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+
 import { LoginRequiredGuard } from './services/login-guard.service';
 import { UserLoginComponent } from './components/authentication/user-login.component';
 import { UserCreateComponent } from './components/authentication/user-create.component';
@@ -11,15 +13,22 @@ const appRoutes: Routes = [
     { path: 'login', component: UserLoginComponent },
     { path: 'newuser', component: UserCreateComponent },
     { path: 'profile/:username', canActivate: [ LoginRequiredGuard ], component: TimelineComponent },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
     imports: [
+        HttpClientModule,
+        HttpClientXsrfModule.withOptions({
+            cookieName: 'csrftoken',
+            headerName: 'X-CSRFToken'
+        }),
         RouterModule.forRoot(appRoutes)
     ],
     exports: [
+        HttpClientModule,
+        HttpClientXsrfModule,
         RouterModule
     ],
     providers: [
