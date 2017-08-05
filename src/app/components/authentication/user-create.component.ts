@@ -1,8 +1,9 @@
 import { OnInit, Component } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserAuthService, AuthResponse, User } from '../../services/user-auth.service';
 import { UserDataService } from '../../services/user-data.service';
+import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 
 
 @Component({
@@ -12,11 +13,13 @@ import { UserDataService } from '../../services/user-data.service';
 })
 export class UserCreateComponent implements OnInit {
     private newUserForm: FormGroup;
-    private showError: boolean;
-    private errorTitle: string;
-    private errorMsg: string;
 
-    constructor(private fb: FormBuilder, private userData: UserDataService, private auth: UserAuthService, private router: Router) {
+    constructor(private fb: FormBuilder,
+        private dialog: ModalDialogService,
+        private userData: UserDataService,
+        private auth: UserAuthService,
+        private router: Router) {
+
         this.newUserForm = this.fb.group({
             fullname: [ '', [ Validators.minLength(2), Validators.maxLength(80), Validators.required ] ],
             email: [ '', [ Validators.email, Validators.required ] ],
@@ -29,29 +32,25 @@ export class UserCreateComponent implements OnInit {
 
     }
 
-    closeErrorDialog() {
-        this.showError = false;
-        this.errorTitle = '';
-        this.errorMsg = '';
-    }
-
     createUser() {
         const name: string = this.newUserForm.get('fullname').value;
-        const [firstName, ...last] = name.split(' ');
+        const [ firstName, ...last ] = name.split(' ');
         const lastName = last.join(' ');
 
         if (firstName.length > 40 || lastName.length > 40) {
-            this.errorTitle = 'Oops: Name Error';
-            this.errorMsg = 'The first and last name needs to be less than 40 characters each';
-            this.showError = true;
+            this.dialog.showErrorDialog(
+                'Oops: Name Error',
+                'The first and last name needs to be less than 40 characters each'
+            );
 
             this.newUserForm.get('password').reset();
             return;
         }
         if (lastName.length < 1) {
-            this.errorTitle = 'Oops: Name Error';
-            this.errorMsg = 'I didn\'t see a last name given';
-            this.showError = true;
+            this.dialog.showErrorDialog(
+                'Oops: Name Error',
+                'I didn\'t see a last name given'
+            );
 
             this.newUserForm.get('password').reset();
             return;
@@ -76,12 +75,12 @@ export class UserCreateComponent implements OnInit {
                         userid: resp.userid
                     });
                 });
-                console.log(resp);
             },
             (err) => {
-                this.errorTitle = 'Oops';
-                this.errorMsg = err.error[ 'message' ];
-                this.showError = true;
+                this.dialog.showErrorDialog(
+                    'Oops',
+                    err.error[ 'message' ]
+                );
                 this.newUserForm.get('password').reset();
             }
         );

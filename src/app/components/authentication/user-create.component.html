@@ -1,29 +1,40 @@
-<div class="col-lg-6 col-md-8 col-sm-8 col-lg-offset-3 col-md-offset-2 col-sm-offset-2">
-    <form class="form" [formGroup]="newUserForm" (ngSubmit)="createUser()">
-        <div class="form-group card">
-            <div class="page-header">
-                <p class="grouping-title">Join "name" today.</p>
-            </div>
-            <input class="form-control input-lg" type="text" placeholder="Full name" formControlName="fullname">
-                <div *ngIf="newUserForm.get('fullname').status === 'INVALID' && !newUserForm.get('fullname').untouched"
-                    class="alert alert-danger"> Oh no, first and last name must be less than 40 characters.
-                </div>
-            <br/>
-            <input class="form-control input-lg" type="text" placeholder="User name" formControlName="username">
-                <div *ngIf="newUserForm.get('username').status === 'INVALID' && !newUserForm.get('username').untouched"
-                    class="alert alert-danger"> Oh no, username must be longer than 2 and less than 40 characters.
-                </div>
-            <br/>
-            <input class="form-control input-lg" type="email" placeholder="Email" formControlName="email">
-            <br/>
-            <input class="form-control input-lg" type="password" placeholder="Password" formControlName="password">
-                <div *ngIf="newUserForm.get('password').status === 'INVALID' && !newUserForm.get('password').untouched"
-                    class="alert alert-danger"> Oh no, password must be longer than 6 characters.
-                </div>
-        </div>
-        <button class="btn btn-primary col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3" type="submit" [disabled]="newUserForm.invalid">Sign up
-        </button>
-    </form>
-</div>
+<div class="newuser-container">
+    <div class="newuser-left">
+        <h3 class=newuser-header>Join "name" today</h3>
 
-<app-error-dialog *ngIf="showError" (toggle)="closeErrorDialog()" [title]="errorTitle" [message]="errorMsg"></app-error-dialog>
+        <form [formGroup]="newUserForm" (ngSubmit)="createUser()">
+            <md-list>
+                <md-list-item>
+                    <md-input-container class="fill-width">
+                        <input type="text" placeholder="Full name" formControlName="fullname" mdInput>
+                    </md-input-container>
+                </md-list-item>
+                <br />
+                <md-list-item>
+                    <md-input-container class="fill-width">
+                        <input type="email" placeholder="Email" formControlName="email" mdInput>
+                    </md-input-container>
+                </md-list-item>
+                <br />
+                <md-list-item>
+                    <md-input-container class="fill-width">
+                        <input type="text" placeholder="User name" formControlName="username" mdInput>
+                    </md-input-container>
+                </md-list-item>
+                <br />
+                <md-list-item>
+                    <md-input-container class="fill-width">
+                        <input type="password" placeholder="Password" formControlName="password" mdInput>
+                        <md-hint align="start">Minimum of 6 characters long</md-hint>
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item> 
+                    <button class="newuser-button" type="submit" [disabled]="!newUserForm.valid" md-button>Join</button>
+                </md-list-item>
+            </md-list>
+
+        </form>
+    </div>
+
+    <div class="newuser-right"></div>
+</div>
