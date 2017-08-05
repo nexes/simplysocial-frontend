@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../../services/user-data.service';
 import { UserAuthService, AuthResponse } from '../../services/user-auth.service';
+import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class UserLoginComponent implements OnInit {
     constructor(private authService: UserAuthService,
                 private userDataService: UserDataService,
                 private fb: FormBuilder,
-                private router: Router) {
+                private router: Router,
+                private dialog: ModalDialogService) {
 
         this.rememberMe = false;
         this.showDialog = false;
@@ -54,9 +56,7 @@ export class UserLoginComponent implements OnInit {
                 });
             },
             (err) => {
-                this.errorTitle = 'Login failed:';
-                this.errorMessage = err.error[ 'message' ];
-                this.showDialog = true;
+                this.dialog.showErrorDialog('Login error', err.error['message']);
             }
         );
     }

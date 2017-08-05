@@ -1,35 +1,46 @@
-import { Component, Injectable, Input, Output, EventEmitter } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { Component, Injectable, Inject } from '@angular/core';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 
 
 @Injectable()
 export class ModalDialogService {
-    private dialogRef: MdDialogRef<ErrorDialogTemplateComponent>;
+    // private dialogRef: MdDialogRef<any>;
 
     constructor(private dialog: MdDialog) {
     }
 
-    show(title: string, message: string) {
-        this.dialogRef = this.dialog.open(ErrorDialogTemplateComponent);
-        this.dialogRef.afterClosed().subscribe(resp => {
-            console.log('after dialog closed');
-            console.log(resp);
-        });
-    }
+    showErrorDialog(title: string, message: string) {
+        let dialogRef: MdDialogRef<ErrorDialogTemplateComponent>;
 
-    closeDialog() {
+        dialogRef = this.dialog.open(ErrorDialogTemplateComponent, {
+            disableClose: true,
+            width: '400px',
+            data: {
+                title: title,
+                message: message
+            }
+        });
+        // dialogRef.afterClosed().subscribe(resp => {
+        // });
     }
 }
 
 
 @Component({
-    selector: 'app-error-template-dialog',
-    template: `
-        <h2>hello</h2>
-    `
+    selector: 'app-error-dialog',
+    templateUrl: 'error-dialog.component.html',
+    styleUrls: ['error-dialog.component.css']
 })
 export class ErrorDialogTemplateComponent {
-    constructor(private dialogRef: MdDialogRef<ErrorDialogTemplateComponent>) {
+    constructor(@Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<ErrorDialogTemplateComponent>) {
+    }
+}
 
+@Component({
+    selector: 'app-info-dialog',
+    templateUrl: 'info-dialog.component.html'
+})
+export class InfoDialogTemplateComponent {
+    constructor(@Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<InfoDialogTemplateComponent>) {
     }
 }
