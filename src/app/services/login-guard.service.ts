@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UserAuthenticationService, AuthResponse } from '../services/user-auth.service';
+import { UserDataService } from '../services/user-data.service';
 
 
 @Injectable()
 export class LoginRequiredGuard implements CanActivate {
     private baseURL: string;
 
-    constructor(private userAuth: UserAuthenticationService, private router: Router) {
+    constructor(private userAuth: UserAuthenticationService, private userData: UserDataService, private router: Router) {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
@@ -18,10 +19,11 @@ export class LoginRequiredGuard implements CanActivate {
                 (resp: AuthResponse) => {
                     if (resp.loggedin) {
                         observer.next(true);
-                        observer.complete();
+                        this.userData.updateUser({ username: route.params[ 'username' ] });
+                        this.router.navigate([ state.url ]);
+
                     } else {
                         observer.next(false);
-                        observer.complete();
                         this.router.navigate([ '/login' ], {
                             replaceUrl: false
                         });

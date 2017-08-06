@@ -31,6 +31,10 @@ export class UserDataService implements OnDestroy {
         this.dataBus.next(this.currentUser);
     }
 
+    getData() {
+        return this.currentUser;
+    }
+
     ngOnDestroy() {
         this.dataBus.unsubscribe();
     }
