@@ -10,7 +10,9 @@ import {
     MdCheckboxModule,
     MdSlideToggleModule,
     MdDialogModule,
-    MdListModule
+    MdListModule,
+    MdCardModule,
+    MdProgressBarModule
 } from '@angular/material';
 
 
@@ -26,7 +28,9 @@ import {
         MdCheckboxModule,
         MdSlideToggleModule,
         MdDialogModule,
-        MdListModule
+        MdListModule,
+        MdCardModule,
+        MdProgressBarModule
     ],
     exports: [
         BrowserAnimationsModule,
@@ -39,7 +43,9 @@ import {
         MdCheckboxModule,
         MdSlideToggleModule,
         MdDialogModule,
-        MdListModule
+        MdListModule,
+        MdCardModule,
+        MdProgressBarModule
     ]
 })
 export class AppMaterialComponentModule { }
