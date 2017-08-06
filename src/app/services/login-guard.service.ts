@@ -13,15 +13,19 @@ export class LoginRequiredGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-        console.log('LoginRequired guard');
-        console.log(route);
-        console.log(state);
-
         const isActiveObserver = new Observable<boolean>(observer => {
             this.userAuth.isOnline(route.params[ 'username' ]).subscribe(
                 (resp: AuthResponse) => {
-                    observer.next(resp.loggedin);
-                    observer.complete();
+                    if (resp.loggedin) {
+                        observer.next(true);
+                        observer.complete();
+                    } else {
+                        observer.next(false);
+                        observer.complete();
+                        this.router.navigate([ '/login' ], {
+                            replaceUrl: false
+                        });
+                    }
                 },
                 (err) => {
                     observer.error(err);
