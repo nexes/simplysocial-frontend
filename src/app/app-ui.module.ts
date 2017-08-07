@@ -12,7 +12,8 @@ import {
     MdDialogModule,
     MdListModule,
     MdCardModule,
-    MdProgressBarModule
+    MdProgressBarModule,
+    MdTabsModule
 } from '@angular/material';
 
 
@@ -30,7 +31,8 @@ import {
         MdDialogModule,
         MdListModule,
         MdCardModule,
-        MdProgressBarModule
+        MdProgressBarModule,
+        MdTabsModule
     ],
     exports: [
         BrowserAnimationsModule,
@@ -45,7 +47,8 @@ import {
         MdDialogModule,
         MdListModule,
         MdCardModule,
-        MdProgressBarModule
+        MdProgressBarModule,
+        MdTabsModule
     ]
 })
 export class AppMaterialComponentModule { }
