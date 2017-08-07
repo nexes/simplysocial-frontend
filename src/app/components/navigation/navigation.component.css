@@ -1,7 +1,52 @@
+md-toolbar.navigation-bar {
+    box-shadow: 3px 1px 10px black;
+}
 .fill-remaining-space {
     flex: 1 1 auto;
 }
 img.navbar-image {
     content: url('/assets/bee-color.png');
     width: 64px;
+}
+.userbar-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; 
+}
+.userbar-container .userbar-tabs {
+    /* background: greenyellow;    */
+    order: 1;
+    flex-grow: 1; 
+    flex-shrink: 2;
+    flex-basis: 40%;
+}
+nav.userbar-tabs.mat-tab-nav-bar {
+    padding: 0px;
+    margin-top: 15px;
+    height: 100%;
+}
+nav.userbar-tabs.mat-tab-nav-bar a {
+    color: white; 
+    font-weight: bold;
+}
+.nav-icon {
+    margin: 10px 5px 0px 0px;
+}
+.userbar-container .userbar-image {
+    /* background: yellow;  */
+    order: 2;
+    /* content: url('/assets/test-avatar.png');  */
+    border-radius: 100%; 
+    align-self: center;
+    width: 48px;
+    height: 48px;
+}
+.userbar-container .userbar-extra {
+    /* background: red; */
+    order: 3;
+    flex-grow: 1; 
+    text-align: right;
+    flex-basis: 40%;
+    margin-top: 10px; 
 }

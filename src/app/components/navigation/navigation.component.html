@@ -1,13 +1,30 @@
-<md-toolbar color="primary">
+<md-toolbar *ngIf="!showUserData else userToolBar" class="navigation-bar" color="primary">
     <img class="navbar-image">
     <span>hive</span>
     <span class="fill-remaining-space"></span>
 
     <md-menu [overlapTrigger]="false" #navMenu="mdMenu">
-        <a routerLink="/newuser" routerLinkActive="active" md-menu-item><md-icon>person_add</md-icon> New user</a>
-        <a routerLink="/blah" routerLinkActive="active" md-menu-item><md-icon>security</md-icon>Forgot password</a>
+        <a routerLink="/newuser" routerLinkActive="active" md-menu-item>
+            <md-icon>person_add</md-icon> New user</a>
+        <a routerLink="/blah" routerLinkActive="active" md-menu-item>
+            <md-icon>security</md-icon>Forgot password</a>
     </md-menu>
     <button md-icon-button [mdMenuTriggerFor]="navMenu">
         <md-icon>more_vert</md-icon>
     </button>
 </md-toolbar>
+
+<ng-template #userToolBar>
+    <md-toolbar class="navigation-bar" color="primary">
+        <div class="userbar-container">
+            <nav md-tab-nav-bar class="userbar-tabs">
+                <a md-tab-link><md-icon class="nav-icon">home</md-icon>Home</a>
+                <a md-tab-link><md-icon class="nav-icon">settings</md-icon>Settings</a>
+            </nav>
+            <img class="userbar-image" src="/assets/bee-color.png">
+            <div class="userbar-extra">
+                <img class="userbar-image" src="/assets/test-avatar.png">
+            </div>
+        </div>
+    </md-toolbar>
+</ng-template>
