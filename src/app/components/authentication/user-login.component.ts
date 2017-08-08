@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../../services/user-data.service';
+import { NavBarService } from '../../services/navbar.service';
 import { UserAuthenticationService, AuthResponse } from '../../services/user-auth.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 
@@ -25,6 +26,7 @@ export class UserLoginComponent implements OnInit {
                 private userDataService: UserDataService,
                 private fb: FormBuilder,
                 private router: Router,
+                private navBar: NavBarService,
                 private dialog: ModalDialogService) {
 
         this.rememberMe = false;
@@ -34,6 +36,8 @@ export class UserLoginComponent implements OnInit {
             password: [ this.password, [ Validators.required ] ],
             remember: false
         });
+
+        this.navBar.showLoginNavBar();
     }
 
     ngOnInit() {

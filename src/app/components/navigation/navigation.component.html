@@ -1,4 +1,4 @@
-<md-toolbar *ngIf="!showUserData else userToolBar" class="navigation-bar" color="primary">
+<md-toolbar *ngIf="navBar.loginNavBar" class="navigation-bar" color="primary">
     <img class="navbar-image">
     <span>hive</span>
     <span class="fill-remaining-space"></span>
@@ -14,17 +14,17 @@
     </button>
 </md-toolbar>
 
-<ng-template #userToolBar>
-    <md-toolbar class="navigation-bar" color="primary">
-        <div class="userbar-container">
-            <nav md-tab-nav-bar class="userbar-tabs">
-                <a md-tab-link><md-icon class="nav-icon">home</md-icon>Home</a>
-                <a md-tab-link><md-icon class="nav-icon">settings</md-icon>Settings</a>
-            </nav>
-            <img class="userbar-image" src="/assets/bee-color.png">
-            <div class="userbar-extra">
-                <img class="userbar-image" src="/assets/test-avatar.png">
-            </div>
+<md-toolbar *ngIf="navBar.userNavBar" class="navigation-bar" color="primary">
+    <div class="userbar-container">
+        <nav md-tab-nav-bar class="userbar-tabs">
+            <a md-tab-link>
+                <md-icon class="nav-icon">home</md-icon>Home</a>
+            <a md-tab-link>
+                <md-icon class="nav-icon">settings</md-icon>Settings</a>
+        </nav>
+        <img class="userbar-image" src="/assets/bee-color.png">
+        <div class="userbar-extra">
+            <img class="userbar-image" src="/assets/test-avatar.png">
         </div>
-    </md-toolbar>
-</ng-template>
+    </div>
+</md-toolbar>

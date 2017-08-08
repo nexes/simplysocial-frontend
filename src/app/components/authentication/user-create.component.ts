@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserAuthenticationService, AuthResponse, User } from '../../services/user-auth.service';
 import { UserDataService } from '../../services/user-data.service';
+import { NavBarService } from '../../services/navbar.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 
 
@@ -18,6 +19,7 @@ export class UserCreateComponent implements OnInit {
         private dialog: ModalDialogService,
         private userData: UserDataService,
         private auth: UserAuthenticationService,
+        private navBar: NavBarService,
         private router: Router) {
 
         this.newUserForm = this.fb.group({
@@ -26,6 +28,8 @@ export class UserCreateComponent implements OnInit {
             username: [ '', [ Validators.minLength(2), Validators.maxLength(40), Validators.required ] ],
             password: [ '', [ Validators.minLength(6), Validators.required ] ]
         });
+
+        this.navBar.showLoginNavBar();
     }
 
     ngOnInit() {

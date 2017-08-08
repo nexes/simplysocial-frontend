@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserDataService, CurrentUser } from '../../services/user-data.service';
+import { NavBarService } from '../../services/navbar.service';
 
 
 @Component({
@@ -11,19 +12,20 @@ import { UserDataService, CurrentUser } from '../../services/user-data.service';
 export class TimelineComponent implements OnInit {
     private showLoadingBar: boolean;
 
-    constructor(private userData: UserDataService) {
-        console.log('cnst called');
+    constructor(private userData: UserDataService, private navBar: NavBarService) {
+        console.log('timeline cnst called');
         this.showLoadingBar = true;
         this.userData.listen().subscribe(this.userDataServiceSuccess, this.userDataServiceError);
+        this.navBar.showUserNavBar();
     }
 
     ngOnInit() {
-        console.log('ngOnInit called');
+        console.log('timeline ngOnInit called');
         this.showLoadingBar = false;
     }
 
     userDataServiceSuccess(resp: CurrentUser) {
-        console.log('user data change was observed');
+        console.log('timeline: user data change was observed');
         console.log(resp);
 
         this.showLoadingBar = false;
