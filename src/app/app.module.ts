@@ -14,6 +14,7 @@ import { PageNotFoundComponent } from './components/404/page-notfound.component'
 
 import { UserAuthenticationService } from './services/user-auth.service';
 import { UserDataService } from './services/user-data.service';
+import { NavBarService } from './services/navbar.service';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { UserDataService } from './services/user-data.service';
   providers: [
     UserAuthenticationService,
     UserDataService,
-    ModalDialogService
+    ModalDialogService,
+    NavBarService
   ],
   bootstrap: [
     AppComponent
