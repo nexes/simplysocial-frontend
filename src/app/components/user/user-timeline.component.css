@@ -2,10 +2,17 @@
     margin: 5px 0px;
     z-index: 100;
 }
+md-input-container {
+    margin: 2px 40px;
+}
+textarea.timeline-post {
+    resize: none;
+    max-height: 40px;
+}
 div.timeline-container {
     position: fixed;
     top: 70px;
-    bottom: 2px;
+    bottom: 4px;
     right: 0px;
     left: 0px;
     display: flex;

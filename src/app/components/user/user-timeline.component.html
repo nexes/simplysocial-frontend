@@ -4,7 +4,6 @@
   <div class="timeline-following">
     <md-list>
       <h3 md-subheader>Following</h3>
-      <md-divider></md-divider>
 
       <md-list-item>
         <img src="/assets/test-avatar.png" md-list-avatar>
@@ -74,6 +73,17 @@
   </div>
 
   <div class="timeline-main">
+  
+  <md-input-container>
+    <textarea class="timeline-post" mdInput cols="90" rows="2" placeholder="Post something new" #postMessage></textarea>
+    <md-hint align="start">
+      <button md-icon-button><md-icon>photo</md-icon></button>
+    </md-hint>
+    <md-hint align="end">
+      <button md-button>Post</button> {{postMessage.value.length}} / 255
+    </md-hint>
+  </md-input-container>
+
     <md-card>
       <md-card-header>
         <md-card-title>username123</md-card-title>
