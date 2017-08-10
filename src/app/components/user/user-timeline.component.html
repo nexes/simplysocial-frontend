@@ -76,11 +76,9 @@
   
   <md-input-container>
     <textarea class="timeline-post" mdInput cols="90" rows="2" placeholder="Post something new" #postMessage></textarea>
-    <md-hint align="start">
-      <button md-icon-button><md-icon>photo</md-icon></button>
-    </md-hint>
+    <md-icon mdSuffix (click)="postImageUpload()">photo</md-icon>
     <md-hint align="end">
-      <button md-button>Post</button> {{postMessage.value.length}} / 255
+      <button md-button (click)="openPostDialog(postMessage.value)">New post</button> {{postMessage.value.length}} / 255
     </md-hint>
   </md-input-container>
 

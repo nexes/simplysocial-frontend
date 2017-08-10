@@ -5,8 +5,7 @@ import { Injectable } from '@angular/core';
 export class NavBarService {
     /* I don't like/want these to be public, but it needs to be this way for now.
        call the methods to change the navbar, not these variables directly.
-
-        This Service can be used to change the navbar on the fly.
+       This Service can be used to change the navbar on the fly.
     */
     loginNavBar: boolean;
     userNavBar: boolean;

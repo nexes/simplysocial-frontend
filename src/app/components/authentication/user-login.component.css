@@ -17,8 +17,8 @@ div.login-container {
     flex-grow: 1;
     flex-basis: 50%;
 }
-.login-main input {
-    min-width: 100%;
+.login-input {
+    width: 100%;
 }
 .login-header {
     color: dimgray;

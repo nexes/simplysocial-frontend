@@ -6,13 +6,13 @@
     <form [formGroup]="loginForm" (ngSubmit)="login()" md-line novalidate>
       <md-list>
         <md-list-item>
-          <md-input-container>
+          <md-input-container class="login-input">
             <input type="text" placeholder="User name" formControlName="username" mdInput>
           </md-input-container>
         </md-list-item>
 
         <md-list-item>
-          <md-input-container>
+          <md-input-container class="login-input">
             <input type="password" placeholder="Password" formControlName="password" mdInput>
           </md-input-container>
         </md-list-item>
