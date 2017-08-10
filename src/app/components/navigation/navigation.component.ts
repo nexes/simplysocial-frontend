@@ -8,12 +8,19 @@ import { NavBarService } from '../../services/navbar.service';
     styleUrls: [ 'navigation.component.css' ]
 })
 export class NavigationComponent implements OnInit {
+    private activeNotifications: boolean;
+
 
     constructor(private navBar: NavBarService) {
         console.log('navigation cstr()');
+        this.activeNotifications = false;
     }
 
     ngOnInit() {
         console.log('navigation oninit()');
+    }
+
+    newPostDialog() {
+        console.log('navigation newpostdialog');
     }
 }

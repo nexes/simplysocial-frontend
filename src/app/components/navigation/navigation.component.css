@@ -15,7 +15,6 @@ img.navbar-image {
     flex-wrap: nowrap; 
 }
 .userbar-container .userbar-tabs {
-    /* background: greenyellow;    */
     order: 1;
     flex-grow: 1; 
     flex-shrink: 2;
@@ -29,12 +28,12 @@ nav.userbar-tabs.mat-tab-nav-bar {
 nav.userbar-tabs.mat-tab-nav-bar a {
     color: white; 
     font-weight: bold;
+     min-width: 0px; 
 }
 .nav-icon {
     margin: 10px 5px 0px 0px;
 }
 .userbar-container .userbar-image {
-    /* background: yellow;  */
     order: 2;
     /* content: url('/assets/test-avatar.png');  */
     border-radius: 100%; 
@@ -43,10 +42,12 @@ nav.userbar-tabs.mat-tab-nav-bar a {
     height: 48px;
 }
 .userbar-container .userbar-extra {
-    /* background: red; */
     order: 3;
     flex-grow: 1; 
     text-align: right;
     flex-basis: 40%;
     margin-top: 10px; 
+}
+.notification-icon {
+    color: red;
 }
