@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppMaterialComponentModule } from './app-ui.module';
 
 import { AppComponent } from './app.component';
-import { ErrorDialogTemplateComponent, ModalDialogService } from './components/dialog/modal-dialog.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { UserLoginComponent } from './components/authentication/user-login.component';
 import { UserCreateComponent } from './components/authentication/user-create.component';
 import { TimelineComponent } from './components/user/user-timeline.component';
 import { PageNotFoundComponent } from './components/404/page-notfound.component';
+import {
+  ErrorDialogTemplateComponent,
+  PostDialogTemplateComponent,
+  ModalDialogService
+} from './components/dialog/modal-dialog.component';
 
 import { UserAuthenticationService } from './services/user-auth.service';
 import { UserDataService } from './services/user-data.service';
@@ -24,6 +28,7 @@ import { NavBarService } from './services/navbar.service';
     UserLoginComponent,
     UserCreateComponent,
     ErrorDialogTemplateComponent,
+    PostDialogTemplateComponent,
     PageNotFoundComponent,
     TimelineComponent
   ],
@@ -43,7 +48,8 @@ import { NavBarService } from './services/navbar.service';
     AppComponent
   ],
   entryComponents: [
-    ErrorDialogTemplateComponent
+    ErrorDialogTemplateComponent,
+    PostDialogTemplateComponent
   ]
 })
 export class AppModule { }
