@@ -1,0 +1,40 @@
+/* md-dialog-container {
+    max-width: 880px !important;
+} */
+.post-dialog-title {
+    padding-bottom: 10px; 
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+.post-dialog-message {
+    width: 100%;
+    height: auto;
+}
+.post-area {
+    margin: 0px 20px;
+    padding: 0px;
+    color: black;
+    font-size: 18px;
+    resize: none;
+}
+.action-area {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+}
+.action-area .action-post {
+    order: 3;
+    flex-grow: 2;
+    flex-basis: 20%;
+}
+.action-area .action-image {
+    order: 1;
+    flex-grow: 1;
+    flex-basis: 40%;
+}
+.action-area .action-space {
+    order: 2;
+    flex-grow: 3;
+    flex-basis: 60%;
+}
