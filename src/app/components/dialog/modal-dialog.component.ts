@@ -4,7 +4,6 @@ import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 
 @Injectable()
 export class ModalDialogService {
-    // private dialogRef: MdDialogRef<any>;
 
     constructor(private dialog: MdDialog) {
     }
@@ -23,7 +22,21 @@ export class ModalDialogService {
         // dialogRef.afterClosed().subscribe(resp => {
         // });
     }
+
+    showNewPostDialog(post?: string) {
+        let dialogRef: MdDialogRef<PostDialogTemplateComponent>;
+
+        dialogRef = this.dialog.open(PostDialogTemplateComponent, {
+            disableClose: false,
+            width: '60%',
+            position: {left: '25%', top: '0px'},
+            data: {
+                message: post || ''
+            }
+        });
+    }
 }
+
 
 
 @Component({
@@ -42,5 +55,22 @@ export class ErrorDialogTemplateComponent {
 })
 export class InfoDialogTemplateComponent {
     constructor(@Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<InfoDialogTemplateComponent>) {
+    }
+}
+
+@Component({
+    selector: 'app-post-dialog',
+    templateUrl: 'post-dialog.component.html',
+    styleUrls: ['post-dialog.component.css']
+})
+export class PostDialogTemplateComponent {
+    private postMessage: string;
+
+    constructor( @Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<PostDialogTemplateComponent>) {
+        this.postMessage = data.message;
+    }
+
+    selectImage() {
+        console.log('image upload');
     }
 }
