@@ -10,7 +10,6 @@ import { NavBarService } from '../../services/navbar.service';
 export class NavigationComponent implements OnInit {
     private activeNotifications: boolean;
 
-
     constructor(private navBar: NavBarService) {
         console.log('navigation cstr()');
         this.activeNotifications = false;
@@ -18,9 +17,5 @@ export class NavigationComponent implements OnInit {
 
     ngOnInit() {
         console.log('navigation oninit()');
-    }
-
-    newPostDialog() {
-        console.log('navigation newpostdialog');
     }
 }
