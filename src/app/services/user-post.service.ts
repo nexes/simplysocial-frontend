@@ -1,0 +1,39 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { UserDataService } from '../services/user-data.service';
+import { CSRFToken } from '../util/securitycsrf';
+
+
+export interface Post {
+    id: number;
+    message: string;
+    title?: string;
+    views: number;
+    likes: number;
+    imageURL?: string;
+    date: string;
+}
+
+@Injectable()
+export class UserPostService extends CSRFToken {
+    private baseURL: string;
+    private postMessage: string;
+    private postImage: string;
+
+
+    constructor(private userData: UserDataService, private http: HttpClient) {
+        super(http);
+        this.baseURL = 'http://localhost:8000/snaplife/api/user/posts/';
+    }
+
+    createPost(message: string, b64Image?: string): Observable<Post> {
+        const user_id = this.userData.getCurrentUserID();
+
+        return this.http.post<Post>(this.baseURL + 'create/', {
+            userid: user_id,
+            message: message,
+            image: b64Image
+        }, { headers: this.headers });
+    }
+}
