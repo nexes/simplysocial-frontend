@@ -73,19 +73,23 @@
   </div>
 
   <div class="timeline-main">
-  
-  <md-input-container>
-    <textarea class="timeline-post" mdInput cols="90" rows="2" placeholder="Post something new" #postMessage></textarea>
-    <md-icon mdSuffix (click)="postImageUpload()">photo</md-icon>
-    <md-hint align="end">
-      <button md-button (click)="openPostDialog(postMessage.value)">New post</button> {{postMessage.value.length}} / 255
-    </md-hint>
-  </md-input-container>
 
+    <!-- new post input  -->
+    <md-input-container>
+      <textarea mdInput class="timeline-post" cols="90" rows="2" placeholder="Post something new" #postMessage></textarea>
+      <input type="file" id="imageFile" accept="image/*" style="display:none" (change)="postImageUpload(imageInput.files[0])" #imageInput>
+      <label mdInput for="imageFile" mdSuffix><md-icon>photo</md-icon></label>
+
+      <md-hint align="end">
+        <button md-button [disabled]="" (click)="submitNewPost(postMessage.value)">New post</button> {{postMessage.value.length}} / 255
+      </md-hint>
+    </md-input-container>
+
+    <!-- list of timeline post cards -->
     <md-card>
-      <md-card-header>
+      <md-card-header id="test">
         <md-card-title>username123</md-card-title>
-        <md-card-subtitle>a picture of a bumble bee!</md-card-subtitle>
+        <md-card-subtitle>4 days</md-card-subtitle>
         <img src="/assets/test-avatar.png" md-card-avatar>
       </md-card-header>
       <img class="timeline-post-img" md-card-image>
@@ -147,6 +151,8 @@
 
   </div>
   <div class="timeline-extra">
-    <!-- extas -->
+    <div class="post-btn-sticky">
+      <button md-icon-button (click)="openPostDialog()"><md-icon>mode_edit</md-icon></button>
+    </div>
   </div>
 </div>

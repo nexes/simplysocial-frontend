@@ -74,3 +74,18 @@ div.timeline-extra {
 md-card-actions button {
     right: 0px;
 }
+div.timeline-extra .post-btn-sticky {
+    position: absolute;
+    bottom: 0;
+    right: 5;
+    padding: 0px;
+    margin: 15px 0px;
+    background: red;
+    border-radius: 100%;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+}
+.post-btn-sticky > button {
+    color: white;
+    width: 52px;
+    height: 52px;
+}

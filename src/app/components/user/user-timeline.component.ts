@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserDataService, CurrentUser } from '../../services/user-data.service';
 import { NavBarService } from '../../services/navbar.service';
+import { UserPostService } from '../../services/user-post.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 
 
@@ -13,17 +14,18 @@ import { ModalDialogService } from '../../components/dialog/modal-dialog.compone
 export class TimelineComponent implements OnInit {
     private showLoadingBar: boolean;
     private currentUser: CurrentUser;
+    private imageData: string;
 
-
-    constructor(private userData: UserDataService, private dialog: ModalDialogService, private navBar: NavBarService) {
-        console.log('timeline cnst called');
+    constructor(private userPost: UserPostService,
+                private userData: UserDataService,
+                private dialog: ModalDialogService,
+                private navBar: NavBarService) {
         this.showLoadingBar = true;
         this.navBar.showUserNavBar();
         this.userData.listen().subscribe(this.userDataServiceSuccess, this.userDataServiceError);
     }
 
     ngOnInit() {
-        console.log('timeline ngOnInit called');
         this.showLoadingBar = false;
     }
 
@@ -31,10 +33,26 @@ export class TimelineComponent implements OnInit {
         this.dialog.showNewPostDialog(message);
     }
 
-    userDataServiceSuccess(resp: CurrentUser) {
-        console.log('timeline: user data change was observed');
-        console.log(resp);
+    submitNewPost(postMessage: string) {
+        this.userPost.createPost(postMessage, this.imageData).subscribe(
+            (resp) => {
+                console.log('response');
+                console.log(resp['post']);
+            }
+        );
+    }
 
+    postImageUpload(file) {
+        const reader = new FileReader();
+
+        reader.addEventListener('load', () => {
+            const imgString: string = reader.result;
+            this.imageData = imgString.substring(imgString.indexOf('base64,') + 'base64,'.length);
+        });
+        reader.readAsDataURL(file);
+    }
+
+    userDataServiceSuccess(resp: CurrentUser) {
         this.showLoadingBar = false;
         this.currentUser = resp;
     }
@@ -45,9 +63,5 @@ export class TimelineComponent implements OnInit {
 
     followingClick(selected: string) {
         console.log(`follower ${selected}`);
-    }
-
-    postImageUpload() {
-        console.log('upload image');
     }
 }
