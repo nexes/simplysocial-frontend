@@ -78,12 +78,19 @@
     <md-input-container>
       <textarea mdInput class="timeline-post" cols="90" rows="2" placeholder="Post something new" #postMessage></textarea>
       <input type="file" id="imageFile" accept="image/*" style="display:none" (change)="postImageUpload(imageInput.files[0])" #imageInput>
-      <label mdInput for="imageFile" mdSuffix><md-icon>photo</md-icon></label>
+      <label class="timeline-img-btn" mdInput for="imageFile" mdSuffix><md-icon>photo</md-icon></label>
 
       <md-hint align="end">
-        <button md-button [disabled]="" (click)="submitNewPost(postMessage.value)">New post</button> {{postMessage.value.length}} / 255
+        <button md-button [disabled]="!postMessage.value.length > 0" (click)="submitNewPost(postMessage.value)">New post</button> {{postMessage.value.length}} / 255
       </md-hint>
     </md-input-container>
+
+    <div [hidden]="hideImgPreview">
+      <md-icon color="warn" style="cursor:pointer" (click)="removeImagePreview()">
+        <img class="timeline-img-preview" id="img-preview" width="64px" height="64px">
+        close
+      </md-icon>
+    </div>
 
     <!-- list of timeline post cards -->
     <md-card>
