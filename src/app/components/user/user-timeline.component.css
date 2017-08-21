@@ -62,7 +62,6 @@ div.timeline-main {
     overflow-y: scroll;
 }
 img.timeline-post-img {
-    content: url('/assets/bee-hero.jpg');
     max-width: 700px;
     height: auto;
 }

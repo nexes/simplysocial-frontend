@@ -92,66 +92,24 @@
       </md-icon>
     </div>
 
-    <!-- list of timeline post cards -->
-    <md-card>
-      <md-card-header id="test">
-        <md-card-title>username123</md-card-title>
-        <md-card-subtitle>4 days</md-card-subtitle>
-        <img src="/assets/test-avatar.png" md-card-avatar>
-      </md-card-header>
-      <img class="timeline-post-img" md-card-image>
-      <md-card-content>
-        <p>tthis is the contentthis is the content this is the contentthis is the content this is the contenthis is the content</p>
-      </md-card-content>
-      <md-card-actions>
-        <div class="timeline-btn-row">
-          <p class="timeline-labels">1,234 likes</p>
-
-          <button class="timeline-action" md-button><md-icon>favorite_border</md-icon></button>
-          <button class="timeline-action" md-button><md-icon>comment</md-icon></button>
-          <button class="timeline-action" md-button><md-icon>share</md-icon></button>
-        </div>
-      </md-card-actions>
-    </md-card>
-
-    <md-card>
+    <!-- timeline post cards (hehe postcards) -->
+    <md-card *ngFor="let post of postList">
       <md-card-header>
-        <md-card-title>username123</md-card-title>
-        <md-card-subtitle>a picture of a bumble bee!</md-card-subtitle>
+        <md-card-title>{{currentUsername}}</md-card-title>
+        <md-card-subtitle>{{post.date}}</md-card-subtitle>
         <img src="/assets/test-avatar.png" md-card-avatar>
       </md-card-header>
-      <img class="timeline-post-img" md-card-image>
+      <img class="timeline-post-img" src={{post.imageurl}} md-card-image>
       <md-card-content>
-        <p>tthis is the contentthis is the content this is the contentthis is the content this is the contenthis is the content</p>
+        <p>{{post.message}}</p>
       </md-card-content>
       <md-card-actions>
         <div class="timeline-btn-row">
-          <p class="timeline-labels">1,234 likes</p>
+          <p class="timeline-labels">{{post.likes}} likes</p>
 
-          <button class="timeline-action" md-button><md-icon>favorite_border</md-icon></button>
-          <button class="timeline-action" md-button><md-icon>comment</md-icon></button>
-          <button class="timeline-action" md-button><md-icon>share</md-icon></button>
-        </div>
-      </md-card-actions>
-    </md-card>
-
-    <md-card>
-      <md-card-header>
-        <md-card-title>username123</md-card-title>
-        <md-card-subtitle>a picture of a bumble bee!</md-card-subtitle>
-        <img src="/assets/test-avatar.png" md-card-avatar>
-      </md-card-header>
-      <img class="timeline-post-img" md-card-image>
-      <md-card-content>
-        <p>tthis is the contentthis is the content this is the contentthis is the content this is the contenthis is the content</p>
-      </md-card-content>
-      <md-card-actions>
-        <div class="timeline-btn-row">
-          <p class="timeline-labels">1,234 likes</p>
-
-          <button class="timeline-action" md-button><md-icon>favorite_border</md-icon></button>
-          <button class="timeline-action" md-button><md-icon>comment</md-icon></button>
-          <button class="timeline-action" md-button><md-icon>share</md-icon></button>
+          <md-icon class="timeline-action" style="cursor:pointer" (click)="likePost(post)">favorite_border</md-icon>
+          <md-icon class="timeline-action" style="cursor:pointer">comment</md-icon>
+          <md-icon class="timeline-action" style="cursor:pointer">share</md-icon>
         </div>
       </md-card-actions>
     </md-card>

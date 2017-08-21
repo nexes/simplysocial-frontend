@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserDataService, CurrentUser } from '../../services/user-data.service';
 import { NavBarService } from '../../services/navbar.service';
-import { UserPostService } from '../../services/user-post.service';
+import { UserPostService, Post } from '../../services/user-post.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 
 
@@ -13,9 +13,11 @@ import { ModalDialogService } from '../../components/dialog/modal-dialog.compone
 })
 export class TimelineComponent implements OnInit {
     private showLoadingBar: boolean;
-    private currentUser: CurrentUser;
-    private imageData: string;
+    private currentUsername: string;
+    private postImageData: string;
     private hideImgPreview: boolean;
+    private postList: Post[];
+
 
     constructor(private userPost: UserPostService,
                 private userData: UserDataService,
@@ -24,11 +26,19 @@ export class TimelineComponent implements OnInit {
         this.showLoadingBar = true;
         this.hideImgPreview = true;
         this.navBar.showUserNavBar();
-        this.userData.listen().subscribe(this.userDataServiceSuccess, this.userDataServiceError);
+        this.currentUsername = this.userData.getCurrentUsername();
+
+        this.userData.listen().subscribe((user: CurrentUser) => {
+            console.log(user);
+        });
+
+        this.userPost.getUserPosts().subscribe((post: Post) => {
+            this.postList = post[ 'posts' ];
+            this.showLoadingBar = false;
+        });
     }
 
     ngOnInit() {
-        this.showLoadingBar = false;
     }
 
     openPostDialog(message?: string) {
@@ -36,12 +46,16 @@ export class TimelineComponent implements OnInit {
     }
 
     submitNewPost(postMessage: string) {
-        this.userPost.createPost(postMessage, this.imageData).subscribe(
+        this.userPost.createPost(postMessage, this.postImageData).subscribe(
             (resp) => {
-                console.log('response');
                 console.log(resp['post']);
+                this.postList.unshift(resp['post']);
             }
         );
+
+        this.postImageData = undefined;
+        this.hideImgPreview = true;
+        postMessage = '';
     }
 
     postImageUpload(file) {
@@ -49,7 +63,7 @@ export class TimelineComponent implements OnInit {
 
         reader.addEventListener('load', () => {
             const imgString: string = reader.result;
-            this.imageData = imgString.substring(imgString.indexOf('base64,') + 'base64,'.length);
+            this.postImageData = imgString.substring(imgString.indexOf('base64,') + 'base64,'.length);
 
             const img = <HTMLImageElement>document.getElementById('img-preview');
             img.src = imgString;
@@ -59,17 +73,16 @@ export class TimelineComponent implements OnInit {
     }
 
     removeImagePreview() {
-        this.imageData = undefined;
+        this.postImageData = undefined;
         this.hideImgPreview = true;
     }
 
-    userDataServiceSuccess(resp: CurrentUser) {
-        this.showLoadingBar = false;
-        this.currentUser = resp;
-    }
-
-    userDataServiceError(err: Error) {
-        console.log(err);
+    likePost(post: Post) {
+        this.userPost.updateLikeCount(post).subscribe(
+            (resp) => {
+                post.likes = resp.likecount;
+            }
+        );
     }
 
     followingClick(selected: string) {

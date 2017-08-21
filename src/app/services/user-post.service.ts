@@ -6,12 +6,12 @@ import { CSRFToken } from '../util/securitycsrf';
 
 
 export interface Post {
-    id: number;
+    postid: number;
     message: string;
     title?: string;
     views: number;
     likes: number;
-    imageURL?: string;
+    imageurl?: string;
     date: string;
 }
 
@@ -34,6 +34,20 @@ export class UserPostService extends CSRFToken {
             userid: user_id,
             message: message,
             image: b64Image
+        }, { headers: this.headers });
+    }
+
+    getUserPosts(): Observable<Post> {
+        const user_id = this.userData.getCurrentUserID();
+        const url = `${this.baseURL}search/user/${this.userData.getCurrentUserID()}/${10}/`;
+
+        return this.http.get<Post>(url);
+    }
+
+    updateLikeCount(post: Post): Observable<any> {
+        return this.http.post(this.baseURL + 'like/', {
+            userid: this.userData.getCurrentUserID(),
+            postid: post.postid
         }, { headers: this.headers });
     }
 }
