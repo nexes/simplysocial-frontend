@@ -19,6 +19,7 @@ import {
 import { UserAuthenticationService } from './services/user-auth.service';
 import { UserDataService } from './services/user-data.service';
 import { NavBarService } from './services/navbar.service';
+import { UserPostService } from './services/user-post.service';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { NavBarService } from './services/navbar.service';
     UserAuthenticationService,
     UserDataService,
     ModalDialogService,
-    NavBarService
+    NavBarService,
+    UserPostService
   ],
   bootstrap: [
     AppComponent
