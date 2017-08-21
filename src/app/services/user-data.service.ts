@@ -31,8 +31,16 @@ export class UserDataService implements OnDestroy {
         this.dataBus.next(this.currentUser);
     }
 
-    getData() {
+    getData(): CurrentUser {
         return this.currentUser;
+    }
+
+    getCurrentUserID(): number {
+        return this.currentUser.userid;
+    }
+
+    getCurrentUsername(): string {
+        return this.currentUser.username;
     }
 
     ngOnDestroy() {
