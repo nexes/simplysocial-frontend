@@ -40,6 +40,12 @@ div.timeline-btn-row {
     margin: 0px;
     padding: 10px;
 }
+.timeline-btn-row .timeline-action-menu {
+    order: 2;
+    min-width: 20px;
+    margin: 0px;
+    padding: 0px;
+}
 .timeline-btn-row .timeline-labels {
     order: 1;
     flex-grow: 1;

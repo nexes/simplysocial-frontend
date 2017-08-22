@@ -50,6 +50,9 @@ export class TimelineComponent implements OnInit {
             (resp) => {
                 console.log(resp['post']);
                 this.postList.unshift(resp['post']);
+            },
+            (err) => {
+                console.log(err);
             }
         );
 
@@ -58,16 +61,29 @@ export class TimelineComponent implements OnInit {
         postMessage = '';
     }
 
-    postImageUpload(file) {
+    postImageUpload(file: File) {
         const reader = new FileReader();
 
         reader.addEventListener('load', () => {
-            const imgString: string = reader.result;
-            this.postImageData = imgString.substring(imgString.indexOf('base64,') + 'base64,'.length);
+            const resizeImg = new Image();
 
-            const img = <HTMLImageElement>document.getElementById('img-preview');
-            img.src = imgString;
-            this.hideImgPreview = false;
+            resizeImg.addEventListener('load', () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                canvas.width = resizeImg.width * 0.25;
+                canvas.height = resizeImg.height * 0.25;
+                ctx.drawImage(resizeImg, 0, 0, canvas.width, canvas.height);
+
+                const imgString = canvas.toDataURL('image/png', 1.0);
+                this.postImageData = imgString.substring(imgString.indexOf('base64,') + 'base64,'.length);
+
+                // show a preview of the image
+                const img = <HTMLImageElement>document.getElementById('img-preview');
+                img.src = imgString;
+                this.hideImgPreview = false;
+            });
+            resizeImg.src = reader.result;
         });
         reader.readAsDataURL(file);
     }
