@@ -13,9 +13,10 @@ import { ProcessImage } from '../../util/imageprocess';
     styleUrls: ['user-timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
-    private showLoadingBar: boolean;
-    private currentUsername: string;
     private postImageData: string;
+    private postMessage: string;
+    private currentUsername: string;
+    private showLoadingBar: boolean;
     private hideImgPreview: boolean;
     private postList: Post[];
     private images: ProcessImage;
@@ -25,11 +26,12 @@ export class TimelineComponent implements OnInit {
                 private userData: UserDataService,
                 private dialog: ModalDialogService,
                 private navBar: NavBarService) {
+        this.navBar.showUserNavBar();
         this.showLoadingBar = true;
         this.hideImgPreview = true;
-        this.navBar.showUserNavBar();
         this.currentUsername = this.userData.getCurrentUsername();
         this.images = new ProcessImage();
+        this.postMessage = '';
 
         this.userData.listen().subscribe((user: CurrentUser) => {
             console.log(user);
@@ -48,8 +50,8 @@ export class TimelineComponent implements OnInit {
         this.dialog.showNewPostDialog(message);
     }
 
-    submitNewPost(postMessage: string) {
-        this.userPost.createPost(postMessage, this.postImageData).subscribe(
+    submitNewPost() {
+        this.userPost.createPost(this.postMessage, this.postImageData).subscribe(
             (resp) => {
                 console.log(resp['post']);
                 this.postList.unshift(resp['post']);
@@ -61,7 +63,7 @@ export class TimelineComponent implements OnInit {
 
         this.postImageData = undefined;
         this.hideImgPreview = true;
-        postMessage = '';
+        this.postMessage = '';
     }
 
     postImageUpload(file: File) {

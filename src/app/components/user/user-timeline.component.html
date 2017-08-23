@@ -76,12 +76,12 @@
 
     <!-- new post input  -->
     <md-input-container>
-      <textarea mdInput class="timeline-post" cols="90" rows="2" placeholder="Post something new" #postMessage></textarea>
+      <textarea mdInput class="timeline-post" cols="90" placeholder="Post something new" [(ngModel)]="postMessage"></textarea>
       <input type="file" id="imageFile" accept="image/*" style="display:none" (change)="postImageUpload(imageInput.files[0])" #imageInput>
       <label class="timeline-img-btn" mdInput for="imageFile" mdSuffix><md-icon>photo</md-icon></label>
 
       <md-hint align="end">
-        <button md-button [disabled]="!postMessage.value.length > 0" (click)="submitNewPost(postMessage.value)">Post</button> {{postMessage.value.length}} / 255
+        <button md-button [disabled]="!(postMessage.length > 0 && postMessage.length < 255)" (click)="submitNewPost()">Post</button> {{postMessage.length}} / 255
       </md-hint>
     </md-input-container>
 
