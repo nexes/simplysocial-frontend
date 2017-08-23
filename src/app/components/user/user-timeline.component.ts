@@ -4,6 +4,7 @@ import { UserDataService, CurrentUser } from '../../services/user-data.service';
 import { NavBarService } from '../../services/navbar.service';
 import { UserPostService, Post } from '../../services/user-post.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
+import { ProcessImage } from '../../util/imageprocess';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class TimelineComponent implements OnInit {
     private postImageData: string;
     private hideImgPreview: boolean;
     private postList: Post[];
+    private images: ProcessImage;
 
 
     constructor(private userPost: UserPostService,
@@ -27,6 +29,7 @@ export class TimelineComponent implements OnInit {
         this.hideImgPreview = true;
         this.navBar.showUserNavBar();
         this.currentUsername = this.userData.getCurrentUsername();
+        this.images = new ProcessImage();
 
         this.userData.listen().subscribe((user: CurrentUser) => {
             console.log(user);
@@ -65,25 +68,16 @@ export class TimelineComponent implements OnInit {
         const reader = new FileReader();
 
         reader.addEventListener('load', () => {
-            const resizeImg = new Image();
+            this.images.resizeImage(reader.result, 720, 720).subscribe(
+                (resp: string) => {
+                    this.postImageData = resp.substring(resp.indexOf('base64,') + 'base64,'.length);
 
-            resizeImg.addEventListener('load', () => {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-
-                canvas.width = resizeImg.width * 0.25;
-                canvas.height = resizeImg.height * 0.25;
-                ctx.drawImage(resizeImg, 0, 0, canvas.width, canvas.height);
-
-                const imgString = canvas.toDataURL('image/png', 1.0);
-                this.postImageData = imgString.substring(imgString.indexOf('base64,') + 'base64,'.length);
-
-                // show a preview of the image
-                const img = <HTMLImageElement>document.getElementById('img-preview');
-                img.src = imgString;
-                this.hideImgPreview = false;
-            });
-            resizeImg.src = reader.result;
+                    // show a preview of the image
+                    const img = <HTMLImageElement>document.getElementById('img-preview');
+                    img.src = resp;
+                    this.hideImgPreview = false;
+                }
+            );
         });
         reader.readAsDataURL(file);
     }
