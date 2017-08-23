@@ -1,5 +1,8 @@
 import { Component, Injectable, Inject } from '@angular/core';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { UserPostService } from '../../services/user-post.service';
+import { ProcessImage } from '../../util/imageprocess';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -23,7 +26,7 @@ export class ModalDialogService {
         // });
     }
 
-    showNewPostDialog(post?: string) {
+    showNewPostDialog(post?: string): Observable<any> {
         let dialogRef: MdDialogRef<PostDialogTemplateComponent>;
 
         dialogRef = this.dialog.open(PostDialogTemplateComponent, {
@@ -34,9 +37,10 @@ export class ModalDialogService {
                 message: post || ''
             }
         });
+
+        return dialogRef.afterClosed();
     }
 }
-
 
 
 @Component({
@@ -58,19 +62,49 @@ export class InfoDialogTemplateComponent {
     }
 }
 
+
 @Component({
     selector: 'app-post-dialog',
     templateUrl: 'post-dialog.component.html',
     styleUrls: ['post-dialog.component.css']
 })
 export class PostDialogTemplateComponent {
+    private image: ProcessImage;
     private postMessage: string;
+    private postImageData: string;
 
-    constructor( @Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<PostDialogTemplateComponent>) {
-        this.postMessage = data.message;
+
+    constructor(@Inject(MD_DIALOG_DATA) private data: any,
+                private dialogRef: MdDialogRef<PostDialogTemplateComponent>,
+                private userPost: UserPostService) {
+        this.image = new ProcessImage();
+        this.postMessage = data.message || '';
     }
 
-    selectImage() {
-        console.log('image upload');
+    selectImage(imageFile: File) {
+        const filereader = new FileReader();
+
+        filereader.addEventListener('load', () => {
+            this.image.resizeImage(filereader.result, 720, 720).subscribe(
+                (resp: string) => {
+                    this.postImageData = resp.substring(resp.indexOf('base64,') + 'base64,'.length);
+                }
+            );
+
+        });
+
+        filereader.readAsDataURL(imageFile);
+    }
+
+    sendPost() {
+        this.userPost.createPost(this.postMessage, this.postImageData).subscribe(
+            (resp) => {
+                console.log(resp);
+                this.dialogRef.close(resp);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
     }
 }
