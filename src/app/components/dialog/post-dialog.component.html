@@ -9,5 +9,5 @@
   <input type="file" style="display:none" id="imagefile" accept="image/*" (change)="selectImage(imageFile.files[0])" #imageFile>
   <label class="action-image" for="imagefile"><md-icon>photo</md-icon></label>
   <div class="action-space"></div>
-  <button class="action-post" [disabled]="!(postMessage.length > 0 && postMessage.length < 255)" color="primary" (click)="sendPost();" md-raised-button md-dialog-close>Post</button>
+  <button class="action-post" [disabled]="!(postMessage.length > 0 && postMessage.length < 255)" color="primary" (click)="sendPost();" md-raised-button>Post</button>
 </div> 

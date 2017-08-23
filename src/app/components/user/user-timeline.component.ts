@@ -46,15 +46,18 @@ export class TimelineComponent implements OnInit {
     ngOnInit() {
     }
 
-    openPostDialog(message?: string) {
-        this.dialog.showNewPostDialog(message);
+    openPostDialog() {
+        this.dialog.showNewPostDialog(this.postMessage).subscribe(
+            (resp) => {
+                this.postList.unshift(resp['post']);
+            }
+        );
     }
 
     submitNewPost() {
         this.userPost.createPost(this.postMessage, this.postImageData).subscribe(
             (resp) => {
-                console.log(resp['post']);
-                this.postList.unshift(resp['post']);
+                this.postList.unshift(resp[ 'post' ]);
             },
             (err) => {
                 console.log(err);

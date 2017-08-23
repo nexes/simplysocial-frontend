@@ -90,7 +90,6 @@ export class PostDialogTemplateComponent {
                     this.postImageData = resp.substring(resp.indexOf('base64,') + 'base64,'.length);
                 }
             );
-
         });
 
         filereader.readAsDataURL(imageFile);
@@ -99,7 +98,6 @@ export class PostDialogTemplateComponent {
     sendPost() {
         this.userPost.createPost(this.postMessage, this.postImageData).subscribe(
             (resp) => {
-                console.log(resp);
                 this.dialogRef.close(resp);
             },
             (err) => {
