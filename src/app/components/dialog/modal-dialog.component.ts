@@ -22,8 +22,6 @@ export class ModalDialogService {
                 message: message
             }
         });
-        // dialogRef.afterClosed().subscribe(resp => {
-        // });
     }
 
     showNewPostDialog(post?: string): Observable<any> {
@@ -72,6 +70,7 @@ export class PostDialogTemplateComponent {
     private image: ProcessImage;
     private postMessage: string;
     private postImageData: string;
+    private showImgPreview: boolean;
 
 
     constructor(@Inject(MD_DIALOG_DATA) private data: any,
@@ -79,6 +78,7 @@ export class PostDialogTemplateComponent {
                 private userPost: UserPostService) {
         this.image = new ProcessImage();
         this.postMessage = data.message || '';
+        this.showImgPreview = false;
     }
 
     selectImage(imageFile: File) {
@@ -88,6 +88,12 @@ export class PostDialogTemplateComponent {
             this.image.resizeImage(filereader.result, 720, 720).subscribe(
                 (resp: string) => {
                     this.postImageData = resp.substring(resp.indexOf('base64,') + 'base64,'.length);
+
+                    // show image preview
+                    const imgElem = <HTMLImageElement>document.getElementById('img-preview');
+                    imgElem.src = resp;
+                    console.log(imgElem);
+                    this.showImgPreview = true;
                 }
             );
         });
@@ -96,6 +102,8 @@ export class PostDialogTemplateComponent {
     }
 
     sendPost() {
+        this.showImgPreview = false;
+
         this.userPost.createPost(this.postMessage, this.postImageData).subscribe(
             (resp) => {
                 this.dialogRef.close(resp);
@@ -104,5 +112,13 @@ export class PostDialogTemplateComponent {
                 console.log(err);
             }
         );
+    }
+
+    removeImagePreview() {
+        const imgElem = <HTMLImageElement>document.getElementById('img-preview');
+        imgElem.src = '';
+
+        this.postImageData = undefined;
+        this.showImgPreview = false;
     }
 }

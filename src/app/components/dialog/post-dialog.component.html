@@ -1,13 +1,21 @@
 <h2 class="post-dialog-title" md-dialog-title>Compose a new post</h2>
- <md-dialog-content>
+<md-dialog-content>
   <md-input-container class="post-dialog-message">
     <textarea class="post-area" mdInput spellcheck="true" role="textbox" rows="4" placeholder="message" [(ngModel)]="postMessage"></textarea>
     <md-hint align="end">{{postMessage.length}} / 255</md-hint>
+
+    <div *ngIf="showImgPreview">
+      <md-icon color="warn" style="cursor:pointer" (click)="removeImagePreview();">
+        <img id="img-preview" width="64px" height="64px"> close
+      </md-icon>
+    </div>
   </md-input-container>
+
 </md-dialog-content>
 <div class="action-area">
   <input type="file" style="display:none" id="imagefile" accept="image/*" (change)="selectImage(imageFile.files[0])" #imageFile>
   <label class="action-image" for="imagefile"><md-icon>photo</md-icon></label>
   <div class="action-space"></div>
-  <button class="action-post" [disabled]="!(postMessage.length > 0 && postMessage.length < 255)" color="primary" (click)="sendPost();" md-raised-button>Post</button>
-</div> 
+  <button class="action-post" [disabled]="!(postMessage.length > 0 && postMessage.length < 255)" color="primary" (click)="sendPost();"
+    md-raised-button>Post</button>
+</div>

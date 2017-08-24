@@ -49,7 +49,9 @@ export class TimelineComponent implements OnInit {
     openPostDialog() {
         this.dialog.showNewPostDialog(this.postMessage).subscribe(
             (resp) => {
-                this.postList.unshift(resp['post']);
+                if (resp) {
+                    this.postList.unshift(resp['post']);
+                }
             }
         );
     }
