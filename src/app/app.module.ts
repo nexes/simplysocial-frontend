@@ -10,6 +10,7 @@ import { UserLoginComponent } from './components/authentication/user-login.compo
 import { UserCreateComponent } from './components/authentication/user-create.component';
 import { TimelineComponent } from './components/user/user-timeline.component';
 import { PageNotFoundComponent } from './components/404/page-notfound.component';
+import { SettingsComponent } from './components/settings/settings.component';
 import {
   ErrorDialogTemplateComponent,
   PostDialogTemplateComponent,
@@ -31,7 +32,8 @@ import { UserPostService } from './services/user-post.service';
     ErrorDialogTemplateComponent,
     PostDialogTemplateComponent,
     PageNotFoundComponent,
-    TimelineComponent
+    TimelineComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
