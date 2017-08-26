@@ -17,9 +17,9 @@
 <md-toolbar *ngIf="navBar.userNavBar" class="navigation-bar" color="primary">
     <div class="userbar-container">
         <nav md-tab-nav-bar class="userbar-tabs">
-            <a md-tab-link routerLink="/profile/{{currentUsername}}" routerLinkActive="true">
+            <a md-tab-link routerLink="/{{currentUsername}}" routerLinkActive="true">
                 <md-icon class="nav-icon">home</md-icon>Home</a>
-            <a md-tab-link>
+            <a md-tab-link routerLink="/profile/{{currentUsername}}" routerLinkActive="true">
                 <md-icon class="nav-icon">settings</md-icon>Settings</a>
         </nav>
 
