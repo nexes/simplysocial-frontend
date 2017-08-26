@@ -7,12 +7,14 @@ import { UserLoginComponent } from './components/authentication/user-login.compo
 import { UserCreateComponent } from './components/authentication/user-create.component';
 import { TimelineComponent } from './components/user/user-timeline.component';
 import { PageNotFoundComponent } from './components/404/page-notfound.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 const appRoutes: Routes = [
     { path: 'login', component: UserLoginComponent },
     { path: 'newuser', component: UserCreateComponent },
-    { path: 'profile/:username', canActivate: [ LoginRequiredGuard ], component: TimelineComponent },
+    { path: ':username', canActivate: [ LoginRequiredGuard ], component: TimelineComponent },
+    { path: 'profile/:username', canActivate: [ LoginRequiredGuard ], component: SettingsComponent },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
 ];
