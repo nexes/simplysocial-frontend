@@ -1,0 +1,32 @@
+.setting-container {
+    display: flex;
+    flex-direction: row;
+}
+.setting-container .setting-left {
+    order: 1;
+    flex-basis: 25%;
+}
+.setting-container .setting-main {
+    flex: 1 1 auto;
+    order: 2;
+    padding: 30px 10px;
+}
+.setting-main .profile-image {
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+.setting-main > span {
+    font-size: 20px;
+    border-bottom: 1px solid #7EBBCF;
+}
+.settings-label {
+    font-size: 16px;
+    color: #424242;
+    margin: 10px 5px;
+}
+.setting-main textarea, input[type="text"], input[type="password"], input[type="email"] {
+    width: 400px;
+    resize: none;
+}
