@@ -70,7 +70,7 @@ export class UserCreateComponent implements OnInit {
 
         this.auth.newUser(newUser).subscribe(
             (resp: AuthResponse) => {
-                this.router.navigate([ '/profile/', newUser.username ]).then(() => {
+                this.router.navigate([ '/', newUser.username ]).then(() => {
                     this.userData.updateUser({
                         username: newUser.username,
                         firstname: newUser.firstname,

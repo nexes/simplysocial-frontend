@@ -51,7 +51,7 @@ export class UserLoginComponent implements OnInit {
         this.loginForm.reset();
         this.authService.login(this.usernameOrEmail, this.password).subscribe(
             (resp: AuthResponse) => {
-                this.router.navigate([ '/profile/', this.usernameOrEmail ]).then(() => {
+                this.router.navigate([ '/', this.usernameOrEmail ]).then(() => {
                     this.userDataService.updateUser({
                         username: this.usernameOrEmail,
                         isActive: true,
@@ -60,7 +60,8 @@ export class UserLoginComponent implements OnInit {
                 });
             },
             (err) => {
-                this.dialog.showErrorDialog('Login error', err.error['message']);
+                console.log(err);
+                this.dialog.showErrorDialog('Login error', err['error']['message']);
             }
         );
     }
