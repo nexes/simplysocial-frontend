@@ -1,8 +1,8 @@
 import { OnInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserAuthenticationService, AuthResponse, User } from '../../services/user-auth.service';
-import { UserDataService } from '../../services/user-data.service';
+import { UserAuthenticationService, AuthResponse } from '../../services/user-auth.service';
+import { UserDataService, CurrentUser } from '../../services/user-data.service';
 import { NavBarService } from '../../services/navbar.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 
@@ -60,7 +60,7 @@ export class UserCreateComponent implements OnInit {
             return;
         }
 
-        const newUser: User = {
+        const newUser: CurrentUser = {
             firstname: firstName,
             lastname: lastName,
             username: this.newUserForm.get('username').value,
