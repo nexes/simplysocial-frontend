@@ -1,16 +1,16 @@
 <div class="setting-container">
   <div class="setting-left"></div>
   <div class="setting-main">
-    <img class="profile-image" src={{userProfile}} (click)="updateProfilePic();">
-    <span>joe berria</span>
+    <img class="profile-image" src={{userAvatar}} (click)="updateProfilePic();">
+    <span>{{userFullName}}</span>
     <br/>
     <br/>
     <br/>
     <br/>
     <md-input-container>
-      <input mdInput type="text" maxlength="255" placeholder="About yourself" [(ngModel)]="userAbout">
+      <input mdInput type="text" maxlength="255" placeholder="About yourself" [(ngModel)]="userDescription">
       <md-icon mdSuffix>mode_edit</md-icon>
-      <md-hint align="end">{{userAbout.length}} / 255</md-hint>
+      <md-hint align="end">{{userDescription.length}} / 255</md-hint>
     </md-input-container>
     <br/>
     <br/>

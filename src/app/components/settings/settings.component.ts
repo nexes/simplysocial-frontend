@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserDataService } from '../../services/user-data.service';
+import { UserDataService, CurrentUser } from '../../services/user-data.service';
 import { NavBarService } from '../../services/navbar.service';
 
 
@@ -9,22 +9,21 @@ import { NavBarService } from '../../services/navbar.service';
     styleUrls: ['settings.component.css']
 })
 export class SettingsComponent {
-    private userAbout: string;
+    private userDescription: string;
     private userEmail: string;
-    private userNewPass: string;
-    private userVerifyPass: string;
-    private userProfile: string;
+    private userAvatar: string;
+    private userFullName: string;
 
 
+    // get user info that can be changed in settings. and first/last name
     constructor(private userData: UserDataService, private navBar: NavBarService) {
         console.log('settings cstr()');
         this.navBar.showUserNavBar();
 
-        this.userNewPass = '';
-        this.userVerifyPass = '';
-        this.userProfile = 'assets/usericon.png';
-        this.userAbout = 'I like turtles!!!';
-        this.userEmail = 'me@gmail.com';
+        this.userAvatar = this.userData.avatar || 'assets/usericon.png';
+        this.userDescription = this.userData.description;
+        this.userEmail = this.userData.email;
+        this.userFullName = this.userData.name;
     }
 
     updateProfilePic() {
