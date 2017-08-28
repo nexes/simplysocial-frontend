@@ -3,6 +3,8 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 
+
+// the data that describes our current user. Some of the values will be updated at different times.
 export interface CurrentUser {
     username?: string;
     isActive?: boolean;
@@ -11,6 +13,11 @@ export interface CurrentUser {
     lastname?: string;
     email?: string;
     avatar?: string;
+    postCout?: number;
+    followers?: number;
+    following?: number;
+    description?: string;
+    password?: string; // this is only ever used when creating a new user
 }
 
 @Injectable()
@@ -32,10 +39,6 @@ export class UserDataService implements OnDestroy {
         this.dataBus.next(this.currentUser);
     }
 
-    // getData(): CurrentUser {
-    //     return this.currentUser;
-    // }
-
     get userID(): number {
         return this.currentUser.userid;
     }
@@ -44,17 +47,21 @@ export class UserDataService implements OnDestroy {
         return this.currentUser.username;
     }
 
+    get email(): string {
+        return this.currentUser.email;
+    }
+
     get avatar(): string {
         return this.currentUser.avatar;
     }
 
-    // getCurrentUserID(): number {
-    //     return this.currentUser.userid;
-    // }
+    get name(): string {
+        return `${this.currentUser.firstname} ${this.currentUser.lastname}`;
+    }
 
-    // getCurrentUsername(): string {
-    //     return this.currentUser.username;
-    // }
+    get description(): string {
+        return this.currentUser.description;
+    }
 
     ngOnDestroy() {
         this.dataBus.unsubscribe();

@@ -28,7 +28,7 @@ export class UserPostService extends CSRFToken {
     }
 
     createPost(message: string, b64Image?: string): Observable<Post> {
-        const user_id = this.userData.getCurrentUserID();
+        const user_id = this.userData.userID;
 
         return this.http.post<Post>(this.baseURL + 'create/', {
             userid: user_id,
@@ -38,15 +38,15 @@ export class UserPostService extends CSRFToken {
     }
 
     getUserPosts(): Observable<Post> {
-        const user_id = this.userData.getCurrentUserID();
-        const url = `${this.baseURL}search/user/${this.userData.getCurrentUserID()}/${10}/`;
+        const user_id = this.userData.userID;
+        const url = `${this.baseURL}search/user/${this.userData.userID}/${10}/`;
 
         return this.http.get<Post>(url);
     }
 
     updateLikeCount(post: Post): Observable<any> {
         return this.http.post(this.baseURL + 'like/', {
-            userid: this.userData.getCurrentUserID(),
+            userid: this.userData.userID,
             postid: post.postid
         }, { headers: this.headers });
     }

@@ -18,8 +18,12 @@ export class LoginRequiredGuard implements CanActivate {
             this.userAuth.isOnline(route.params[ 'username' ]).subscribe(
                 (resp: AuthResponse) => {
                     if (resp.loggedin) {
+                        this.userData.updateUser({
+                            userid: resp.userid,
+                            username: route.params[ 'username' ]
+                        });
+
                         observer.next(true);
-                        this.userData.updateUser({ userid: resp.userid, username: route.params[ 'username' ] });
                         this.router.navigate([ state.url ]);
 
                     } else {

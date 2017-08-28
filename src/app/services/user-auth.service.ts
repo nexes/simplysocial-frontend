@@ -2,21 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { CSRFToken } from '../util/securitycsrf';
+import { CurrentUser } from '../services/user-data.service';
 
 
 export interface AuthResponse {
     code: number;
     message: string;
-    userid?: number;
+    userid: number;
     loggedin?: boolean;
-}
-
-export interface User {
-    firstname: string;
-    lastname: string;
-    username: string;
-    password: string;
-    email: string;
+    firstname?: string;
+    lastname?: string;
 }
 
 @Injectable()
@@ -42,7 +37,7 @@ export class UserAuthenticationService extends CSRFToken {
         return null;
     }
 
-    newUser(user: User): Observable<AuthResponse> {
+    newUser(user: CurrentUser): Observable<AuthResponse> {
         const url = this.baseURL + 'user/create/';
         return this.http.post<AuthResponse>(url, user, { headers: this.headers });
     }
@@ -50,5 +45,14 @@ export class UserAuthenticationService extends CSRFToken {
     isOnline(username: string): Observable<AuthResponse> {
         const url = `http://localhost:8000/snaplife/api/user/online/${username}/`;
         return this.http.get<AuthResponse>(url);
+    }
+
+    getUserProfileData(userID: number): Observable<CurrentUser> {
+        const url = `http://localhost:8000/snaplife/api/user/account/snapshot/${userID}/`;
+        return this.http.get<CurrentUser>(url);
+    }
+
+    setUserProfileData(username: string) {
+
     }
 }
