@@ -3,25 +3,29 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class NavBarService {
-    /* I don't like/want these to be public, but it needs to be this way for now.
-       call the methods to change the navbar, not these variables directly.
-       This Service can be used to change the navbar on the fly.
-    */
-    loginNavBar: boolean;
-    userNavBar: boolean;
+    private _loginNavBar: boolean;
+    private _userNavBar: boolean;
 
     constructor() {
-        this.loginNavBar = false;
-        this.userNavBar = false;
+        this._loginNavBar = false;
+        this._userNavBar = false;
     }
 
     showLoginNavBar() {
-        this.loginNavBar = true;
-        this.userNavBar = false;
+        this._loginNavBar = true;
+        this._userNavBar = false;
     }
 
     showUserNavBar() {
-        this.loginNavBar = false;
-        this.userNavBar = true;
+        this._loginNavBar = false;
+        this._userNavBar = true;
+    }
+
+    get loginNavBar(): boolean {
+        return this._loginNavBar;
+    }
+
+    get userNavBar(): boolean {
+        return this._userNavBar;
     }
 }
