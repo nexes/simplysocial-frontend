@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserDataService, CurrentUser } from '../../services/user-data.service';
+import { UserAuthenticationService } from '../../services/user-auth.service';
 import { NavBarService } from '../../services/navbar.service';
 import { UserPostService, Post } from '../../services/user-post.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
@@ -26,23 +27,30 @@ export class TimelineComponent implements OnInit {
 
     constructor(private userPost: UserPostService,
                 private userData: UserDataService,
+                private userService: UserAuthenticationService,
                 private dialog: ModalDialogService,
                 private navBar: NavBarService) {
         this.navBar.showUserNavBar();
         this.showLoadingBar = true;
         this.hideImgPreview = true;
-        this.currentUsername = this.userData.username;
         this.images = new ProcessImage();
         this.postMessage = '';
 
+        // listen if the something updates the current users data
         this.userData.listen().subscribe((user: CurrentUser) => {
-            console.log(user);
+            this.currentUsername = user.username;
             this.currentUserAvatar = user.avatar || 'assets/usericon.png';
         });
 
+        // populate the uses timeline with their posts. This is getting called once
         this.userPost.getUserPosts().subscribe((post: Post) => {
             this.postList = post[ 'posts' ];
             this.showLoadingBar = false;
+        });
+
+        // user users meta data
+        this.userService.getUserProfileData(this.userData.userID).subscribe((user: CurrentUser) => {
+            this.userData.updateUser(user);
         });
     }
 
