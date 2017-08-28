@@ -55,7 +55,9 @@ export class UserLoginComponent implements OnInit {
                     this.userDataService.updateUser({
                         username: this.usernameOrEmail,
                         isActive: true,
-                        userid: resp.userid
+                        userid: resp.userid,
+                        firstname: resp.firstname,
+                        lastname: resp.lastname
                     });
                 });
             },
