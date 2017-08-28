@@ -10,6 +10,7 @@ export interface CurrentUser {
     firstname?: string;
     lastname?: string;
     email?: string;
+    avatar?: string;
 }
 
 @Injectable()
@@ -31,17 +32,29 @@ export class UserDataService implements OnDestroy {
         this.dataBus.next(this.currentUser);
     }
 
-    getData(): CurrentUser {
-        return this.currentUser;
-    }
+    // getData(): CurrentUser {
+    //     return this.currentUser;
+    // }
 
-    getCurrentUserID(): number {
+    get userID(): number {
         return this.currentUser.userid;
     }
 
-    getCurrentUsername(): string {
+    get username(): string {
         return this.currentUser.username;
     }
+
+    get avatar(): string {
+        return this.currentUser.avatar;
+    }
+
+    // getCurrentUserID(): number {
+    //     return this.currentUser.userid;
+    // }
+
+    // getCurrentUsername(): string {
+    //     return this.currentUser.username;
+    // }
 
     ngOnDestroy() {
         this.dataBus.unsubscribe();

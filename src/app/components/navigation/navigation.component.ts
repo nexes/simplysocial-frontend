@@ -11,6 +11,8 @@ import { UserDataService, CurrentUser } from '../../services/user-data.service';
 export class NavigationComponent implements OnInit {
     private activeNotifications: boolean;
     private currentUsername: string;
+    private currentUserAvatar: string;
+
 
     constructor(private navBar: NavBarService, private userData: UserDataService) {
         this.activeNotifications = false;
@@ -18,6 +20,7 @@ export class NavigationComponent implements OnInit {
         userData.listen().subscribe(
             (resp: CurrentUser) => {
                 this.currentUsername = resp.username;
+                this.currentUserAvatar = resp.avatar || 'assets/usericon.png';
             }
         );
     }

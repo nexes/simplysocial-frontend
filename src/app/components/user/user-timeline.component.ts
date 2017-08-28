@@ -7,6 +7,7 @@ import { ModalDialogService } from '../../components/dialog/modal-dialog.compone
 import { ProcessImage } from '../../util/imageprocess';
 
 
+
 @Component({
     selector: 'app-timeline',
     templateUrl: 'user-timeline.component.html',
@@ -16,6 +17,7 @@ export class TimelineComponent implements OnInit {
     private postImageData: string;
     private postMessage: string;
     private currentUsername: string;
+    private currentUserAvatar: string;
     private showLoadingBar: boolean;
     private hideImgPreview: boolean;
     private postList: Post[];
@@ -29,12 +31,13 @@ export class TimelineComponent implements OnInit {
         this.navBar.showUserNavBar();
         this.showLoadingBar = true;
         this.hideImgPreview = true;
-        this.currentUsername = this.userData.getCurrentUsername();
+        this.currentUsername = this.userData.username;
         this.images = new ProcessImage();
         this.postMessage = '';
 
         this.userData.listen().subscribe((user: CurrentUser) => {
             console.log(user);
+            this.currentUserAvatar = user.avatar || 'assets/usericon.png';
         });
 
         this.userPost.getUserPosts().subscribe((post: Post) => {
@@ -44,6 +47,9 @@ export class TimelineComponent implements OnInit {
     }
 
     ngOnInit() {
+        // make sure our user information is loaded here too. For page refreshes
+        this.currentUsername = this.userData.username;
+        this.currentUserAvatar = this.userData.avatar || 'assets/usericon.png';
     }
 
     openPostDialog() {

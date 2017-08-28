@@ -97,7 +97,7 @@
       <md-card-header>
         <md-card-title>{{currentUsername}}</md-card-title>
         <md-card-subtitle>{{post.date | date:short}}</md-card-subtitle>
-        <img src="/assets/test-avatar.png" md-card-avatar>
+        <img src={{currentUserAvatar}} md-card-avatar>
       </md-card-header>
       <img class="timeline-post-img" src={{post.imageurl}} md-card-image>
       <md-card-content>
