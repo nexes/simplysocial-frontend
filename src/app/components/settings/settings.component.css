@@ -30,3 +30,6 @@
     width: 400px;
     resize: none;
 }
+button.change-btn {
+    margin: 5px 0px;
+}

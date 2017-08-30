@@ -1,7 +1,10 @@
 <div class="setting-container">
   <div class="setting-left"></div>
   <div class="setting-main">
-    <img class="profile-image" src={{userAvatar}} (click)="updateProfilePic();">
+    <input type="file" id="avatar" style="display:none" accept="image/*" (change)="updateProfilePic(imageAvatar.files[0]);" #imageAvatar>
+    <label for="avatar">
+      <img mdTooltip="Change avatar" class="profile-image" src={{userAvatar}}>
+    </label>
     <span>{{userFullName}}</span>
     <br/>
     <br/>
@@ -28,5 +31,7 @@
       <input mdInput type="password" placeholder="verify password" [(ngModel)]="userVerifyPass">
     </md-input-container>
     <br/>
-  </div>
+
+    <button md-raised-button class="change-btn" (click)="sendChanges();">Submit Changes</button>
+  </div> <!-- setting-main -->
 </div>
