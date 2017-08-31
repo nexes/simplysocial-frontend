@@ -17,8 +17,9 @@ export class NavigationComponent implements OnInit {
     constructor(private navBar: NavBarService, private userData: UserDataService) {
         this.activeNotifications = false;
 
-        userData.listen().subscribe(
+        this.userData.listen().subscribe(
             (resp: CurrentUser) => {
+                console.log('navigation user change');
                 this.currentUsername = resp.username;
                 this.currentUserAvatar = resp.avatar || 'assets/usericon.png';
             }
@@ -27,5 +28,6 @@ export class NavigationComponent implements OnInit {
 
     ngOnInit() {
         console.log('navigation oninit()');
+        this.currentUserAvatar = this.userData.avatar || 'assets/usericon.png';
     }
 }
