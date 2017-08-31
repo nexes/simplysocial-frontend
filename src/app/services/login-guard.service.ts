@@ -15,32 +15,41 @@ export class LoginRequiredGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
         const isActiveObserver = new Observable<boolean>(observer => {
-            this.userAuth.isOnline(route.params[ 'username' ]).subscribe(
-                (resp: AuthResponse) => {
-                    if (resp.loggedin) {
-                        this.userData.updateUser({
-                            userid: resp.userid,
-                            username: route.params[ 'username' ]
-                        });
+            if (this.userData.active) {
+                console.log('already active');
+                observer.next(true);
+            } else {
+                console.log('not active');
+                this.userAuth.isOnline(route.params[ 'username' ]).subscribe(
+                    (resp: AuthResponse) => {
+                        console.log('canActivate response');
 
-                        observer.next(true);
-                        this.router.navigate([ state.url ]);
+                        if (resp.loggedin) {
+                            this.userData.updateUser({
+                                userid: resp.userid,
+                                isActive: true,
+                                username: route.params[ 'username' ]
+                            });
 
-                    } else {
-                        observer.next(false);
+                            observer.next(true);
+                            this.router.navigate([ state.url ]);
+
+                        } else {
+                            observer.next(false);
+                            this.router.navigate([ '/login' ], {
+                                replaceUrl: false
+                            });
+                        }
+                    },
+                    (err) => {
+                        observer.error(err);
+                        observer.complete();
                         this.router.navigate([ '/login' ], {
                             replaceUrl: false
                         });
                     }
-                },
-                (err) => {
-                    observer.error(err);
-                    observer.complete();
-                    this.router.navigate([ '/login' ], {
-                        replaceUrl: false
-                    });
-                }
-            );
+                );
+            }
         });
         return isActiveObserver;
     }
