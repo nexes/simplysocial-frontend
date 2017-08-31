@@ -36,25 +36,23 @@ export class TimelineComponent implements OnInit {
         this.images = new ProcessImage();
         this.postMessage = '';
 
+        console.log('timeline cstr()');
         // listen if the something updates the current users data
         this.userData.listen().subscribe((user: CurrentUser) => {
+            console.log('timeline user updated');
             this.currentUsername = user.username;
-            this.currentUserAvatar = user.avatar || 'assets/usericon.png';
+            this.currentUserAvatar = user.avatar;
         });
 
-        // populate the uses timeline with their posts. This is getting called once
+        // populate the uses timeline with their posts. This is getting called once - should it be a service?
         this.userPost.getUserPosts().subscribe((post: Post) => {
             this.postList = post[ 'posts' ];
             this.showLoadingBar = false;
         });
-
-        // user users meta data
-        this.userService.getUserProfileData(this.userData.userID).subscribe((user: CurrentUser) => {
-            this.userData.updateUser(user);
-        });
     }
 
     ngOnInit() {
+        console.log('timeline onInit()');
         // make sure our user information is loaded here too. For page refreshes
         this.currentUsername = this.userData.username;
         this.currentUserAvatar = this.userData.avatar || 'assets/usericon.png';
