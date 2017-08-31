@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserDataService } from '../../services/user-data.service';
+import { UserDataService, CurrentUser } from '../../services/user-data.service';
 import { NavBarService } from '../../services/navbar.service';
 import { UserAuthenticationService, AuthResponse } from '../../services/user-auth.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
@@ -23,11 +23,11 @@ export class UserLoginComponent implements OnInit {
 
 
     constructor(private authService: UserAuthenticationService,
-                private userDataService: UserDataService,
-                private fb: FormBuilder,
-                private router: Router,
-                private navBar: NavBarService,
-                private dialog: ModalDialogService) {
+        private userDataService: UserDataService,
+        private fb: FormBuilder,
+        private router: Router,
+        private navBar: NavBarService,
+        private dialog: ModalDialogService) {
 
         this.rememberMe = false;
         this.showDialog = false;
@@ -50,20 +50,19 @@ export class UserLoginComponent implements OnInit {
 
         this.loginForm.reset();
         this.authService.login(this.usernameOrEmail, this.password).subscribe(
-            (resp: AuthResponse) => {
-                this.router.navigate([ '/', this.usernameOrEmail ]).then(() => {
-                    this.userDataService.updateUser({
-                        username: this.usernameOrEmail,
-                        isActive: true,
-                        userid: resp.userid,
-                        firstname: resp.firstname,
-                        lastname: resp.lastname
-                    });
-                });
+            (loginResp: AuthResponse) => {
+
+                // the user is successfully signed in, lets get profile data
+                this.authService.getUserProfileData(loginResp.userid).subscribe(
+                    (user: CurrentUser) => {
+                        this.userDataService.updateUser(user);
+                        this.router.navigate([ '/', user.username ]);
+                    }
+                );
             },
             (err) => {
                 console.log(err);
-                this.dialog.showErrorDialog('Login error', err['error']['message']);
+                this.dialog.showErrorDialog('Login error', err[ 'error' ][ 'message' ]);
             }
         );
     }
