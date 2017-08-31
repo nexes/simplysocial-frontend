@@ -52,7 +52,42 @@ export class UserAuthenticationService extends CSRFToken {
         return this.http.get<CurrentUser>(url);
     }
 
-    setUserProfileData(username: string) {
+    userEmail(userid: number, email?: string, update = false): Observable<CurrentUser> {
+        if (update && email) {
+            const url = `http://localhost:8000/snaplife/api/user/email/`;
 
+            return this.http.post<CurrentUser>(url, {
+                userid: userid,
+                email: email
+            }, { headers: this.headers });
+        }
+
+        const url = `http://localhost:8000/snaplife/api/user/email/${userid}/`;
+        return this.http.get<CurrentUser>(url);
+    }
+
+    userDescription(userid: number, description?: string, update = false): Observable<CurrentUser> {
+        if (update && description) {
+            const url = `http://localhost:8000/snaplife/api/user/description/`;
+
+            return this.http.post<CurrentUser>(url, {
+                userid: userid,
+                description: description
+            }, { headers: this.headers });
+        }
+
+        const url = `http://localhost:8000/snaplife/api/user/description/${userid}/`;
+        return this.http.get<CurrentUser>(url);
+    }
+
+    userAvatar(userid: number, avatarImg?: string, update = false): Observable<CurrentUser> {
+        if (update && avatarImg) {
+            const url = `http://localhost:8000/snaplife/api/user/profile/update/`;
+
+            return this.http.post<CurrentUser>(url, {
+                userid: userid,
+                profilepic: avatarImg.substring(avatarImg.indexOf('base64,') + 'base64,'.length)
+            }, { headers: this.headers });
+        }
     }
 }
