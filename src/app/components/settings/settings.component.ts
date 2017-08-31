@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { UserDataService, CurrentUser } from '../../services/user-data.service';
+import { UserAuthenticationService } from '../../services/user-auth.service';
+import { ModalDialogService } from '../dialog/modal-dialog.component';
 import { NavBarService } from '../../services/navbar.service';
 import { ProcessImage } from '../../util/imageprocess';
 
@@ -18,7 +20,10 @@ export class SettingsComponent {
 
 
     // get user info that can be changed in settings. and first/last name
-    constructor(private userData: UserDataService, private navBar: NavBarService) {
+    constructor(private userData: UserDataService,
+                private userAuth: UserAuthenticationService,
+                private navBar: NavBarService,
+                private dialog: ModalDialogService) {
         console.log('settings cstr()');
         this.imageProcess = new ProcessImage();
         this.navBar.showUserNavBar();
@@ -30,7 +35,6 @@ export class SettingsComponent {
     }
 
     updateProfilePic(avatarImg: File) {
-        console.log(avatarImg);
         const reader = new FileReader();
 
         reader.addEventListener('load', () => {
@@ -43,11 +47,28 @@ export class SettingsComponent {
     }
 
     sendChanges() {
-        console.log('sendChanges()');
-        this.userData.updateUser({
-            avatar: this.userAvatar,
-            email: this.userEmail,
-            description: this.userDescription
-        });
+        if (this.userEmail !== this.userData.email) {
+            this.userAuth.userEmail(this.userData.userID, this.userEmail, true).subscribe(
+                (resp: CurrentUser) => {
+                    this.userData.updateUser({ email: resp.email });
+                }
+            );
+        }
+
+        if (this.userDescription !== this.userData.description) {
+            this.userAuth.userDescription(this.userData.userID, this.userDescription, true).subscribe(
+                (resp: CurrentUser) => {
+                    this.userData.updateUser({ description: resp.description });
+                }
+            );
+        }
+
+        if (this.userAvatar !== this.userData.avatar && this.userAvatar !== 'assets/usericon.png') {
+            this.userAuth.userAvatar(this.userData.userID, this.userAvatar, true).subscribe(
+                (resp: CurrentUser) => {
+                    this.userData.updateUser({ avatar: resp.avatar });
+                }
+            );
+        }
     }
 }
