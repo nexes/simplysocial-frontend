@@ -9,7 +9,7 @@ export class ProcessImage {
     }
 
     // @imgData: the base64 encoded image data from FileReader
-    // the observer will return a base64 encoded image
+    // the observer will return a base64 encoded resized image
     resizeImage(imgData: string, width: number, height: number): Observable<string> {
         return new Observable<string>(observer => {
             const resizeImg = new Image();
