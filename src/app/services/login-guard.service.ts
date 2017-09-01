@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UserAuthenticationService, AuthResponse } from '../services/user-auth.service';
-import { UserDataService } from '../services/user-data.service';
+import { UserDataService, CurrentUser } from '../services/user-data.service';
 
 
 @Injectable()
@@ -16,25 +16,23 @@ export class LoginRequiredGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
         const isActiveObserver = new Observable<boolean>(observer => {
             if (this.userData.active) {
-                console.log('already active');
                 observer.next(true);
+
             } else {
-                console.log('not active');
                 this.userAuth.isOnline(route.params[ 'username' ]).subscribe(
                     (resp: AuthResponse) => {
-                        console.log('canActivate response');
-
                         if (resp.loggedin) {
-                            this.userData.updateUser({
-                                userid: resp.userid,
-                                isActive: true,
-                                username: route.params[ 'username' ]
-                            });
-
-                            observer.next(true);
-                            this.router.navigate([ state.url ]);
+                            // the user is online, lets get profile data
+                            this.userAuth.getUserProfileData(resp.userid).subscribe(
+                                (user: CurrentUser) => {
+                                    this.userData.updateUser({isActive: true, userid: resp.userid});
+                                    this.userData.updateUser(user);
+                                    observer.next(true);
+                                 }
+                            );
 
                         } else {
+                            // the user is not online, lets route to the login page
                             observer.next(false);
                             this.router.navigate([ '/login' ], {
                                 replaceUrl: false

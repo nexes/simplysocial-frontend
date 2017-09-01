@@ -51,14 +51,7 @@ export class UserLoginComponent implements OnInit {
         this.loginForm.reset();
         this.authService.login(this.usernameOrEmail, this.password).subscribe(
             (loginResp: AuthResponse) => {
-
-                // the user is successfully signed in, lets get profile data
-                this.authService.getUserProfileData(loginResp.userid).subscribe(
-                    (user: CurrentUser) => {
-                        this.userDataService.updateUser(user);
-                        this.router.navigate([ '/', user.username ]);
-                    }
-                );
+                this.router.navigate([ '/', this.usernameOrEmail ]);
             },
             (err) => {
                 console.log(err);
