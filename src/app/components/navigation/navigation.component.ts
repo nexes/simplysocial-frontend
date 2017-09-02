@@ -11,23 +11,22 @@ import { UserDataService, CurrentUser } from '../../services/user-data.service';
 export class NavigationComponent implements OnInit {
     private activeNotifications: boolean;
     private currentUsername: string;
-    private currentUserAvatar: string;
 
 
     constructor(private navBar: NavBarService, private userData: UserDataService) {
         this.activeNotifications = false;
+        this.currentUsername = this.userData.username;
+    }
+
+    ngOnInit() {
+        console.log('navigation oninit()');
 
         this.userData.listen().subscribe(
             (resp: CurrentUser) => {
                 console.log('navigation user change');
                 this.currentUsername = resp.username;
-                this.currentUserAvatar = resp.avatar || 'assets/usericon.png';
             }
         );
-    }
-
-    ngOnInit() {
-        console.log('navigation oninit()');
-        this.currentUserAvatar = this.userData.avatar || 'assets/usericon.png';
+        this.currentUsername = this.userData.username;
     }
 }
