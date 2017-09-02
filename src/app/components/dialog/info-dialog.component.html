@@ -1,0 +1,13 @@
+<h2 class="info-title" md-dialog-title>{{title}}</h2>
+<md-dialog-content class="info-content">
+    {{message}}
+    <br />
+    <br />
+    <md-input-container *ngIf=showPassword>
+        <input type="text" mdInput placeholder="password" [(ngModel)]="password" name="password">
+    </md-input-container>
+</md-dialog-content>
+<md-dialog-actions align="end">
+    <button color="primary" md-raised-button (click)="cancelPress(false);" md-dialog-close>Cancel</button>
+    <button color="warn" md-raised-button (click)="deletePress(true);">Delete account</button>
+</md-dialog-actions>

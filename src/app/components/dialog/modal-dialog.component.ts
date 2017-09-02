@@ -38,6 +38,21 @@ export class ModalDialogService {
 
         return dialogRef.afterClosed();
     }
+
+    showInfoDialog(title: string, message: string): Observable<any> {
+        let dialogRef: MdDialogRef<InfoDialogTemplateComponent>;
+
+        dialogRef = this.dialog.open(InfoDialogTemplateComponent, {
+            disableClose: true,
+            width: '400px',
+            data: {
+                title: title,
+                message: message
+            }
+        });
+
+        return dialogRef.afterClosed();
+    }
 }
 
 
@@ -53,10 +68,35 @@ export class ErrorDialogTemplateComponent {
 
 @Component({
     selector: 'app-info-dialog',
-    templateUrl: 'info-dialog.component.html'
+    templateUrl: 'info-dialog.component.html',
+    styleUrls: ['info-dialog.component.css']
 })
 export class InfoDialogTemplateComponent {
-    constructor(@Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<InfoDialogTemplateComponent>) {
+    private title: string;
+    private message: string;
+    private showPassword: boolean;
+    private password: string;
+
+
+    constructor(@Inject(MD_DIALOG_DATA) private data: any,
+                private dialogRef: MdDialogRef<InfoDialogTemplateComponent>) {
+        this.title = data.title;
+        this.message = data.message;
+        this.showPassword = false;
+    }
+
+    deletePress(value: boolean) {
+        if (!this.showPassword) {
+            this.showPassword = value;        
+            this.message = 'Your password is required to delete your account';
+
+        } else {
+            this.dialogRef.close(this.password);
+        }
+    }
+
+    cancelPress(value: boolean) {
+        this.dialogRef.close(undefined);
     }
 }
 

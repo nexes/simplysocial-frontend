@@ -14,6 +14,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import {
   ErrorDialogTemplateComponent,
   PostDialogTemplateComponent,
+  InfoDialogTemplateComponent,
   ModalDialogService
 } from './components/dialog/modal-dialog.component';
 
@@ -31,6 +32,7 @@ import { UserPostService } from './services/user-post.service';
     UserCreateComponent,
     ErrorDialogTemplateComponent,
     PostDialogTemplateComponent,
+    InfoDialogTemplateComponent,
     PageNotFoundComponent,
     TimelineComponent,
     SettingsComponent
@@ -54,7 +56,8 @@ import { UserPostService } from './services/user-post.service';
   ],
   entryComponents: [
     ErrorDialogTemplateComponent,
-    PostDialogTemplateComponent
+    PostDialogTemplateComponent,
+    InfoDialogTemplateComponent
   ]
 })
 export class AppModule { }
