@@ -5,6 +5,11 @@
 .setting-container .setting-left {
     order: 1;
     flex-basis: 25%;
+    padding-top: 50px;
+}
+.setting-container .setting-left md-list-item {
+    color: #a8a8a8;
+    font-size: 14px;
 }
 .setting-container .setting-main {
     flex: 1 1 auto;
@@ -31,5 +36,12 @@
     resize: none;
 }
 button.change-btn {
+    width: 200px;
+    left: 20%;
     margin: 5px 0px;
+}
+button.delete-btn {
+    width: 200px;
+    left: 20%;
+    margin: 10px 0px;
 }

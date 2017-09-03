@@ -1,5 +1,18 @@
 <div class="setting-container">
-  <div class="setting-left"></div>
+    <div class="setting-left">
+        <md-list>
+            <md-list-item>
+                <md-icon mdListIcon>mail_outline</md-icon> Posts: {{postCount}}
+            </md-list-item>
+            <md-list-item>
+                <md-icon mdListIcon>supervisor_account</md-icon> Following: {{followingCount}}
+            </md-list-item>
+            <md-list-item>
+                <md-icon mdListIcon>bookmark</md-icon> Followers: {{followerCount}}
+            </md-list-item>
+        </md-list>
+    </div>
+
   <div class="setting-main">
     <input type="file" id="avatar" style="display:none" accept="image/*" (change)="updateProfilePic(imageAvatar.files[0]);" #imageAvatar>
     <label for="avatar">
@@ -33,5 +46,7 @@
     <br/>
 
     <button md-raised-button class="change-btn" (click)="sendChanges();">Submit Changes</button>
+    <br />
+    <button md-raised-button color="warn" class="delete-btn" (click)="deleteAccount();">Delete account</button>
   </div> <!-- setting-main -->
 </div>

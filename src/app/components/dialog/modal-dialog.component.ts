@@ -39,10 +39,10 @@ export class ModalDialogService {
         return dialogRef.afterClosed();
     }
 
-    showInfoDialog(title: string, message: string): Observable<any> {
-        let dialogRef: MdDialogRef<InfoDialogTemplateComponent>;
+    showDeleteDialog(title: string, message: string): Observable<any> {
+        let dialogRef: MdDialogRef<DeleteDialogTemplateComponent>;
 
-        dialogRef = this.dialog.open(InfoDialogTemplateComponent, {
+        dialogRef = this.dialog.open(DeleteDialogTemplateComponent, {
             disableClose: true,
             width: '400px',
             data: {
@@ -71,7 +71,7 @@ export class ErrorDialogTemplateComponent {
     templateUrl: 'info-dialog.component.html',
     styleUrls: ['info-dialog.component.css']
 })
-export class InfoDialogTemplateComponent {
+export class DeleteDialogTemplateComponent {
     private title: string;
     private message: string;
     private showPassword: boolean;
@@ -79,7 +79,7 @@ export class InfoDialogTemplateComponent {
 
 
     constructor(@Inject(MD_DIALOG_DATA) private data: any,
-                private dialogRef: MdDialogRef<InfoDialogTemplateComponent>) {
+                private dialogRef: MdDialogRef<DeleteDialogTemplateComponent>) {
         this.title = data.title;
         this.message = data.message;
         this.showPassword = false;
@@ -87,7 +87,7 @@ export class InfoDialogTemplateComponent {
 
     deletePress(value: boolean) {
         if (!this.showPassword) {
-            this.showPassword = value;        
+            this.showPassword = value;
             this.message = 'Your password is required to delete your account';
 
         } else {
@@ -132,7 +132,6 @@ export class PostDialogTemplateComponent {
                     // show image preview
                     const imgElem = <HTMLImageElement>document.getElementById('img-preview');
                     imgElem.src = resp;
-                    console.log(imgElem);
                     this.showImgPreview = true;
                 }
             );

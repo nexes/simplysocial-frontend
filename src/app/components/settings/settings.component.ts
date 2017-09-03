@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { UserDataService, CurrentUser } from '../../services/user-data.service';
 import { UserAuthenticationService } from '../../services/user-auth.service';
@@ -18,20 +19,27 @@ export class SettingsComponent {
     private userEmail: string;
     private userAvatar: string;
     private userFullName: string;
+    private followerCount: number;
+    private followingCount: number;
+    private postCount: number;
 
 
     constructor(private userData: UserDataService,
                 private userAuth: UserAuthenticationService,
                 private navBar: NavBarService,
                 private router: Router,
+                private snackBar: MdSnackBar,
                 private dialog: ModalDialogService) {
         this.imageProcess = new ProcessImage();
         this.navBar.showUserNavBar();
 
-        this.userAvatar = this.userData.avatar || 'assets/usericon.png';
+        this.userAvatar = this.userData.avatar;
         this.userDescription = this.userData.description;
         this.userEmail = this.userData.email;
         this.userFullName = this.userData.name;
+        this.postCount = this.userData.posts;
+        this.followerCount = this.userData.followerCount;
+        this.followingCount = this.userData.followingCount;
     }
 
     updateProfilePic(avatarImg: File) {
@@ -44,6 +52,38 @@ export class SettingsComponent {
         });
 
         reader.readAsDataURL(avatarImg);
+    }
+
+    deleteAccount() {
+        const title = 'Delete your account';
+        const msg = `Are you sure you want to delete your account ${this.userData.name}`;
+
+        this.dialog.showDeleteDialog(title, msg).subscribe((password: string) => {
+            if (password) {
+                this.userAuth.deleteUser(this.userData.username, password).subscribe(
+                    (resp) => {
+                        console.log(resp);
+
+                        if (resp.message === 'success') {
+                            this.snackBar.open('Account was removed', 'close', {duration: 3000});
+                            this.router.navigate(['/']);
+                        }
+                    },
+                    (err) => {
+                        const msg = err.error['message'];
+
+                        if (msg) {
+                            this.snackBar.open(err.error['message'], 'close', {duration: 3000});
+                        } else { 
+                            this.snackBar.open('Account was not deleted', 'close', {duration: 3000});
+                        }
+                    }
+                );
+
+            } else {
+                console.log('no password given');
+            }
+        });
     }
 
     sendChanges() {

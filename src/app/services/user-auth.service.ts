@@ -42,6 +42,14 @@ export class UserAuthenticationService extends CSRFToken {
         return this.http.post<AuthResponse>(url, user, { headers: this.headers });
     }
 
+    deleteUser(username: string, password: string): Observable<AuthResponse> {
+        const url = this.baseURL + 'user/delete/';
+        return this.http.post<AuthResponse>(url, {
+                username: username,
+                password: password
+            }, {headers: this.headers});
+    }
+
     isOnline(username: string): Observable<AuthResponse> {
         const url = `http://localhost:8000/snaplife/api/user/online/${username}/`;
         return this.http.get<AuthResponse>(url);
@@ -54,9 +62,9 @@ export class UserAuthenticationService extends CSRFToken {
 
     userEmail(userid: number, email?: string, update = false): Observable<CurrentUser> {
         if (update && email) {
-            const url = `http://localhost:8000/snaplife/api/user/email/`;
+            const emailUrl = `http://localhost:8000/snaplife/api/user/email/`;
 
-            return this.http.post<CurrentUser>(url, {
+            return this.http.post<CurrentUser>(emailUrl, {
                 userid: userid,
                 email: email
             }, { headers: this.headers });
@@ -68,9 +76,9 @@ export class UserAuthenticationService extends CSRFToken {
 
     userDescription(userid: number, description?: string, update = false): Observable<CurrentUser> {
         if (update && description) {
-            const url = `http://localhost:8000/snaplife/api/user/description/`;
+            const descUrl = `http://localhost:8000/snaplife/api/user/description/`;
 
-            return this.http.post<CurrentUser>(url, {
+            return this.http.post<CurrentUser>(descUrl, {
                 userid: userid,
                 description: description
             }, { headers: this.headers });
@@ -82,9 +90,9 @@ export class UserAuthenticationService extends CSRFToken {
 
     userAvatar(userid: number, avatarImg?: string, update = false): Observable<CurrentUser> {
         if (update && avatarImg) {
-            const url = `http://localhost:8000/snaplife/api/user/profile/update/`;
+            const avatarUrl = `http://localhost:8000/snaplife/api/user/profile/update/`;
 
-            return this.http.post<CurrentUser>(url, {
+            return this.http.post<CurrentUser>(avatarUrl, {
                 userid: userid,
                 profilepic: avatarImg.substring(avatarImg.indexOf('base64,') + 'base64,'.length)
             }, { headers: this.headers });
