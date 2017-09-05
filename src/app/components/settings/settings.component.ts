@@ -62,19 +62,17 @@ export class SettingsComponent {
             if (password) {
                 this.userAuth.deleteUser(this.userData.username, password).subscribe(
                     (resp) => {
-                        console.log(resp);
-
                         if (resp.message === 'success') {
                             this.snackBar.open('Account was removed', 'close', {duration: 3000});
                             this.router.navigate(['/']);
                         }
                     },
                     (err) => {
-                        const msg = err.error['message'];
+                        const errorMsg = err.error['message'];
 
-                        if (msg) {
-                            this.snackBar.open(err.error['message'], 'close', {duration: 3000});
-                        } else { 
+                        if (errorMsg) {
+                            this.snackBar.open(errorMsg, 'close', {duration: 3000});
+                        } else {
                             this.snackBar.open('Account was not deleted', 'close', {duration: 3000});
                         }
                     }
