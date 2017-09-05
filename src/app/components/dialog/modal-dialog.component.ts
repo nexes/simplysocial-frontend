@@ -53,7 +53,12 @@ export class ModalDialogService {
 
         return dialogRef.afterClosed();
     }
+
+    showUserSearchDialog(): Observable<any> {
+        return null;
+    }
 }
+
 
 
 @Component({
@@ -65,6 +70,18 @@ export class ErrorDialogTemplateComponent {
     constructor(@Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<ErrorDialogTemplateComponent>) {
     }
 }
+
+
+@Component({
+    selector: 'app-usersearch-dialog',
+    templateUrl: 'usersearch-dialog.component.html',
+    styleUrls: ['usersearch-dialog.component.css']
+})
+export class SearchUserDialogTemplateComponent {
+    constructor(@Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<SearchUserDialogTemplateComponent>) {
+    }
+}
+
 
 @Component({
     selector: 'app-info-dialog',

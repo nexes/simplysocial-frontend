@@ -15,6 +15,7 @@ import {
   ErrorDialogTemplateComponent,
   PostDialogTemplateComponent,
   DeleteDialogTemplateComponent,
+  SearchUserDialogTemplateComponent,
   ModalDialogService
 } from './components/dialog/modal-dialog.component';
 
@@ -33,6 +34,7 @@ import { UserPostService } from './services/user-post.service';
     ErrorDialogTemplateComponent,
     PostDialogTemplateComponent,
     DeleteDialogTemplateComponent,
+    SearchUserDialogTemplateComponent,
     PageNotFoundComponent,
     TimelineComponent,
     SettingsComponent
@@ -54,10 +56,12 @@ import { UserPostService } from './services/user-post.service';
   bootstrap: [
     AppComponent
   ],
+  // these will get compiled ahead of time, these are our modal dialog windows
   entryComponents: [
     ErrorDialogTemplateComponent,
     PostDialogTemplateComponent,
-    DeleteDialogTemplateComponent
+    DeleteDialogTemplateComponent,
+    SearchUserDialogTemplateComponent
   ]
 })
 export class AppModule { }
