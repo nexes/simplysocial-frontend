@@ -76,7 +76,8 @@ export class UserCreateComponent implements OnInit {
                         firstname: newUser.firstname,
                         lastname: newUser.lastname,
                         email: newUser.email,
-                        userid: resp.userid
+                        userid: resp.userid,
+                        isActive: true
                     });
                 });
             },
