@@ -23,6 +23,7 @@ import { UserAuthenticationService } from './services/user-auth.service';
 import { UserDataService } from './services/user-data.service';
 import { NavBarService } from './services/navbar.service';
 import { UserPostService } from './services/user-post.service';
+import { UserFollowService } from './services/user-follow.service';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { UserPostService } from './services/user-post.service';
     UserDataService,
     ModalDialogService,
     NavBarService,
+    UserFollowService,
     UserPostService
   ],
   bootstrap: [
