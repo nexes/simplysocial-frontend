@@ -4,6 +4,7 @@ import { UserDataService, CurrentUser } from '../../services/user-data.service';
 import { UserAuthenticationService } from '../../services/user-auth.service';
 import { NavBarService } from '../../services/navbar.service';
 import { UserPostService, Post } from '../../services/user-post.service';
+import { UserFollowService } from '../../services/user-follow.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 import { ProcessImage } from '../../util/imageprocess';
 
@@ -27,6 +28,7 @@ export class TimelineComponent implements OnInit {
 
     constructor(private userPost: UserPostService,
                 private userData: UserDataService,
+                private userFollowers: UserFollowService,
                 private userService: UserAuthenticationService,
                 private dialog: ModalDialogService,
                 private navBar: NavBarService) {
@@ -36,8 +38,6 @@ export class TimelineComponent implements OnInit {
         this.images = new ProcessImage();
         this.postMessage = '';
 
-        console.log('timeline cstr()');
-
         // populate the uses timeline with their posts. This is getting called once - should it be a service?
         this.userPost.getUserPosts().subscribe((post: Post) => {
             this.postList = post[ 'posts' ];
@@ -46,8 +46,6 @@ export class TimelineComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('timeline onInit()');
-
         this.currentUserAvatar = this.userData.avatar;
         this.currentUsername = this.userData.username;
     }
@@ -108,7 +106,21 @@ export class TimelineComponent implements OnInit {
         );
     }
 
-    followingClick(selected: string) {
-        console.log(`follower ${selected}`);
+    userSearch() {
+        this.dialog.showUserSearchDialog().subscribe(
+            (searchResp: string) => {
+                if (searchResp !== undefined && searchResp.length > 1) {
+                    this.userFollowers.searchForUser(searchResp).subscribe(
+                        (resp) => {
+                            console.log('from our search result');
+                            console.log(resp);
+                        },
+                        (err) => {
+                            this.dialog.showErrorDialog('Search result', `could not find ${searchResp}`);
+                        }
+                    );
+                }
+            }
+        );
     }
 }

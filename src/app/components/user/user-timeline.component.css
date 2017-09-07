@@ -101,3 +101,7 @@ img.timeline-img-preview {
     width: 52px;
     height: 52px;
 }
+button.user-search {
+    margin: 10px;
+    width: 65%;
+}
