@@ -13,7 +13,7 @@ export interface CurrentUser {
     email?: string;
     avatar?: string;
     isActive?: boolean;
-    postCout?: number;
+    postcount?: number;
     followers?: number;
     following?: number;
     description?: string;
@@ -52,7 +52,7 @@ export class UserDataService implements OnDestroy {
     }
 
     get avatar(): string {
-        return this.currentUser.avatar;
+        return this.currentUser.avatar || 'assets/usericon.png';
     }
 
     get name(): string {
@@ -65,6 +65,18 @@ export class UserDataService implements OnDestroy {
 
     get active(): boolean {
         return this.currentUser.isActive;
+    }
+
+    get posts(): number {
+        return this.currentUser.postcount;
+    }
+
+    get followerCount(): number {
+        return this.currentUser.followers;
+    }
+
+    get followingCount(): number {
+        return this.currentUser.following;
     }
 
     ngOnDestroy() {
