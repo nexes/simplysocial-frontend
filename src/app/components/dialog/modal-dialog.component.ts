@@ -55,7 +55,15 @@ export class ModalDialogService {
     }
 
     showUserSearchDialog(): Observable<any> {
-        return null;
+        let dialogRef: MdDialogRef<SearchUserDialogTemplateComponent>;
+
+        dialogRef = this.dialog.open(SearchUserDialogTemplateComponent, {
+            disableClose: false,
+            width: '400px',
+            position: {top: '50px'}
+        });
+
+        return dialogRef.afterClosed();
     }
 }
 
@@ -78,7 +86,15 @@ export class ErrorDialogTemplateComponent {
     styleUrls: ['usersearch-dialog.component.css']
 })
 export class SearchUserDialogTemplateComponent {
+    private username: string;
+
+
     constructor(@Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<SearchUserDialogTemplateComponent>) {
+        this.username = '';
+    }
+
+    search() {
+        this.dialogRef.close(this.username);
     }
 }
 
