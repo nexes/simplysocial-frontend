@@ -2,21 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { CSRFToken } from '../util/securitycsrf';
+import { UserDataService } from '../services/user-data.service';
 
 
 
 @Injectable()
 export class UserFollowService extends CSRFToken {
-    private baseURL: string;
+    private baseSearchURL: string;
+    private baseFollowURL: string;
 
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private userData: UserDataService) {
         super(http);
-        this.baseURL = 'http://localhost:8000/snaplife/api/user/search/user/';
+        this.baseSearchURL = 'http://localhost:8000/snaplife/api/user/search/user/';
+        this.baseFollowURL = 'http://localhost:8000/snaplife/api/user/follow/new/';
     }
 
     searchForUser(username: string): Observable<any> {
-        const url = `${this.baseURL}${username}/`;
+        const url = `${this.baseSearchURL}${username}/`;
         return this.http.get(url);
+    }
+
+    followUser(username: string): Observable<any> {
+        const data = {
+            userid: this.userData.userID,
+            username: username
+        };
+        return this.http.post(this.baseFollowURL, data, { headers: this.headers });
     }
 }

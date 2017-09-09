@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { UserDataService, CurrentUser } from '../../services/user-data.service';
 import { UserAuthenticationService } from '../../services/user-auth.service';
@@ -31,6 +32,7 @@ export class TimelineComponent implements OnInit {
                 private userFollowers: UserFollowService,
                 private userService: UserAuthenticationService,
                 private dialog: ModalDialogService,
+                private snackBar: MdSnackBar,
                 private navBar: NavBarService) {
         this.navBar.showUserNavBar();
         this.showLoadingBar = true;
@@ -109,7 +111,15 @@ export class TimelineComponent implements OnInit {
     userSearch() {
         this.dialog.showUserSearchDialog().subscribe(
             (searchResp: string) => {
-                console.log(searchResp);
+                this.userFollowers.followUser(searchResp).subscribe(
+                    (resp) => {
+                        this.userData.updateUser({ following: resp.followercount });
+                        this.snackBar.open(`following ${searchResp}`, 'dismiss', { duration: 3000 });
+                    },
+                    (err) => {
+                        console.log(err);
+                    }
+                );
             }
         );
     }
