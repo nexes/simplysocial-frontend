@@ -37,7 +37,7 @@ export class ModalDialogService {
         dialogRef = this.dialog.open(PostDialogTemplateComponent, {
             disableClose: false,
             width: '60%',
-            position: {left: '25%', top: '0px'},
+            position: {left: '25%', top: '50px'},
             data: {
                 message: post || ''
             }
