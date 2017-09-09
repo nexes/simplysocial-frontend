@@ -1,3 +1,12 @@
 .search-input {
     width: 100%;
 }
+p.user-name {
+    padding: 10px;
+    cursor: pointer;
+}
+img.user-avatar {
+    border-radius: 100px;
+    width: 32px;
+    cursor: pointer;
+}

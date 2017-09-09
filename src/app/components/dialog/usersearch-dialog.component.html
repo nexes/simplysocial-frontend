@@ -2,6 +2,12 @@
 <md-input-container class="search-input">
     <input mdInput type="text" placeholder="username" [(ngModel)]="username">
 </md-input-container>
+    <md-list>
+        <md-list-item (click)="userSelect(user);" *ngFor="let user of userList">
+            <img class="user-avatar" src={{user.avatar}}/>
+            <p class="user-name">{{user.username}}</p>
+        </md-list-item>
+    </md-list>
 <md-dialog-actions>
-    <button md-button md-dialog-close color="primary" (click)="search();">Search</button>
+    <button md-button color="primary" (click)="search();">Search</button>
 </md-dialog-actions>

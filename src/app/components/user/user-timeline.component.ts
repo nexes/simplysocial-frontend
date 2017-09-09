@@ -109,17 +109,7 @@ export class TimelineComponent implements OnInit {
     userSearch() {
         this.dialog.showUserSearchDialog().subscribe(
             (searchResp: string) => {
-                if (searchResp !== undefined && searchResp.length > 1) {
-                    this.userFollowers.searchForUser(searchResp).subscribe(
-                        (resp) => {
-                            console.log('from our search result');
-                            console.log(resp);
-                        },
-                        (err) => {
-                            this.dialog.showErrorDialog('Search result', `could not find ${searchResp}`);
-                        }
-                    );
-                }
+                console.log(searchResp);
             }
         );
     }

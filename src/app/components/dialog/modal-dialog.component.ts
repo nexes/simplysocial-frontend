@@ -1,9 +1,16 @@
 import { Component, Injectable, Inject } from '@angular/core';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { UserPostService } from '../../services/user-post.service';
+import { UserFollowService } from '../../services/user-follow.service';
 import { ProcessImage } from '../../util/imageprocess';
 import { Observable } from 'rxjs/Observable';
 
+
+
+interface UserSearch {
+    username: string;
+    avatar: string;
+}
 
 @Injectable()
 export class ModalDialogService {
@@ -60,7 +67,7 @@ export class ModalDialogService {
         dialogRef = this.dialog.open(SearchUserDialogTemplateComponent, {
             disableClose: false,
             width: '400px',
-            position: {top: '50px'}
+            position: { top: '50px' }
         });
 
         return dialogRef.afterClosed();
@@ -87,14 +94,45 @@ export class ErrorDialogTemplateComponent {
 })
 export class SearchUserDialogTemplateComponent {
     private username: string;
+    private userList: UserSearch[];
 
 
-    constructor(@Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<SearchUserDialogTemplateComponent>) {
+    constructor(@Inject(MD_DIALOG_DATA) private data: any,
+                private dialogRef: MdDialogRef<SearchUserDialogTemplateComponent>,
+                private userFollow: UserFollowService) {
         this.username = '';
+        this.userList = [];
     }
 
     search() {
-        this.dialogRef.close(this.username);
+        if (this.username.length > 1) {
+            this.userFollow.searchForUser(this.username).subscribe(
+                (resp) => {
+                    if (this.userList.length > 0) {
+                        this.userList = [];
+                    }
+
+                    for (const user of resp.users) {
+                        if (user.avatar.length === 0) {
+                            user.avatar = 'assets/usericon.png';
+                        }
+                        this.userList.push(user);
+                    }
+                },
+                (err) => {
+                    this.userList.push({
+                        username: 'Sorry, no users were found',
+                        avatar: 'assets/cloud-error.png'
+                    });
+                }
+            );
+
+            this.username = '';
+        }
+    }
+
+    userSelect(user: UserSearch) {
+        this.dialogRef.close(user.username);
     }
 }
 
