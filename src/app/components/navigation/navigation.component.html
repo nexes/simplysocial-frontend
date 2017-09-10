@@ -26,14 +26,18 @@
         <img class="userbar-image" src="/assets/bee-color.png">
         <div class="userbar-extra">
             <md-menu #notificationMenu="mdMenu" [overlapTrigger]="false">
-                <md-list>
+                <md-list dense>
                     <md-list-item>
-                        no notifications
+                        <md-icon mdListIcon>notifications</md-icon> 0
+                    </md-list-item>
+                    <md-divider></md-divider>
+                    <md-list-item>
+                        <p (click)="logoutUser();">Sign out</p>
                     </md-list-item>
                 </md-list>
             </md-menu>
             <button md-icon-button [mdMenuTriggerFor]="notificationMenu">
-                <md-icon [ngClass]="{ 'notification-icon': activeNotifications }">notifications</md-icon>
+                <md-icon [ngClass]="{ 'notification-icon': activeNotifications }">more_horiz</md-icon>
             </button>
         </div>
     </div>

@@ -35,7 +35,6 @@ nav.userbar-tabs.mat-tab-nav-bar a {
 }
 .userbar-container .userbar-image {
     order: 2;
-    /* content: url('/assets/test-avatar.png');  */
     border-radius: 100%; 
     align-self: center;
     width: 48px;
@@ -50,4 +49,7 @@ nav.userbar-tabs.mat-tab-nav-bar a {
 }
 .notification-icon {
     color: red;
+}
+md-list-item {
+    cursor: pointer;
 }
