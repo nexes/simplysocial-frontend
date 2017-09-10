@@ -10,12 +10,13 @@ import { UserDataService } from '../services/user-data.service';
 export class UserFollowService extends CSRFToken {
     private baseSearchURL: string;
     private baseFollowURL: string;
+    private baseUnfollowURL: string;
 
 
     constructor(private http: HttpClient, private userData: UserDataService) {
         super(http);
         this.baseSearchURL = 'http://localhost:8000/snaplife/api/user/search/user/';
-        this.baseFollowURL = 'http://localhost:8000/snaplife/api/user/follow/new/';
+        this.baseFollowURL = 'http://localhost:8000/snaplife/api/user/follow/';
     }
 
     searchForUser(username: string): Observable<any> {
@@ -28,6 +29,18 @@ export class UserFollowService extends CSRFToken {
             userid: this.userData.userID,
             username: username
         };
-        return this.http.post(this.baseFollowURL, data, { headers: this.headers });
+        return this.http.post(`${this.baseFollowURL}new/`, data, { headers: this.headers });
+    }
+
+    unFollowUser(username: string): Observable<any> {
+        const data = {
+            userid: this.userData.userID,
+            username: username
+        };
+        return this.http.post(`${this.baseFollowURL}remove/`, data, { headers: this.headers });
+    }
+
+    followList(): Observable<any> {
+        return this.http.get(`${this.baseFollowURL}list/${this.userData.userID}/`);
     }
 }

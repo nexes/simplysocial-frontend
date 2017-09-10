@@ -63,7 +63,7 @@ export class SettingsComponent {
                 this.userAuth.deleteUser(this.userData.username, password).subscribe(
                     (resp) => {
                         if (resp.message === 'success') {
-                            this.snackBar.open('Account was removed', 'close', {duration: 3000});
+                            this.snackBar.open('Account was removed', 'close', { duration: 3000 });
                             this.router.navigate(['/']);
                         }
                     },

@@ -1,73 +1,15 @@
 <md-progress-bar *ngIf="showLoadingBar" class="timeline-progress-bar" color="warn" mode="indeterminate"></md-progress-bar>
 
 <div class="timeline-container">
+
+  <!-- users following list -->
   <div class="timeline-following">
     <md-list>
       <button md-raised-button class="user-search" (click)="userSearch();">Follow user</button>
 
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>John</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Sue</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Ben</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Billy goat</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>John</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Sue</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Ben</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Billy goat</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>John</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Sue</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Ben</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Billy goat</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>John</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Sue</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Ben</p>
-      </md-list-item>
-      <md-list-item>
-        <img src="/assets/test-avatar.png" md-list-avatar>
-        <p md-line>Billy goat</p>
+      <md-list-item *ngFor="let user of followList">
+        <img src={{user.avatar}} md-list-avatar>
+        <p md-line>{{user.username}}</p>
       </md-list-item>
     </md-list>
   </div>

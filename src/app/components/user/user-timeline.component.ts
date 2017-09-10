@@ -23,6 +23,7 @@ export class TimelineComponent implements OnInit {
     private currentUserAvatar: string;
     private showLoadingBar: boolean;
     private hideImgPreview: boolean;
+    private followList: Post[];
     private postList: Post[];
     private images: ProcessImage;
 
@@ -40,10 +41,21 @@ export class TimelineComponent implements OnInit {
         this.images = new ProcessImage();
         this.postMessage = '';
 
-        // populate the uses timeline with their posts. This is getting called once - should it be a service?
+        // populate the users timeline with their posts. This is getting called once - should it be a service?
         this.userPost.getUserPosts().subscribe((post: Post) => {
             this.postList = post[ 'posts' ];
             this.showLoadingBar = false;
+        });
+
+        // populate the users following users
+        this.userFollowers.followList().subscribe((followers) => {
+            this.followList = followers[ 'following' ];
+
+            for (const _follower of this.followList) {
+                if (_follower['avatar'] === '') {
+                    _follower['avatar'] = 'assets/usericon.png';
+                }
+            }
         });
     }
 
