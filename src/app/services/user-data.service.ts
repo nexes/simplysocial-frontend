@@ -34,9 +34,8 @@ export class UserDataService implements OnDestroy {
         return this.dataBus.asObservable();
     }
 
-    logOffUser() {
-        this.dataBus.unsubscribe();
-        this.currentUser = undefined;
+    clearUser() {
+        this.currentUser = {};
     }
 
     updateUser(updated: CurrentUser) {

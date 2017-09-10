@@ -6,6 +6,11 @@ import { UserDataService } from '../services/user-data.service';
 
 
 
+export interface FollowUser {
+    username: string;
+    avatar: string;
+}
+
 @Injectable()
 export class UserFollowService extends CSRFToken {
     private baseSearchURL: string;
@@ -40,7 +45,7 @@ export class UserFollowService extends CSRFToken {
         return this.http.post(`${this.baseFollowURL}remove/`, data, { headers: this.headers });
     }
 
-    followList(): Observable<any> {
-        return this.http.get(`${this.baseFollowURL}list/${this.userData.userID}/`);
+    followList(): Observable<FollowUser> {
+        return this.http.get<FollowUser>(`${this.baseFollowURL}list/${this.userData.userID}/`);
     }
 }

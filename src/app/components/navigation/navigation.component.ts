@@ -39,9 +39,9 @@ export class NavigationComponent implements OnInit {
 
     logoutUser() {
         this.userAuth.logoff(this.userData.userID).subscribe((resp) => {
-            this.userData.logOffUser();
+            this.userData.clearUser();
             this.router.navigateByUrl('/');
-            this.snackBar.open('You have been logged off', 'dismiss');
+            this.snackBar.open('You have been logged off', 'dismiss', {duration: 2000});
         });
     }
 }
