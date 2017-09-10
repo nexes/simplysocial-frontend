@@ -32,9 +32,10 @@ export class UserAuthenticationService extends CSRFToken {
         return this.http.post<AuthResponse>(url, data, { headers: this.headers });
     }
 
-    logoff(username: string): Observable<AuthResponse> {
-        // TODO: logoff
-        return null;
+    logoff(userid: number): Observable<AuthResponse> {
+        const url = this.baseURL + 'user/logoff/';
+        const data = { userid: userid };
+        return this.http.post<AuthResponse>(url, data, { headers: this.headers });
     }
 
     newUser(user: CurrentUser): Observable<AuthResponse> {

@@ -34,6 +34,11 @@ export class UserDataService implements OnDestroy {
         return this.dataBus.asObservable();
     }
 
+    logOffUser() {
+        this.dataBus.unsubscribe();
+        this.currentUser = undefined;
+    }
+
     updateUser(updated: CurrentUser) {
         this.currentUser = Object.assign(this.currentUser, updated);
         this.dataBus.next(this.currentUser);
@@ -80,6 +85,8 @@ export class UserDataService implements OnDestroy {
     }
 
     ngOnDestroy() {
-        this.dataBus.unsubscribe();
+        if (!this.dataBus.closed) {
+            this.dataBus.unsubscribe();
+        }
     }
 }
