@@ -62,6 +62,7 @@ export class SettingsComponent {
             if (password) {
                 this.userAuth.deleteUser(this.userData.username, password).subscribe(
                     (resp) => {
+                        this.userData.clearUser();
                         if (resp.message === 'success') {
                             this.snackBar.open('Account was removed', 'close', { duration: 3000 });
                             this.router.navigate(['/']);
