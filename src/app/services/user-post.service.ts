@@ -13,6 +13,8 @@ export interface Post {
     likes: number;
     imageurl?: string;
     date: string;
+    author: string;
+    authoravatar: string;
 }
 
 @Injectable()
