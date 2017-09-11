@@ -26,11 +26,8 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('navigation oninit()');
-
         this.userData.listen().subscribe(
             (resp: CurrentUser) => {
-                console.log('navigation user change');
                 this.currentUsername = resp.username;
             }
         );

@@ -120,6 +120,7 @@ export class SearchUserDialogTemplateComponent {
                     }
                 },
                 (err) => {
+                    this.userList = [];
                     this.userList.push({
                         username: 'Sorry, no users were found',
                         avatar: 'assets/cloud-error.png'
