@@ -7,7 +7,7 @@
     <md-list>
       <button md-raised-button class="user-search" (click)="userSearch();">Follow user</button>
 
-      <md-list-item *ngFor="let user of followList">
+      <md-list-item class="follow-user" (click)="followingUserSelect(user.username);" *ngFor="let user of followList">
         <img src={{user.avatar}} md-list-avatar>
         <p md-line>{{user.username}}</p>
       </md-list-item>
@@ -37,9 +37,11 @@
     <!-- timeline post cards (hehe postcards) -->
     <md-card *ngFor="let post of postList">
       <md-card-header>
-        <md-card-title>{{currentUsername}}</md-card-title>
+        <md-card-title>{{post.author}}</md-card-title>
+        <!-- <md-card-title>{{currentUsername}}</md-card-title> -->
         <md-card-subtitle>{{post.date | date:short}}</md-card-subtitle>
-        <img src={{currentUserAvatar}} md-card-avatar>
+        <img src={{post.authoravatar}} md-card-avatar>
+        <!-- <img src={{currentUserAvatar}} md-card-avatar> -->
       </md-card-header>
       <img class="timeline-post-img" src={{post.imageurl}} md-card-image>
       <md-card-content>

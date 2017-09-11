@@ -105,3 +105,6 @@ button.user-search {
     margin: 10px;
     width: 65%;
 }
+.follow-user {
+    cursor: pointer;
+}
