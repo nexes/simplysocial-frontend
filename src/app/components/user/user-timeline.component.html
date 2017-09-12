@@ -38,10 +38,8 @@
     <md-card *ngFor="let post of postList">
       <md-card-header>
         <md-card-title>{{post.author}}</md-card-title>
-        <!-- <md-card-title>{{currentUsername}}</md-card-title> -->
         <md-card-subtitle>{{post.date | date:short}}</md-card-subtitle>
         <img src={{post.authoravatar}} md-card-avatar>
-        <!-- <img src={{currentUserAvatar}} md-card-avatar> -->
       </md-card-header>
       <img class="timeline-post-img" src={{post.imageurl}} md-card-image>
       <md-card-content>
@@ -73,6 +71,19 @@
 
   </div>
   <div class="timeline-extra">
+    <div class="timeline-left">
+        <md-list>
+            <md-list-item>
+                <md-icon mdListIcon>mail_outline</md-icon> Posts: {{userData.posts}}
+            </md-list-item>
+            <md-list-item>
+                <md-icon mdListIcon>supervisor_account</md-icon> Following: {{userData.followingCount}}
+            </md-list-item>
+            <md-list-item>
+                <md-icon mdListIcon>bookmark</md-icon> Followers: {{userData.followerCount}}
+            </md-list-item>
+        </md-list>
+    </div>
     <div class="post-btn-sticky">
       <button md-icon-button (click)="openPostDialog()"><md-icon>mode_edit</md-icon></button>
     </div>

@@ -4,12 +4,8 @@
 }
 .setting-container .setting-left {
     order: 1;
-    flex-basis: 25%;
+    flex-basis: 35%;
     padding-top: 50px;
-}
-.setting-container .setting-left md-list-item {
-    color: #a8a8a8;
-    font-size: 14px;
 }
 .setting-container .setting-main {
     flex: 1 1 auto;
