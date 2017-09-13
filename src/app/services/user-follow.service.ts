@@ -48,4 +48,9 @@ export class UserFollowService extends CSRFToken {
     followList(): Observable<FollowUser> {
         return this.http.get<FollowUser>(`${this.baseFollowURL}list/${this.userData.userID}/`);
     }
+
+    getFriendTimeline(username: string): Observable<any> {
+        const url = `http://localhost:8000/snaplife/api/user/friend/snapshot/${username}/`;
+        return this.http.get(url);
+    }
 }

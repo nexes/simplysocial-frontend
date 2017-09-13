@@ -113,9 +113,6 @@ export class SearchUserDialogTemplateComponent {
                     }
 
                     for (const user of resp.users) {
-                        if (user.avatar.length === 0) {
-                            user.avatar = 'assets/usericon.png';
-                        }
                         this.userList.push(user);
                     }
                 },

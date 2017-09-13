@@ -44,24 +44,12 @@ export class TimelineComponent implements OnInit {
         // populate the users timeline with their posts. This is getting called once - should it be a service?
         this.userPost.getUserPosts().subscribe((post: Post) => {
             this.postList = post[ 'posts' ];
-
-            for (const _post of this.postList) {
-                if (_post.authoravatar === '') {
-                    _post.authoravatar = 'assets/usericon.png'; // move this to the server
-                }
-            }
             this.showLoadingBar = false;
         });
 
         // populate the users following users
         this.userFollowers.followList().subscribe((followers: FollowUser) => {
             this.followList = followers[ 'following' ];
-
-            for (const _follower of this.followList) {
-                if (_follower[ 'avatar' ] === '') {
-                    _follower[ 'avatar' ] = 'assets/usericon.png';
-                }
-            }
         });
     }
 
@@ -75,10 +63,6 @@ export class TimelineComponent implements OnInit {
             (resp) => {
                 if (resp) {
                     const newPost = resp[ 'post' ];
-
-                    if (newPost.authoravatar === '') {
-                        newPost.authoravatar = 'assets/usericon.png';
-                    }
                     this.postList.unshift(resp[ 'post' ]);
                 }
             }
@@ -89,10 +73,6 @@ export class TimelineComponent implements OnInit {
         this.userPost.createPost(this.postMessage, this.postImageData).subscribe(
             (resp) => {
                 const newPost = resp[ 'post' ];
-
-                if (newPost.authoravatar === '') {
-                    newPost.authoravatar = 'assets/usericon.png';
-                }
                 this.postList.unshift(newPost);
             },
             (err) => {
@@ -147,7 +127,7 @@ export class TimelineComponent implements OnInit {
                 this.userFollowers.followUser(searchResp).subscribe(
                     (resp) => {
                         this.followList.push({
-                            avatar: resp.followavatar || 'assets/usericon.png',
+                            avatar: resp.followavatar,
                             username: resp.followname
                         });
                         this.userData.updateUser({ following: resp.followercount });

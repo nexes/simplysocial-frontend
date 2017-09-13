@@ -56,7 +56,7 @@ export class UserDataService implements OnDestroy {
     }
 
     get avatar(): string {
-        return this.currentUser.avatar || 'assets/usericon.png';
+        return this.currentUser.avatar;
     }
 
     get name(): string {
