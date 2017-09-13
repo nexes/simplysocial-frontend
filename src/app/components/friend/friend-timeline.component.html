@@ -3,10 +3,21 @@
         <h3>{{friendUsername}}</h3>
     </div>
     <div class="banner-middle">
-        <p>{{friendAbout}}</p>
+        <md-tab-group>
+            <md-tab label="Posts: {{friendPostCount}}">
+            </md-tab>
+            <md-tab label="Following: {{friendFollowingCount}}">
+                <md-list>
+                    <md-list-item *ngFor="let user of friendFollowing">
+                        <img class="following-img" src={{user.avatar}}/>
+                        <span>{{user.username}}</span>
+                    </md-list-item>
+                </md-list>
+            </md-tab>
+        </md-tab-group>
     </div>
     <div class="banner-right">
-        <button md-raised-button color="primary">Unfollow</button>
+        <button md-raised-button color="primary" (click)="unfollowUser();">Unfollow</button>
     </div>
 </div>
 
@@ -50,6 +61,7 @@
         <div class="timeline-left">
             <img class=timeline-avatar src={{friendAvatar}}>
             <md-list>
+                <md-list-item>{{friendAbout}}</md-list-item>
                 <md-list-item>
                     <md-icon mdListIcon>mail_outline</md-icon> Posts: {{friendPostCount}}
                 </md-list-item>

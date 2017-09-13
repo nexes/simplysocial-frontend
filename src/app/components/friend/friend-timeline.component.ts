@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserDataService } from '../../services/user-data.service';
 import { UserFollowService } from '../../services/user-follow.service';
 
 
@@ -10,8 +11,9 @@ import { UserFollowService } from '../../services/user-follow.service';
     styleUrls: ['friend-timeline.component.css']
 })
 export class FriendTimelineComponent {
-    private friendUsername: string;
+    private readonly friendUsername: string;
     private friendPosts: JSON[];
+    private friendFollowing: JSON[];
     private friendAvatar: string;
     private friendAbout: string;
     private friendPostCount: number;
@@ -19,22 +21,38 @@ export class FriendTimelineComponent {
     private friendFollowerCount: number;
 
 
-    constructor(private router: Router, private followService: UserFollowService) {
+    constructor(private router: Router,
+                private userData: UserDataService,
+                private followService: UserFollowService) {
         this.friendUsername = router.url.substring(router.url.lastIndexOf('/') + 1);
 
         this.followService.getFriendTimeline(this.friendUsername).subscribe(
             (resp) => {
                 console.log(resp);
 
-                this.friendAvatar = resp['avatar'];
-                this.friendAbout = resp['about'];
-                this.friendPostCount = resp['postcount'];
-                this.friendFollowerCount = resp['followers'];
-                this.friendFollowingCount = resp['following'];
-                this.friendPosts = resp['posts'];
+                this.friendAvatar = resp[ 'avatar' ];
+                this.friendAbout = resp[ 'about' ];
+                this.friendPostCount = resp[ 'postcount' ];
+                this.friendFollowerCount = resp[ 'followers' ];
+                this.friendFollowingCount = resp[ 'following' ];
+                this.friendPosts = resp[ 'posts' ];
+                this.friendFollowing = resp[ 'followinglist' ];
             },
             (err) => {
                 console.log('error friend timeline');
+                console.log(err);
+            }
+        );
+    }
+
+    unfollowUser() {
+        this.followService.unFollowUser(this.friendUsername).subscribe(
+            (resp) => {
+                this.userData.updateUser({ following: resp[ 'followercount' ] });
+                this.router.navigateByUrl(`/${this.userData.username}`);
+            },
+            (err) => {
+                console.log('unfollow error');
                 console.log(err);
             }
         );

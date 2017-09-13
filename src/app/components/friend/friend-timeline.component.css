@@ -17,6 +17,9 @@
     align-self: center;
     padding: 0px 25%;
 }
+.banner .banner-middle md-list {
+    margin: 10px;
+}
 .banner .banner-right {
     order: 3;
     flex-grow: 1;
@@ -24,6 +27,11 @@
 }
 .banner .banner-right button {
     border-radius: 15px 30px;
+}
+.following-img {
+    width: 64px;
+    border-radius: 100%;
+    margin: 5px;
 }
 
 .friend-timeline {
@@ -45,12 +53,13 @@ div.timeline-btn-row {
 .friend-timeline .timeline-center {
     order: 2;
     flex-grow: 2;
-    flex-basis: 35%;
+    flex-basis: 55%;
 }
 .friend-timeline .timeline-right {
     order: 3;
-    flex-grow: 1;
+    flex-grow: 0;
     flex-basis: auto;
+    margin-right: 0px;
 }
 .timeline-center md-card {
     margin: 10px;
