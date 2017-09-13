@@ -1,0 +1,89 @@
+.banner {
+    display: flex;
+    padding: 20px 25px 0px 25px;
+    font-size: 16px;
+    font-weight: normal;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.5);
+}
+.banner .banner-left {
+    order: 1;
+    flex-grow: 1;
+    flex-basis: auto;
+}
+.banner .banner-middle {
+    order: 2;
+    flex-grow: 2;
+    flex-basis: 100%;
+    align-self: center;
+    padding: 0px 25%;
+}
+.banner .banner-right {
+    order: 3;
+    flex-grow: 1;
+    flex-basis: auto;
+}
+.banner .banner-right button {
+    border-radius: 15px 30px;
+}
+
+.friend-timeline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+div.timeline-btn-row {
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid darkgray;
+}
+.friend-timeline .timeline-left {
+    order: 1;
+    flex-grow: 1;
+    flex-basis: auto;
+}
+.friend-timeline .timeline-center {
+    order: 2;
+    flex-grow: 2;
+    flex-basis: 35%;
+}
+.friend-timeline .timeline-right {
+    order: 3;
+    flex-grow: 1;
+    flex-basis: auto;
+}
+.timeline-center md-card {
+    margin: 10px;
+}
+.timeline-btn-row .timeline-action {
+    order: 2;
+    min-width: 20px;
+    margin: 0px;
+    padding: 10px;
+}
+.timeline-btn-row .timeline-action-menu {
+    order: 2;
+    min-width: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+img.timeline-post-img {
+    max-width: 700px;
+    height: auto;
+}
+.timeline-btn-row .timeline-labels {
+    order: 1;
+    flex-grow: 1;
+    padding: 0px 1px; 
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    align-self: center;
+}
+.timeline-avatar {
+    border-radius: 100%;
+    width: 120px;
+    height: 120px;
+    border: 2px solid red;
+    margin: 20px;
+}

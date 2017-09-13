@@ -1,0 +1,65 @@
+<div class="banner">
+    <div class="banner-left">
+        <h3>{{friendUsername}}</h3>
+    </div>
+    <div class="banner-middle">
+        <p>{{friendAbout}}</p>
+    </div>
+    <div class="banner-right">
+        <button md-raised-button color="primary">Unfollow</button>
+    </div>
+</div>
+
+<div class="friend-timeline">
+    <div class="timeline-left">
+    </div>
+
+    <div class="timeline-center">
+        <md-card *ngFor="let post of friendPosts">
+            <md-card-header>
+                <md-card-title>{{friendUsername}}</md-card-title>
+                <md-card-subtitle>{{post.date | date:short}}</md-card-subtitle>
+                <img src={{friendAvatar}} md-card-avatar>
+            </md-card-header>
+            <img class="timeline-post-img" src={{post.url}} md-card-image>
+            <md-card-content>
+                <p>{{post.message}}</p>
+            </md-card-content>
+            <md-card-actions>
+                <div class="timeline-btn-row">
+                    <p class="timeline-labels">{{post.likes}} likes</p>
+
+                    <md-menu #postMenu="mdMenu">
+                        <div md-menu-item>
+                            <md-icon class="timeline-action" style="cursor:pointer">report</md-icon>
+                            <span>report</span>
+                        </div>
+                    </md-menu>
+
+                    <md-icon class="timeline-action" style="cursor:pointer" (click)="likePost(post)">favorite_border</md-icon>
+                    <md-icon class="timeline-action" style="cursor:pointer">comment</md-icon>
+                    <button md-icon-button class="timeline-action-menu" [mdMenuTriggerFor]="postMenu">
+              <md-icon style="cursor:pointer">more_horiz</md-icon>
+            </button>
+                </div>
+            </md-card-actions>
+        </md-card>
+    </div>
+
+    <div class="timeline-right">
+        <div class="timeline-left">
+            <img class=timeline-avatar src={{friendAvatar}}>
+            <md-list>
+                <md-list-item>
+                    <md-icon mdListIcon>mail_outline</md-icon> Posts: {{friendPostCount}}
+                </md-list-item>
+                <md-list-item>
+                    <md-icon mdListIcon>supervisor_account</md-icon> Following: {{friendFollowingCount}}
+                </md-list-item>
+                <md-list-item>
+                    <md-icon mdListIcon>bookmark</md-icon> Followers: {{friendFollowerCount}}
+                </md-list-item>
+            </md-list>
+        </div>
+    </div>
+</div>
