@@ -9,6 +9,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { UserLoginComponent } from './components/authentication/user-login.component';
 import { UserCreateComponent } from './components/authentication/user-create.component';
 import { TimelineComponent } from './components/user/user-timeline.component';
+import { FriendTimelineComponent } from './components/friend/friend-timeline.component';
 import { PageNotFoundComponent } from './components/404/page-notfound.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import {
@@ -38,6 +39,7 @@ import { UserFollowService } from './services/user-follow.service';
     SearchUserDialogTemplateComponent,
     PageNotFoundComponent,
     TimelineComponent,
+    FriendTimelineComponent,
     SettingsComponent
   ],
   imports: [
