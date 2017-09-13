@@ -4,14 +4,13 @@
 
   <!-- users following list -->
   <div class="timeline-following">
-    <md-list>
+    <md-nav-list>
       <button md-raised-button class="user-search" (click)="userSearch();">Follow user</button>
-
-      <md-list-item class="follow-user" (click)="followingUserSelect(user.username);" *ngFor="let user of followList">
+      <md-list-item class="follow-user" *ngFor="let user of followList">
         <img src={{user.avatar}} md-list-avatar>
-        <p md-line>{{user.username}}</p>
+        <a routerLink="/timeline/{{user.username}}">{{user.username}}</a>
       </md-list-item>
-    </md-list>
+    </md-nav-list>
   </div>
 
   <div class="timeline-main">
@@ -23,14 +22,13 @@
       <label class="timeline-img-btn" mdInput for="imageFile" mdSuffix><md-icon>photo</md-icon></label>
 
       <md-hint align="end">
-        <button md-button [disabled]="!(postMessage.length > 0 && postMessage.length < 255)" (click)="submitNewPost()">Post</button> {{postMessage.length}} / 255
+        <button md-button [disabled]="!(postMessage.length > 0 && postMessage.length < 255)" (click)="submitNewPost()">Post</button>        {{postMessage.length}} / 255
       </md-hint>
     </md-input-container>
 
     <div [hidden]="hideImgPreview">
       <md-icon color="warn" style="cursor:pointer" (click)="removeImagePreview()">
-        <img class="timeline-img-preview" id="img-preview" width="64px" height="64px">
-        close
+        <img class="timeline-img-preview" id="img-preview" width="64px" height="64px"> close
       </md-icon>
     </div>
 
@@ -69,20 +67,21 @@
       </md-card-actions>
     </md-card>
 
+  <!-- user count data -->
   </div>
   <div class="timeline-extra">
     <div class="timeline-left">
-        <md-list>
-            <md-list-item>
-                <md-icon mdListIcon>mail_outline</md-icon> Posts: {{userData.posts}}
-            </md-list-item>
-            <md-list-item>
-                <md-icon mdListIcon>supervisor_account</md-icon> Following: {{userData.followingCount}}
-            </md-list-item>
-            <md-list-item>
-                <md-icon mdListIcon>bookmark</md-icon> Followers: {{userData.followerCount}}
-            </md-list-item>
-        </md-list>
+      <md-list>
+        <md-list-item>
+          <md-icon mdListIcon>mail_outline</md-icon> Posts: {{userData.posts}}
+        </md-list-item>
+        <md-list-item>
+          <md-icon mdListIcon>supervisor_account</md-icon> Following: {{userData.followingCount}}
+        </md-list-item>
+        <md-list-item>
+          <md-icon mdListIcon>bookmark</md-icon> Followers: {{userData.followerCount}}
+        </md-list-item>
+      </md-list>
     </div>
     <div class="post-btn-sticky">
       <button md-icon-button (click)="openPostDialog()"><md-icon>mode_edit</md-icon></button>

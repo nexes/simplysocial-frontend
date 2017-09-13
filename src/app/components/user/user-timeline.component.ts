@@ -139,7 +139,6 @@ export class TimelineComponent implements OnInit {
     userSearch() {
         this.dialog.showUserSearchDialog().subscribe(
             (searchResp: string) => {
-                console.log(searchResp);
                 if (searchResp === undefined || searchResp === this.userData.username) {
                     // can't follow yourself
                     return;
