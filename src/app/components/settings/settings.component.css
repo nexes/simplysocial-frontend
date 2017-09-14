@@ -27,6 +27,9 @@
     color: #424242;
     margin: 10px 5px;
 }
+.settings-bio {
+    height: 30px;
+}
 .setting-main textarea, input[type="text"], input[type="password"], input[type="email"] {
     width: 400px;
     resize: none;
