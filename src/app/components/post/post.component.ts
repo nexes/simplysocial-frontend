@@ -11,16 +11,19 @@ import { UserPostService, Post } from '../../services/user-post.service';
 })
 export class PostComponent {
     private postList: Post[];
+    private commentMessage: string;
 
     @Output()
     private loadingPost: EventEmitter<boolean>;
 
 
     constructor(private userData: UserDataService, private userPost: UserPostService) {
+        this.commentMessage = '';
         this.loadingPost = new EventEmitter<boolean>();
 
         this.userPost.getUserPosts().subscribe(
             (post) => {
+                console.log(post);
                 this.postList = post[ 'posts' ];
                 this.loadingPost.emit(true);
             }
@@ -48,6 +51,16 @@ export class PostComponent {
         this.userPost.updateLikeCount(post).subscribe(
             (resp) => {
                 post.likes = resp.likecount;
+            }
+        );
+    }
+
+    submitComment(post: Post) {
+        this.userPost.commentOnPost(post, this.commentMessage).subscribe(
+            (resp) => {
+                this.commentMessage = '';
+                console.log('all done comment');
+                console.log(resp);
             }
         );
     }
