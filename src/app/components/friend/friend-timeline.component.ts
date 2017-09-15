@@ -28,8 +28,6 @@ export class FriendTimelineComponent {
 
         this.followService.getFriendTimeline(this.friendUsername).subscribe(
             (resp) => {
-                console.log(resp);
-
                 this.friendAvatar = resp[ 'avatar' ];
                 this.friendAbout = resp[ 'about' ];
                 this.friendPostCount = resp[ 'postcount' ];
@@ -39,7 +37,6 @@ export class FriendTimelineComponent {
                 this.friendFollowing = resp[ 'followinglist' ];
             },
             (err) => {
-                console.log('error friend timeline');
                 console.log(err);
             }
         );
@@ -52,7 +49,6 @@ export class FriendTimelineComponent {
                 this.router.navigateByUrl(`/${this.userData.username}`);
             },
             (err) => {
-                console.log('unfollow error');
                 console.log(err);
             }
         );
