@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { UserDataService, CurrentUser } from '../../services/user-data.service';
 import { UserAuthenticationService } from '../../services/user-auth.service';
 import { NavBarService } from '../../services/navbar.service';
-import { UserPostService, Post } from '../../services/user-post.service';
 import { UserFollowService, FollowUser } from '../../services/user-follow.service';
 import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
+import { PostComponent } from '../../components/post/post.component';
 import { ProcessImage } from '../../util/imageprocess';
 
 
@@ -24,12 +24,13 @@ export class TimelineComponent implements OnInit {
     private showLoadingBar: boolean;
     private hideImgPreview: boolean;
     private followList: FollowUser[];
-    private postList: Post[];
     private images: ProcessImage;
 
+    @ViewChild(PostComponent)
+    private postComponent: PostComponent;
 
-    constructor(private userPost: UserPostService,
-                private userData: UserDataService,
+
+    constructor(private userData: UserDataService,
                 private userFollowers: UserFollowService,
                 private userService: UserAuthenticationService,
                 private dialog: ModalDialogService,
@@ -41,13 +42,6 @@ export class TimelineComponent implements OnInit {
         this.images = new ProcessImage();
         this.postMessage = '';
 
-        // populate the users timeline with their posts. This is getting called once - should it be a service?
-        this.userPost.getUserPosts().subscribe((post: Post) => {
-            this.postList = post[ 'posts' ];
-            this.showLoadingBar = false;
-        });
-
-        // populate the users following users
         this.userFollowers.followList().subscribe((followers: FollowUser) => {
             this.followList = followers[ 'following' ];
         });
@@ -61,28 +55,20 @@ export class TimelineComponent implements OnInit {
     openPostDialog() {
         this.dialog.showNewPostDialog(this.postMessage).subscribe(
             (resp) => {
-                if (resp) {
-                    const newPost = resp[ 'post' ];
-                    this.postList.unshift(resp[ 'post' ]);
-                }
+                this.postComponent.updatePostList(resp[ 'post' ]);
             }
         );
     }
 
     submitNewPost() {
-        this.userPost.createPost(this.postMessage, this.postImageData).subscribe(
-            (resp) => {
-                const newPost = resp[ 'post' ];
-                this.postList.unshift(newPost);
-            },
-            (err) => {
-                console.log(err);
-            }
-        );
-
-        this.postImageData = undefined;
-        this.hideImgPreview = true;
+        this.postComponent.submitNewPost(this.postMessage, this.postImageData);
         this.postMessage = '';
+        this.postImageData = '';
+        this.hideImgPreview = true;
+    }
+
+    submitComment() {
+        console.log('submit the new commet');
     }
 
     postImageUpload(file: File) {
@@ -108,14 +94,6 @@ export class TimelineComponent implements OnInit {
         this.hideImgPreview = true;
     }
 
-    likePost(post: Post) {
-        this.userPost.updateLikeCount(post).subscribe(
-            (resp) => {
-                post.likes = resp.likecount;
-            }
-        );
-    }
-
     userSearch() {
         this.dialog.showUserSearchDialog().subscribe(
             (searchResp: string) => {
@@ -139,9 +117,5 @@ export class TimelineComponent implements OnInit {
                 );
             }
         );
-    }
-
-    followingUserSelect(username: string) {
-        console.log('follower clicked');
     }
 }

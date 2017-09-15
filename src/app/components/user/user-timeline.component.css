@@ -21,6 +21,22 @@ div.timeline-container {
 div.timeline-container md-card {
     margin: 25px 5px;
 }
+md-expansion-panel {
+    padding-bottom: 0px;
+}
+.comment-input {
+    width: 100%;
+    height: 14px;
+    margin: 0px;
+}
+md-list.comment-list {
+    margin: 12px 0px;
+    overflow-y: auto;
+    height: 200px;
+}
+md-icon.comment-submit {
+    cursor: pointer;
+}
 div.timeline-following {
     order: 1;
     flex: 1 1 auto;
@@ -29,11 +45,6 @@ div.timeline-following {
     overflow-y: scroll;
     min-width: 64px;
 }
-div.timeline-btn-row {
-    display: flex;
-    flex-direction: row;
-    border-top: 1px solid darkgray;
-}
 .timeline-left {
     margin: 50px 10px;
 }
@@ -41,42 +52,14 @@ div.timeline-btn-row {
     color: #a8a8a8;
     font-size: 14px;
 }
-.timeline-btn-row .timeline-action {
-    order: 2;
-    min-width: 20px;
-    margin: 0px;
-    padding: 10px;
-}
-.timeline-btn-row .timeline-action-menu {
-    order: 2;
-    min-width: 20px;
-    margin: 0px;
-    padding: 0px;
-}
-.timeline-btn-row .timeline-labels {
-    order: 1;
-    flex-grow: 1;
-    padding: 0px 1px; 
-    color: black;
-    font-size: 14px;
-    font-weight: bold;
-    align-self: center;
-}
-.timeline-action:hover {
-    color: deeppink;
-}
 div.timeline-main {
     order: 2;
     flex-grow: 2;
     max-width: 700px;
     min-width: 490px;
-    padding: 0px 5px; 
+    padding: 0px 5px;
     height: 100%;
     overflow-y: scroll;
-}
-img.timeline-post-img {
-    max-width: 700px;
-    height: auto;
 }
 div.timeline-extra {
     order: 3;
