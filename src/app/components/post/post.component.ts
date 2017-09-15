@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UserDataService } from '../../services/user-data.service';
 import { UserPostService, Post } from '../../services/user-post.service';
 
@@ -12,11 +12,17 @@ import { UserPostService, Post } from '../../services/user-post.service';
 export class PostComponent {
     private postList: Post[];
 
+    @Output()
+    private loadingPost: EventEmitter<boolean>;
+
 
     constructor(private userData: UserDataService, private userPost: UserPostService) {
+        this.loadingPost = new EventEmitter<boolean>();
+
         this.userPost.getUserPosts().subscribe(
             (post) => {
                 this.postList = post[ 'posts' ];
+                this.loadingPost.emit(true);
             }
         );
     }

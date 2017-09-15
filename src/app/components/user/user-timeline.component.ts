@@ -52,6 +52,10 @@ export class TimelineComponent implements OnInit {
         this.currentUsername = this.userData.username;
     }
 
+    postsLoaded() {
+        this.showLoadingBar = false;
+    }
+
     openPostDialog() {
         this.dialog.showNewPostDialog(this.postMessage).subscribe(
             (resp) => {
