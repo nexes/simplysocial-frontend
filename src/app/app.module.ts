@@ -11,6 +11,7 @@ import { UserCreateComponent } from './components/authentication/user-create.com
 import { TimelineComponent } from './components/user/user-timeline.component';
 import { FriendTimelineComponent } from './components/friend/friend-timeline.component';
 import { PageNotFoundComponent } from './components/404/page-notfound.component';
+import { PostComponent } from './components/post/post.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import {
   ErrorDialogTemplateComponent,
@@ -40,7 +41,8 @@ import { UserFollowService } from './services/user-follow.service';
     PageNotFoundComponent,
     TimelineComponent,
     FriendTimelineComponent,
-    SettingsComponent
+    SettingsComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
