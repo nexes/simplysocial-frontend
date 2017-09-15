@@ -28,7 +28,6 @@
         </md-card-actions>
     </md-card>
 
-    <!-- <app-comment></app-comment> -->
     <md-expansion-panel class="comment-panel">
         <md-expansion-panel-header>
             <md-panel-title>
@@ -41,7 +40,7 @@
         </md-input-container>
         <md-list class="comment-list">
             <md-list-item *ngFor="let comment of post.comments">
-                {{comment.message}} - {{comment.date | date}}
+                {{comment.author}}: {{comment.message}} - {{comment.date | date}}
             </md-list-item>
         </md-list>
     </md-expansion-panel>

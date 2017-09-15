@@ -43,7 +43,7 @@ div.timeline-btn-row {
 md-list.comment-list {
     margin: 12px 0px;
     overflow-y: auto;
-    height: 200px;
+    height: 150px;
 }
 md-icon.comment-submit {
     cursor: pointer;

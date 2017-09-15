@@ -23,7 +23,6 @@ export class PostComponent {
 
         this.userPost.getUserPosts().subscribe(
             (post) => {
-                console.log(post);
                 this.postList = post[ 'posts' ];
                 this.loadingPost.emit(true);
             }
@@ -58,9 +57,13 @@ export class PostComponent {
     submitComment(post: Post) {
         this.userPost.commentOnPost(post, this.commentMessage).subscribe(
             (resp) => {
+                // we're going to fake it right now
+                post.comments.unshift({
+                    author: this.userData.username,
+                    message: this.commentMessage,
+                    date: Date.now().toString()
+                });
                 this.commentMessage = '';
-                console.log('all done comment');
-                console.log(resp);
             }
         );
     }

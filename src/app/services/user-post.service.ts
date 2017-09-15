@@ -5,6 +5,12 @@ import { UserDataService } from '../services/user-data.service';
 import { CSRFToken } from '../util/securitycsrf';
 
 
+
+export interface Comment {
+    author: string;
+    message: string;
+    date: string;
+}
 export interface Post {
     postid: number;
     message: string;
@@ -15,11 +21,13 @@ export interface Post {
     date: string;
     author: string;
     authoravatar: string;
+    comments: Comment[];
 }
 
 @Injectable()
 export class UserPostService extends CSRFToken {
     private baseURL: string;
+    private baseCommentURL: string;
     private postMessage: string;
     private postImage: string;
 
@@ -27,6 +35,7 @@ export class UserPostService extends CSRFToken {
     constructor(private userData: UserDataService, private http: HttpClient) {
         super(http);
         this.baseURL = 'http://localhost:8000/snaplife/api/user/posts/';
+        this.baseCommentURL = 'http://localhost:8000/snaplife/api/user/posts/comment/';
     }
 
     createPost(message: string, b64Image?: string): Observable<Post> {
@@ -49,5 +58,15 @@ export class UserPostService extends CSRFToken {
             userid: this.userData.userID,
             postid: post.postid
         }, { headers: this.headers });
+    }
+
+    commentOnPost(post: Post, message: string): Observable<any> {
+        const url = `${this.baseCommentURL}create/`;
+        const data = {
+            postid: post.postid,
+            userid: this.userData.userID,
+            message: message
+        };
+        return this.http.post(url, data, { headers: this.headers });
     }
 }
