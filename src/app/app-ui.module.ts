@@ -15,7 +15,8 @@ import {
     MdProgressBarModule,
     MdTabsModule,
     MdSnackBarModule,
-    MdTooltipModule
+    MdTooltipModule,
+    MdExpansionModule
 } from '@angular/material';
 
 
@@ -36,7 +37,8 @@ import {
         MdProgressBarModule,
         MdTabsModule,
         MdSnackBarModule,
-        MdTooltipModule
+        MdTooltipModule,
+        MdExpansionModule
     ],
     exports: [
         BrowserAnimationsModule,
@@ -54,7 +56,8 @@ import {
         MdProgressBarModule,
         MdTabsModule,
         MdSnackBarModule,
-        MdTooltipModule
+        MdTooltipModule,
+        MdExpansionModule
     ]
 })
 export class AppMaterialComponentModule { }

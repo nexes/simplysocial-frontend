@@ -35,7 +35,6 @@ export class UserPostService extends CSRFToken {
     constructor(private userData: UserDataService, private http: HttpClient) {
         super(http);
         this.baseURL = 'http://localhost:8000/snaplife/api/user/posts/';
-        this.baseCommentURL = 'http://localhost:8000/snaplife/api/user/posts/comment/';
     }
 
     createPost(message: string, b64Image?: string): Observable<Post> {
@@ -61,11 +60,21 @@ export class UserPostService extends CSRFToken {
     }
 
     commentOnPost(post: Post, message: string): Observable<any> {
-        const url = `${this.baseCommentURL}create/`;
+        const url = `${this.baseURL}comment/create/`;
         const data = {
             postid: post.postid,
             userid: this.userData.userID,
             message: message
+        };
+        return this.http.post(url, data, { headers: this.headers });
+    }
+
+    reportPost(postid: number, reason: string, email: string): Observable<any> {
+        const url = `${this.baseURL}report/`;
+        const data = {
+            postid: postid,
+            reason: reason,
+            email: email
         };
         return this.http.post(url, data, { headers: this.headers });
     }
