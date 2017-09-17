@@ -18,7 +18,8 @@ import {
   PostDialogTemplateComponent,
   DeleteDialogTemplateComponent,
   SearchUserDialogTemplateComponent,
-  ModalDialogService
+  ModalDialogService,
+  ReportDialogTemplateComponent
 } from './components/dialog/modal-dialog.component';
 
 import { UserAuthenticationService } from './services/user-auth.service';
@@ -38,6 +39,7 @@ import { UserFollowService } from './services/user-follow.service';
     PostDialogTemplateComponent,
     DeleteDialogTemplateComponent,
     SearchUserDialogTemplateComponent,
+    ReportDialogTemplateComponent,
     PageNotFoundComponent,
     TimelineComponent,
     FriendTimelineComponent,
@@ -67,7 +69,8 @@ import { UserFollowService } from './services/user-follow.service';
     ErrorDialogTemplateComponent,
     PostDialogTemplateComponent,
     DeleteDialogTemplateComponent,
-    SearchUserDialogTemplateComponent
+    SearchUserDialogTemplateComponent,
+    ReportDialogTemplateComponent
   ]
 })
 export class AppModule { }
