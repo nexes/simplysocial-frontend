@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MdSnackBar } from '@angular/material';
 import { UserDataService } from '../../services/user-data.service';
 import { UserPostService, Post } from '../../services/user-post.service';
+import { ModalDialogService } from '../../components/dialog/modal-dialog.component';
 
 
 
@@ -17,7 +19,10 @@ export class PostComponent {
     private loadingPost: EventEmitter<boolean>;
 
 
-    constructor(private userData: UserDataService, private userPost: UserPostService) {
+    constructor(private userData: UserDataService,
+                private userPost: UserPostService,
+                private snackBar: MdSnackBar,
+                private dialog: ModalDialogService) {
         this.commentMessage = '';
         this.loadingPost = new EventEmitter<boolean>();
 
@@ -64,6 +69,23 @@ export class PostComponent {
                     date: Date.now().toString()
                 });
                 this.commentMessage = '';
+            }
+        );
+    }
+
+    reportPost(post: Post) {
+        this.dialog.showReportDialog().subscribe(
+            (resp) => {
+                if (resp !== undefined && resp.length > 2) {
+                    this.userPost.reportPost(post.postid, resp, this.userData.email).subscribe(
+                        (balh) => {
+                            this.snackBar.open('Post reported', 'dismiss', { duration: 3000});
+                        }
+                    );
+                }
+            },
+            (err) => {
+                console.log(err);
             }
         );
     }

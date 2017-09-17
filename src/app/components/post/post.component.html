@@ -14,7 +14,7 @@
                 <p class="timeline-labels">{{post.likes}} likes</p>
 
                 <md-menu #postMenu="mdMenu">
-                    <div md-menu-item>
+                    <div md-menu-item (click)="reportPost(post);">
                         <md-icon class="timeline-action" style="cursor:pointer">report</md-icon>
                         <span>report</span>
                     </div>

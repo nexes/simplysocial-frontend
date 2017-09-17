@@ -1,0 +1,10 @@
+<h3 md-dialog-title>Report post</h3>
+<md-dialog-content>
+    <p>Describe the reason for the report. An email will be sent with your description</p>
+    <md-input-container>
+        <textarea mdInput class="report-input" type="text" placeholder="Description" [(ngModel)]="reason"></textarea>
+    </md-input-container>
+    <md-dialog-actions>
+        <button md-button md-dialog-close (click)="submitReport();">Report</button>
+    </md-dialog-actions>
+</md-dialog-content>

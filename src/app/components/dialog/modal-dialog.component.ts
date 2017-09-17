@@ -14,7 +14,6 @@ interface UserSearch {
 
 @Injectable()
 export class ModalDialogService {
-
     constructor(private dialog: MdDialog) {
     }
 
@@ -37,7 +36,7 @@ export class ModalDialogService {
         dialogRef = this.dialog.open(PostDialogTemplateComponent, {
             disableClose: false,
             width: '60%',
-            position: {left: '25%', top: '50px'},
+            position: { left: '25%', top: '50px' },
             data: {
                 message: post || ''
             }
@@ -72,6 +71,17 @@ export class ModalDialogService {
 
         return dialogRef.afterClosed();
     }
+
+    showReportDialog(): Observable<any> {
+        let dialogRef: MdDialogRef<ReportDialogTemplateComponent>;
+
+        dialogRef = this.dialog.open(ReportDialogTemplateComponent, {
+            width: '600px',
+            position: { left: '25%', top: '50px' }
+        });
+
+        return dialogRef.afterClosed();
+    }
 }
 
 
@@ -82,7 +92,25 @@ export class ModalDialogService {
     styleUrls: ['error-dialog.component.css']
 })
 export class ErrorDialogTemplateComponent {
-    constructor(@Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<ErrorDialogTemplateComponent>) {
+    constructor( @Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<ErrorDialogTemplateComponent>) {
+    }
+}
+
+
+@Component({
+    selector: 'app-report-dialog',
+    templateUrl: 'report-dialog.component.html',
+    styleUrls: ['report-dialog.component.css']
+})
+export class ReportDialogTemplateComponent {
+    private reason: string;
+
+
+    constructor( @Inject(MD_DIALOG_DATA) private data: any, private dialogRef: MdDialogRef<ErrorDialogTemplateComponent>) {
+    }
+
+    submitReport() {
+        this.dialogRef.close(this.reason);
     }
 }
 
@@ -97,7 +125,7 @@ export class SearchUserDialogTemplateComponent {
     private userList: UserSearch[];
 
 
-    constructor(@Inject(MD_DIALOG_DATA) private data: any,
+    constructor( @Inject(MD_DIALOG_DATA) private data: any,
                 private dialogRef: MdDialogRef<SearchUserDialogTemplateComponent>,
                 private userFollow: UserFollowService) {
         this.username = '';
@@ -147,7 +175,7 @@ export class DeleteDialogTemplateComponent {
     private password: string;
 
 
-    constructor(@Inject(MD_DIALOG_DATA) private data: any,
+    constructor( @Inject(MD_DIALOG_DATA) private data: any,
                 private dialogRef: MdDialogRef<DeleteDialogTemplateComponent>) {
         this.title = data.title;
         this.message = data.message;
@@ -182,7 +210,7 @@ export class PostDialogTemplateComponent {
     private showImgPreview: boolean;
 
 
-    constructor(@Inject(MD_DIALOG_DATA) private data: any,
+    constructor( @Inject(MD_DIALOG_DATA) private data: any,
                 private dialogRef: MdDialogRef<PostDialogTemplateComponent>,
                 private userPost: UserPostService) {
         this.image = new ProcessImage();
