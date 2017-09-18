@@ -8,3 +8,6 @@ body {
     margin: 0px;
     background: #fafafa;
 }
+md-dialog-container {
+    max-width: 800px !important;
+}

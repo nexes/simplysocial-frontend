@@ -72,9 +72,9 @@ export class SettingsComponent {
                         const errorMsg = err.error['message'];
 
                         if (errorMsg) {
-                            this.snackBar.open(errorMsg, 'close', {duration: 3000});
+                            this.snackBar.open(errorMsg, 'close', { duration: 3000 });
                         } else {
-                            this.snackBar.open('Account was not deleted', 'close', {duration: 3000});
+                            this.snackBar.open('Account was not deleted', 'close', { duration: 3000 });
                         }
                     }
                 );
