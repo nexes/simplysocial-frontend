@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { CSRFToken } from '../util/securitycsrf';
 import { CurrentUser } from '../services/user-data.service';
+import { environment } from '../../environments/environment';
 
 
 export interface AuthResponse {
@@ -20,7 +21,7 @@ export class UserAuthenticationService extends CSRFToken {
 
     constructor(private http: HttpClient) {
         super(http);
-        this.baseURL = 'http://localhost:8000/snaplife/api/auth/';
+        this.baseURL = `${environment.api}snaplife/api/auth/`;
     }
 
     login(username: string, password: string): Observable<AuthResponse> {
@@ -52,18 +53,18 @@ export class UserAuthenticationService extends CSRFToken {
     }
 
     isOnline(username: string): Observable<AuthResponse> {
-        const url = `http://localhost:8000/snaplife/api/user/online/${username}/`;
+        const url = `${environment.api}/snaplife/api/user/online/${username}/`;
         return this.http.get<AuthResponse>(url);
     }
 
     getUserProfileData(userID: number): Observable<CurrentUser> {
-        const url = `http://localhost:8000/snaplife/api/user/account/snapshot/${userID}/`;
+        const url = `${environment.api}snaplife/api/user/account/snapshot/${userID}/`;
         return this.http.get<CurrentUser>(url);
     }
 
     userEmail(userid: number, email?: string, update = false): Observable<CurrentUser> {
         if (update && email) {
-            const emailUrl = `http://localhost:8000/snaplife/api/user/email/`;
+            const emailUrl = `${environment.api}snaplife/api/user/email/`;
 
             return this.http.post<CurrentUser>(emailUrl, {
                 userid: userid,
@@ -71,13 +72,13 @@ export class UserAuthenticationService extends CSRFToken {
             }, { headers: this.headers });
         }
 
-        const url = `http://localhost:8000/snaplife/api/user/email/${userid}/`;
+        const url = `${environment.api}snaplife/api/user/email/${userid}/`;
         return this.http.get<CurrentUser>(url);
     }
 
     userDescription(userid: number, description?: string, update = false): Observable<CurrentUser> {
         if (update && description) {
-            const descUrl = `http://localhost:8000/snaplife/api/user/description/`;
+            const descUrl = `${environment.api}snaplife/api/user/description/`;
 
             return this.http.post<CurrentUser>(descUrl, {
                 userid: userid,
@@ -85,13 +86,13 @@ export class UserAuthenticationService extends CSRFToken {
             }, { headers: this.headers });
         }
 
-        const url = `http://localhost:8000/snaplife/api/user/description/${userid}/`;
+        const url = `${environment.api}snaplife/api/user/description/${userid}/`;
         return this.http.get<CurrentUser>(url);
     }
 
     userAvatar(userid: number, avatarImg?: string, update = false): Observable<CurrentUser> {
         if (update && avatarImg) {
-            const avatarUrl = `http://localhost:8000/snaplife/api/user/profile/update/`;
+            const avatarUrl = `${environment.api}snaplife/api/user/profile/update/`;
 
             return this.http.post<CurrentUser>(avatarUrl, {
                 userid: userid,

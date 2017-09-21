@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 
 export abstract class CSRFToken {
@@ -26,10 +27,10 @@ export abstract class CSRFToken {
     }
 
     private ensureCSRFToken(http: HttpClient) {
-        const baseURL = 'http://localhost:8000/snaplife/api/auth/';
+        const baseURL = `${environment.api}snaplife/api/auth/`;
 
         const req = http.get(baseURL + 'csrftoken/').subscribe(
-            data => { },
+            (data) => { },
             (err) => { /*this url will always return a status_code 200. This just ensures the browser has our csrf token*/ },
             () => {
                 const cookie = document.cookie;

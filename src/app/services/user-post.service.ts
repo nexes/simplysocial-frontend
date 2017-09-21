@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { UserDataService } from '../services/user-data.service';
 import { CSRFToken } from '../util/securitycsrf';
+import { environment } from '../../environments/environment';
 
 
 
@@ -34,7 +35,7 @@ export class UserPostService extends CSRFToken {
 
     constructor(private userData: UserDataService, private http: HttpClient) {
         super(http);
-        this.baseURL = 'http://localhost:8000/snaplife/api/user/posts/';
+        this.baseURL = `${environment.api}snaplife/api/user/posts/`;
     }
 
     createPost(message: string, b64Image?: string): Observable<Post> {

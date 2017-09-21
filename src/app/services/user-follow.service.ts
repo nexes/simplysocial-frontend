@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { CSRFToken } from '../util/securitycsrf';
 import { UserDataService } from '../services/user-data.service';
+import { environment } from '../../environments/environment';
 
 
 
@@ -20,8 +21,8 @@ export class UserFollowService extends CSRFToken {
 
     constructor(private http: HttpClient, private userData: UserDataService) {
         super(http);
-        this.baseSearchURL = 'http://localhost:8000/snaplife/api/user/search/user/';
-        this.baseFollowURL = 'http://localhost:8000/snaplife/api/user/follow/';
+        this.baseSearchURL = `${environment.api}snaplife/api/user/search/user/`;
+        this.baseFollowURL = `${environment.api}snaplife/api/user/follow/`;
     }
 
     searchForUser(username: string): Observable<any> {
@@ -50,7 +51,7 @@ export class UserFollowService extends CSRFToken {
     }
 
     getFriendTimeline(username: string): Observable<any> {
-        const url = `http://localhost:8000/snaplife/api/user/friend/snapshot/${username}/`;
+        const url = `${environment.api}snaplife/api/user/friend/snapshot/${username}/`;
         return this.http.get(url);
     }
 }
