@@ -53,7 +53,7 @@ export class UserAuthenticationService extends CSRFToken {
     }
 
     isOnline(username: string): Observable<AuthResponse> {
-        const url = `${environment.api}/snaplife/api/user/online/${username}/`;
+        const url = `${environment.api}snaplife/api/user/online/${username}/`;
         return this.http.get<AuthResponse>(url);
     }
 

@@ -16,11 +16,11 @@ export class UserCreateComponent implements OnInit {
     private newUserForm: FormGroup;
 
     constructor(private fb: FormBuilder,
-        private dialog: ModalDialogService,
-        private userData: UserDataService,
-        private auth: UserAuthenticationService,
-        private navBar: NavBarService,
-        private router: Router) {
+                private dialog: ModalDialogService,
+                private userData: UserDataService,
+                private auth: UserAuthenticationService,
+                private navBar: NavBarService,
+                private router: Router) {
 
         this.newUserForm = this.fb.group({
             fullname: [ '', [ Validators.minLength(2), Validators.maxLength(80), Validators.required ] ],

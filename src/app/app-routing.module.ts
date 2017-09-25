@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CookieXSRFStrategy, XSRFStrategy } from '@angular/http';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 import { LoginRequiredGuard } from './services/login-guard.service';
@@ -24,10 +25,6 @@ const appRoutes: Routes = [
 @NgModule({
     imports: [
         HttpClientModule,
-        HttpClientXsrfModule.withOptions({
-            cookieName: 'csrftoken',
-            headerName: 'X-CSRFToken'
-        }),
         RouterModule.forRoot(appRoutes)
     ],
     exports: [
@@ -36,7 +33,13 @@ const appRoutes: Routes = [
         RouterModule
     ],
     providers: [
-        LoginRequiredGuard
+        LoginRequiredGuard,
+        { provide: XSRFStrategy, useFactory: cookieXSRFFactory }
     ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
+
+export function cookieXSRFFactory() {
+    return new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+}

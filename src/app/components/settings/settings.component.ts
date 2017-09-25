@@ -112,7 +112,7 @@ export class SettingsComponent {
             );
         }
 
-        if (this.userAvatar !== this.userData.avatar && this.userAvatar !== 'assets/usericon.png') {
+        if (this.userAvatar !== this.userData.avatar && this.userAvatar !== 'static/assets/usericon.png') {
             this.userAuth.userAvatar(this.userData.userID, this.userAvatar, true).subscribe(
                 (resp: CurrentUser) => {
                     this.userData.updateUser({ avatar: resp.avatar });

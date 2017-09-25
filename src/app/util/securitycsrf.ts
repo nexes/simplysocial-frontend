@@ -30,7 +30,7 @@ export abstract class CSRFToken {
         const baseURL = `${environment.api}snaplife/api/auth/`;
 
         const req = http.get(baseURL + 'csrftoken/').subscribe(
-            (data) => { },
+            (data: any) => { },
             (err) => { /*this url will always return a status_code 200. This just ensures the browser has our csrf token*/ },
             () => {
                 const cookie = document.cookie;

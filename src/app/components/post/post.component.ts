@@ -42,7 +42,7 @@ export class PostComponent {
                 this.userData.updateUser({ postcount: this.userData.posts + 1 });
             },
             (err) => {
-
+                console.log(err);
             }
         );
     }

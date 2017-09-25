@@ -54,8 +54,7 @@ export class UserLoginComponent implements OnInit {
                 this.router.navigate([ '/', this.usernameOrEmail ]);
             },
             (err) => {
-                console.log(err);
-                this.dialog.showErrorDialog('Login error', err[ 'error' ][ 'message' ]);
+                this.dialog.showErrorDialog('Oops', 'login failed');
             }
         );
     }

@@ -5,18 +5,18 @@ md-toolbar.navigation-bar {
     flex: 1 1 auto;
 }
 img.navbar-image {
-    content: url('/assets/bee-color.png');
+    content: url('/static/assets/bee-color.png');
     width: 64px;
 }
 .userbar-container {
     width: 100%;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap; 
+    flex-wrap: nowrap;
 }
 .userbar-container .userbar-tabs {
     order: 1;
-    flex-grow: 1; 
+    flex-grow: 1;
     flex-shrink: 2;
     flex-basis: 40%;
 }
@@ -26,26 +26,26 @@ nav.userbar-tabs.mat-tab-nav-bar {
     height: 100%;
 }
 nav.userbar-tabs.mat-tab-nav-bar a {
-    color: white; 
+    color: white;
     font-weight: bold;
-     min-width: 0px; 
+     min-width: 0px;
 }
 .nav-icon {
     margin: 10px 5px 0px 0px;
 }
 .userbar-container .userbar-image {
     order: 2;
-    border-radius: 100%; 
+    border-radius: 100%;
     align-self: center;
     width: 48px;
     height: 48px;
 }
 .userbar-container .userbar-extra {
     order: 3;
-    flex-grow: 1; 
+    flex-grow: 1;
     text-align: right;
     flex-basis: 40%;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 .notification-icon {
     color: red;
