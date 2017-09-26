@@ -48,3 +48,28 @@ md-list.comment-list {
 md-icon.comment-submit {
     cursor: pointer;
 }
+
+/* iPhone 6/7 */
+@media (max-width: 375px) {
+    div.card-container > md-card {
+        display: absolute;
+        right: 0;
+        margin: 5px 0px;
+        max-width: 340px;
+    }
+    .comment-panel {
+        max-width: 375px;
+    }
+}
+
+/* iPhone 6+/7+ */
+@media (max-width: 445px) and (min-width: 400px) {
+    div.card-container > md-card {
+        display: absolute;
+        margin: 5px 0px;
+        max-width: 390px;
+    }
+    .comment-panel {
+        max-width: 415px;
+    }
+}

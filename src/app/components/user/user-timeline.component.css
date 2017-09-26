@@ -88,3 +88,61 @@ button.user-search {
 .follow-user  a {
     padding: 10px;
 }
+
+
+/* iPhone 6/7 */
+@media (max-width: 375px) {
+    md-input-container {
+        max-width: 350px;
+        margin: 7px 2px;
+    }
+    textarea.timeline-post {
+        resize: none;
+        max-height: 20px;
+    }
+    div.timeline-main {
+        padding: 0px 0px;
+        overflow-y: scroll;
+    }
+    div.timeline-container md-card {
+        margin: 25px 0px;
+    }
+    div.timeline-following {
+        display: none;
+    }
+    div.timeline-extra {
+        display: none;
+    }
+    div.timeline-main {
+        overflow-y: scroll;
+    }
+}
+
+/* iPhone 6+/7+ */
+@media (max-width: 445px) and (min-width: 400px) {
+    md-input-container {
+        max-width: 400px;
+        margin: 7px 2px;
+    }
+    textarea.timeline-post {
+        resize: none;
+        max-height: 20px;
+    }
+    div.timeline-main {
+        padding: 0px;
+        margin: 0px;
+        overflow-y: scroll;
+    }
+    div.timeline-container md-card {
+        margin: 25px 0px;
+    }
+    div.timeline-following {
+        display: none;
+    }
+    div.timeline-extra {
+        display: none;
+    }
+    div.timeline-main {
+        overflow-y: scroll;
+    }
+}

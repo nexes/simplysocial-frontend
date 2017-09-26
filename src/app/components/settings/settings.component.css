@@ -44,3 +44,39 @@ button.delete-btn {
     left: 20%;
     margin: 10px 0px;
 }
+
+/* iPhone 6/7 */
+@media (min-width: 375px) {
+    .setting-container .setting-left {
+        display: none;
+    }
+    .setting-container .setting-main {
+        padding: 30px 10px;
+    }
+    .setting-main .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+    .setting-main textarea, input[type="text"], input[type="password"], input[type="email"] {
+        width: 325px;
+        resize: none;
+    }
+}
+
+/* iPhone 6+/7+ */
+@media (min-width: 400px) and (max-width: 445px) {
+    .setting-container .setting-left {
+        display: none;
+    }
+    .setting-container .setting-main {
+        padding: 30px 10px;
+    }
+    .setting-main .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+    .setting-main textarea, input[type="text"], input[type="password"], input[type="email"] {
+        width: 375px;
+        resize: none;
+    }
+}

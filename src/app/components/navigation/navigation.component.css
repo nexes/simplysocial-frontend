@@ -53,3 +53,27 @@ nav.userbar-tabs.mat-tab-nav-bar a {
 md-list-item {
     cursor: pointer;
 }
+div.navbar-sm-item {
+    display: none;
+}
+
+/* iPhone 6/7 */
+@media (max-width: 415px) {
+    nav.userbar-tabs {
+        display: none;
+    }
+    div.navbar-sm-item {
+        display: block;
+    }
+
+}
+
+/* iPhone 6+/7+ */
+@media (max-width: 445px) and (min-width: 400px) {
+    nav.userbar-tabs {
+        display: none;
+    }
+    div.navbar-sm-item {
+        display: block;
+    }
+}

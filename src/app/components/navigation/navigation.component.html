@@ -6,8 +6,8 @@
     <md-menu [overlapTrigger]="false" #navMenu="mdMenu">
         <a routerLink="/newuser" routerLinkActive="active" md-menu-item>
             <md-icon>person_add</md-icon> New user</a>
-        <a routerLink="/blah" routerLinkActive="active" md-menu-item>
-            <md-icon>security</md-icon>Forgot password</a>
+<!--         <a routerLink="/blah" routerLinkActive="active" md-menu-item>
+            <md-icon>security</md-icon>Forgot password</a> -->
     </md-menu>
     <button md-icon-button [mdMenuTriggerFor]="navMenu">
         <md-icon>more_vert</md-icon>
@@ -30,6 +30,19 @@
                     <md-list-item>
                         <md-icon mdListIcon>notifications</md-icon> 0
                     </md-list-item>
+                    <md-divider></md-divider>
+
+                    <div class="navbar-sm-item">
+                        <md-list-item>
+                            <a md-list-item routerLink="/{{currentUsername}}">
+                                <md-icon class="nav-icon">home</md-icon>Home</a>
+                        </md-list-item>
+                        <md-list-item>
+                            <a md-list-item routerLink="/profile/{{currentUsername}}">
+                                <md-icon class="nav-icon">settings</md-icon>Settings</a>
+                        </md-list-item>
+                    </div>
+
                     <md-divider></md-divider>
                     <md-list-item>
                         <p (click)="logoutUser();">Sign out</p>
