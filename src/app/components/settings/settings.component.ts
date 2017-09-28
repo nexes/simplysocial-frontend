@@ -103,7 +103,7 @@ export class SettingsComponent {
         if (this.userDescription !== this.userData.description) {
             this.userAuth.userDescription(this.userData.userID, this.userDescription, true).subscribe(
                 (resp: CurrentUser) => {
-                    this.userData.updateUser({ description: resp.description });
+                    this.userData.updateUser({ description: this.userDescription });
 
                     if (this.userAvatar === this.userData.avatar) {
                         this.router.navigate([ '/', this.userData.username ]);
