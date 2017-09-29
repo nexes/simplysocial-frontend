@@ -3,3 +3,8 @@ textarea.report-input {
     width: 400px;
     margin: 5px 0px;
 }
+.report-container {
+    margin: 0px;
+    padding-bottom: 10px;
+    overflow: hidden;
+}

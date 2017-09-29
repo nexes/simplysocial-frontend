@@ -29,7 +29,7 @@ div.timeline-following {
     flex: 1 1 auto;
     flex-basis: 10%;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: hidden;
     min-width: 64px;
 }
 .timeline-left {

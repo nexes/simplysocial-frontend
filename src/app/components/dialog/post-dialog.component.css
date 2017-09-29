@@ -2,13 +2,15 @@
     max-width: 880px !important;
 } */
 .post-dialog-title {
-    padding-bottom: 10px; 
+    padding-bottom: 10px;
     text-align: center;
     border-bottom: 1px solid black;
 }
 .post-dialog-message {
     width: 100%;
     height: auto;
+    overflow-x: hidden;
+    padding: 0px;
 }
 .post-area {
     margin: 0px 20px;

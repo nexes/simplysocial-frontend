@@ -106,19 +106,28 @@ export class TimelineComponent implements OnInit {
                     return;
                 }
 
-                this.userFollowers.followUser(searchResp).subscribe(
-                    (resp) => {
-                        this.followList.push({
-                            avatar: resp.followavatar,
-                            username: resp.followname
-                        });
-                        this.userData.updateUser({ following: resp.followercount });
-                        this.snackBar.open(`following ${resp.followname}`, 'dismiss', { duration: 3000 });
-                    },
-                    (err) => {
-                        console.log(err);
-                    }
-                );
+                const isFound = this.followList.find((follower) => {
+                    return searchResp === follower.username;
+                });
+
+                if (!isFound) {
+                    this.userFollowers.followUser(searchResp).subscribe(
+                        (resp) => {
+                            this.followList.push({
+                                avatar: resp.followavatar,
+                                username: resp.followname
+                            });
+                            this.userData.updateUser({ following: resp.followercount });
+                            this.snackBar.open(`following ${resp.followname}`, 'dismiss', { duration: 3000 });
+                        },
+                        (err) => {
+                            console.log(err);
+                        }
+                    );
+
+                } else {
+                    this.snackBar.open(`Alredy following ${searchResp}`, 'dismiss', {duration: 3000});
+                }
             }
         );
     }

@@ -48,17 +48,18 @@ div.timeline-btn-row {
 .friend-timeline .timeline-left {
     order: 1;
     flex-grow: 1;
-    flex-basis: auto;
+    flex-basis: 10%;
 }
 .friend-timeline .timeline-center {
     order: 2;
     flex-grow: 2;
-    flex-basis: 55%;
+    flex-basis: 30%;
+    overflow-y: auto;
 }
 .friend-timeline .timeline-right {
     order: 3;
-    flex-grow: 0;
-    flex-basis: auto;
+    flex-grow: 1;
+    flex-basis: 10%;
     margin-right: 0px;
 }
 .timeline-center md-card {

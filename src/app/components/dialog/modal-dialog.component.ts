@@ -35,8 +35,8 @@ export class ModalDialogService {
 
         dialogRef = this.dialog.open(PostDialogTemplateComponent, {
             disableClose: false,
-            width: '60%',
-            position: { left: '25%', top: '50px' },
+            width: '45%',
+            position: { left: '30%', top: '50px' },
             data: {
                 message: post || ''
             }
@@ -76,8 +76,9 @@ export class ModalDialogService {
         let dialogRef: MdDialogRef<ReportDialogTemplateComponent>;
 
         dialogRef = this.dialog.open(ReportDialogTemplateComponent, {
-            width: '600px',
-            position: { left: '25%', top: '50px' }
+            width: '45%',
+            height: '300px',
+            position: { left: '30%', top: '50px' }
         });
 
         return dialogRef.afterClosed();

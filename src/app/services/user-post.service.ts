@@ -49,7 +49,7 @@ export class UserPostService extends CSRFToken {
     }
 
     getUserPosts(): Observable<Post> {
-        const url = `${this.baseURL}search/user/${this.userData.userID}/${10}/`;
+        const url = `${this.baseURL}search/user/${this.userData.userID}/${25}/`;
         return this.http.get<Post>(url);
     }
 

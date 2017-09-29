@@ -1,52 +1,56 @@
-.setting-container {
-    display: flex;
-    flex-direction: row;
-}
-.setting-container .setting-left {
-    order: 1;
-    flex-basis: 35%;
-    padding-top: 50px;
-}
-.setting-container .setting-main {
-    flex: 1 1 auto;
-    order: 2;
-    padding: 30px 10px;
-}
-.setting-main .profile-image {
-    border-radius: 100%;
-    width: 200px;
-    height: 200px;
-    cursor: pointer;
-}
-.setting-main > span {
-    font-size: 20px;
-    border-bottom: 1px solid #7EBBCF;
-}
-.settings-label {
-    font-size: 16px;
-    color: #424242;
-    margin: 10px 5px;
-}
-.settings-bio {
-    height: 30px;
-}
-.setting-main textarea, input[type="text"], input[type="password"], input[type="email"] {
-    width: 400px;
-    resize: none;
-}
-button.change-btn {
-    width: 200px;
-    left: 20%;
-    margin: 5px 0px;
-}
-button.delete-btn {
-    width: 200px;
-    left: 20%;
-    margin: 10px 0px;
+@media (min-width: 500px) {
+    .setting-container {
+        display: flex;
+        flex-direction: row;
+    }
+    .setting-container .setting-left {
+        order: 1;
+        flex-grow: 1;
+        flex-grow: auto;
+        padding-top: 50px;
+    }
+    .setting-container .setting-main {
+        order: 2;
+        flex-grow: 1;
+        flex-grow: auto;
+        padding: 30px 10px;
+    }
+    .setting-main .profile-image {
+        border-radius: 100%;
+        cursor: pointer;
+        width: 200px;
+        height: 200px;
+    }
+    .setting-main > span {
+        font-size: 20px;
+        border-bottom: 1px solid #7EBBCF;
+    }
+    .settings-label {
+        font-size: 16px;
+        color: #424242;
+        margin: 10px 5px;
+    }
+    .settings-bio {
+        height: 30px;
+    }
+    .setting-main textarea, input[type="text"], input[type="password"], input[type="email"] {
+        width: 400px;
+        resize: none;
+    }
+    button.change-btn {
+        width: 200px;
+        left: 10%;
+        margin: 5px 0px;
+    }
+    button.delete-btn {
+        width: 200px;
+        left: 10%;
+        margin: 10px 0px;
+    }
 }
 
 /* iPhone 6/7 */
-@media (min-width: 375px) {
+@media (min-width: 375px) and (max-width: 399px) {
     .setting-container .setting-left {
         display: none;
     }
@@ -56,15 +60,27 @@ button.delete-btn {
     .setting-main .profile-image {
         width: 100px;
         height: 100px;
+        border-radius: 100%;
+        cursor: pointer;
     }
     .setting-main textarea, input[type="text"], input[type="password"], input[type="email"] {
         width: 325px;
         resize: none;
     }
+    button.change-btn {
+        width: 200px;
+        left: 10%;
+        margin: 5px 0px;
+    }
+    button.delete-btn {
+        width: 200px;
+        left: 10%;
+        margin: 10px 0px;
+    }
 }
 
 /* iPhone 6+/7+ */
-@media (min-width: 400px) and (max-width: 445px) {
+@media (min-width: 400px) and (max-width: 500px) {
     .setting-container .setting-left {
         display: none;
     }
@@ -74,9 +90,22 @@ button.delete-btn {
     .setting-main .profile-image {
         width: 100px;
         height: 100px;
+        border-radius: 100%;
+        cursor: pointer;
     }
     .setting-main textarea, input[type="text"], input[type="password"], input[type="email"] {
         width: 375px;
         resize: none;
     }
+    button.change-btn {
+        width: 200px;
+        left: 10%;
+        margin: 5px 0px;
+    }
+    button.delete-btn {
+        width: 200px;
+        left: 10%;
+        margin: 10px 0px;
+    }
+
 }
